@@ -1,0 +1,11 @@
+@import '../../shared/scss/variables.scss';
+
+.home-page {
+  &__header {
+    background: $green;
+  }
+
+  &__logo {
+    color: $white;
+  }
+}

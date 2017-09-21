@@ -4,7 +4,6 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-
 import { HomePage } from './pages/home'
 import { NoMatchPage } from './pages/nomatch'
 
