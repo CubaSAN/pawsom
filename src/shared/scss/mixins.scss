@@ -1,26 +1,12 @@
-@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
-  $src: null;
+$base-font-size: 16px !default;
 
-  $extmods: (
-    eot: "?",
-    svg: "#" + str-replace($name, " ", "_")
-  );
+@function calculaterem($size) {
+  $remSize: $size / $base-font-size;
 
-  $formats: (
-    otf: "opentype",
-    ttf: "truetype"
-  );
+  @return $remSize * 1rem;
+}
 
-  @each $ext in $exts {
-    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
-    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
-  }
-
-  @font-face {
-    font-family: quote($name);
-    font-style: $style;
-    font-weight: $weight;
-    src: $src;
-  }
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculaterem($size);
 }

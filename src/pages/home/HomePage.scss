@@ -1,4 +1,8 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import "~bootstrap/scss/mixins/breakpoints";
 @import '../../shared/scss/variables.scss';
+@import '../../shared/scss/mixins.scss';
 
 .home-page {
   &__header {
@@ -7,5 +11,289 @@
 
   &__logo {
     color: $white;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &#{&} {
+      @include font-size(24px);
+    }
+
+    &:hover {
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
+  &__banner {
+    background: $yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 480px;
+    position: relative;
+
+    &:after {
+      content: '';
+      background: url('../../shared/assets/images/landing-page/white-dog.png') no-repeat;
+      background-position: right -200px top 45px;
+      background-size: cover;
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0.7;
+
+      @include media-breakpoint-up(sm) {
+        background-position: right -300px top 45px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        background-size: auto;
+        background-position: right -150px top 45px;
+        opacity: 1;
+      }
+
+      @include media-breakpoint-up(xl) {
+        background-size: auto;
+        background-position: right 0 top 45px;
+      }
+    }
+
+    &-content {
+      color: $white;
+      padding: 0 15px;
+      position: relative;
+      z-index: 1;
+      @include font-size(24px);
+
+      @include media-breakpoint-up(sm) {
+        max-width: 60vw;
+      }
+
+      @include media-breakpoint-up(lg) {
+        max-width: 38vw;
+      }
+
+      h2 {
+        font-weight: 900;
+        @include font-size(44px);
+      }
+    }
+  }
+
+  &__ad1 {
+    background: url('../../shared/assets/images/landing-page/big-bone.png') $blue;
+    background-position: center center;
+    background-repeat: space;
+    $ad1: &;
+
+    &-content {
+      padding: 14px 0 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-text-main {
+      @include font-size(24px);
+      color: $white;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+
+    &-cta {
+      width: 225px;
+      height: 42px;
+      text-transform: uppercase;
+      color: $white;
+
+      &#{&} {
+        line-height: 26px;
+        background: $green;
+        border: none;
+
+        &:hover,
+        &:focus {
+          cursor: pointer;
+          color: $white;
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      &:first-of-type {
+        margin-bottom: 20px;
+      }
+    }
+
+    &-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @include media-breakpoint-up(sm) {
+        flex-direction: row;
+        #{$ad1}-cta {
+          &:first-of-type {
+            margin-bottom: 0;
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  &__feedback {
+    background: $light-gray;
+    padding: 60px 0;
+    position: relative;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    &:before {
+      background: url('../../shared/assets/images/landing-page/dog-1.png') no-repeat;
+      background-size: cover;
+      background-position: left -275px bottom -180px;
+
+      @include media-breakpoint-up(sm) {
+        background-position: left -500px top 45px;
+      }
+
+      @include media-breakpoint-up(md) {
+        background-size: auto;
+        background-position: left -600px top 45px;
+      }
+    }
+
+    &:after {
+      background: url('../../shared/assets/images/landing-page/dog-2.png') no-repeat;
+      display: none;
+
+      @include media-breakpoint-up(sm) {
+        display: block;
+        background-position: right -275px top 105px;
+      }
+    }
+
+    &-wrapper {
+      overflow: hidden;
+    }
+
+    .slick-list {
+      overflow: visible;
+    }
+
+    .slick-slider {
+      z-index: 2;
+    }
+
+    &-title {
+      @include font-size(24px);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    &-carousel-meta {
+      display: flex;
+    }
+
+    &-carousel-user {
+      margin: 46px 0 0 14px;
+      padding: 0 14px;
+      @include font-size(18px);
+      font-weight: 900;
+      background: $transparent-white;
+      height: 30px;
+    }
+
+    &-carousel-avatar {
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+      overflow: hidden;
+      margin: 25px 0 0 28px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-carousel-body {
+      background: $transparent-white;
+      padding: 24px;
+      margin: 0 20px;
+      position: relative;
+      @include font-size(16px);
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -16px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 16px solid $transparent-white;
+      }
+    }
+  }
+
+  &__facilities {
+    padding: 60px 0;
+    position: relative;
+
+    &-title {
+      @include font-size(24px);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    &-wrapper {
+      list-style: none;
+    }
+
+    &-item {
+      list-style: none;
+      color: $white;
+      background: url('../../shared/assets/images/landing-page/bone.png') no-repeat $green;
+      background-position: right 20px center;
+
+      &#{&} {
+        padding: 15px 25px !important;
+      }
+
+      &:nth-child(2n) {
+        background: url('../../shared/assets/images/landing-page/dog.png') no-repeat $light-green;
+        background-position: right 20px center;
+      }
+
+      h4 {
+        @include font-size(20px);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      p {
+        @include font-size(16px);
+        padding-right: 60px;
+      }
+    }
   }
 }

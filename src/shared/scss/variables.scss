@@ -1,4 +1,21 @@
 /* Colors */
 
 $green: #398228;
+$light-green: #40942d;
 $white: #ffffff;
+$yellow: #dfaa45;
+$blue: #295f90;
+$light-gray: #e9f0f2;
+$dark-text: #333333;
+
+$transparent-white: rgba(255, 255, 255, 0.7);
+
+/* Grid Breakpoints */
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 630px,
+  lg: 992px,
+  xl: 1200px
+);
