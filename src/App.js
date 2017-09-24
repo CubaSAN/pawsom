@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AppRouter } from './router/AppRouter'
+import { AppRouter } from './router'
 
 import './shared/scss/main.scss'
 
