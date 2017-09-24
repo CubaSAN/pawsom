@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Slider from 'react-slick'
 import { Container, Row, Col, Navbar, NavbarBrand, Button } from 'reactstrap'
 import { LandingLayout } from '../../shared/components/LandingLayout'
+import { Header } from '../../shared/components/Header'
 import avatarDummyImage from '../../shared/assets/images/landing-page/girl.png'
 import './HomePage.scss'
 
@@ -89,20 +90,7 @@ export class HomePage extends Component {
   render() {
     return (
       <LandingLayout>
-        <Container fluid>
-          <Row className={`${CN}__header`}>
-            <Container>
-              <Navbar>
-                <NavbarBrand
-                    className={`${CN}__logo`}
-                    href="/"
-                >
-                  Pawsom
-                </NavbarBrand>
-              </Navbar>
-            </Container>
-          </Row>
-        </Container>
+        <Header />
 
         <Container fluid>
           <Row className={`${CN}__banner`}>

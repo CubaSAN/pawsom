@@ -1,0 +1,72 @@
+@import "~bootstrap/scss/mixins/breakpoints";
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
+
+.main-header {
+  background: $green;
+  height: 60px;
+
+  .navbar {
+    height: 60px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: 90px;
+
+    .navbar {
+      height: 90px;
+      justify-content: flex-start;
+    }
+  }
+
+  &__homelink {
+    color: $white;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &#{&} {
+      @include font-size(24px);
+
+      @include media-breakpoint-up(lg) {
+        @include font-size(30px);
+      }
+    }
+
+    &:hover {
+      color: $white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  &__navigation {
+    color: $white;
+
+    &.nav {
+      padding-left: 20px;
+      flex-grow: 1;
+    }
+
+    .nav-item {
+      padding: 0 20px;
+
+      &.login {
+        flex-grow: 1;
+        padding-right: 0;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &__homenav {
+    font-weight: 300;
+    color: $white;
+
+    &:hover {
+      color: $white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+}

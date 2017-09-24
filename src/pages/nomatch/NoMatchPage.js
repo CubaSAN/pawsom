@@ -1,9 +1,10 @@
 import React from 'react'
+import { PageLayout } from '../../shared/components/PageLayout'
 
 export const NoMatchPage = () => {
   return (
-    <div>
+    <PageLayout>
       404: Nothing found on your request
-    </div>
+    </PageLayout>
   )
 }

@@ -5,25 +5,6 @@
 @import '../../shared/scss/mixins.scss';
 
 .home-page {
-  &__header {
-    background: $green;
-  }
-
-  &__logo {
-    color: $white;
-    text-transform: uppercase;
-    font-weight: bold;
-
-    &#{&} {
-      @include font-size(24px);
-    }
-
-    &:hover {
-      color: $white;
-      cursor: pointer;
-    }
-  }
-
   &__banner {
     background: $yellow;
     display: flex;
@@ -168,10 +149,6 @@
       background-size: cover;
       background-position: left -275px bottom -180px;
 
-      @include media-breakpoint-up(sm) {
-        background-position: left -500px top 45px;
-      }
-
       @include media-breakpoint-up(md) {
         background-size: auto;
         background-position: left -600px top 45px;
@@ -182,7 +159,7 @@
       background: url('../../shared/assets/images/landing-page/dog-2.png') no-repeat;
       display: none;
 
-      @include media-breakpoint-up(sm) {
+      @include media-breakpoint-up(md) {
         display: block;
         background-position: right -275px top 105px;
       }
@@ -293,6 +270,7 @@
       p {
         @include font-size(16px);
         padding-right: 60px;
+        margin-bottom: 0;
       }
     }
   }
