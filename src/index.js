@@ -10,7 +10,7 @@ import uk from 'react-intl/locale-data/uk';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import { flattenMessages } from './utils';
-import messages from './localization/messages';
+import { messages } from './localization';
 
 addLocaleData(
   [...en, ...ru, ...uk]

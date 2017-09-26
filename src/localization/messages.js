@@ -1,4 +1,4 @@
-export default {
+export const messages = {
   'en-US': {
     landing: {
       banner: {
@@ -21,7 +21,8 @@ export default {
       title: 'Meet the animal lovers who will treat your pet like family'
     }
   },
-  'ru': {
+
+  'ru-RU': {
     landing: {
       banner: {
         main: 'Найди идеального няньку для твого собаки рядом с тобой',
@@ -43,7 +44,8 @@ export default {
       title: 'Познакомьтесь с любителями животных, которые будут относиться к вашему домашнему животному, как к семье'
     }
   },
-  'uk': {
+
+  'uk-UA': {
     landing: {
       banner: {
         main: 'Знайди ідеального няньку для твого собаки поруч з тобою',
