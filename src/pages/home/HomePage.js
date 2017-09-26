@@ -4,6 +4,7 @@ import { Container, Row, Col, Navbar, NavbarBrand, Button } from 'reactstrap'
 import { LandingLayout } from '../../shared/components/LandingLayout'
 import { Header } from '../../shared/components/Header'
 import avatarDummyImage from '../../shared/assets/images/landing-page/girl.png'
+import { FormattedMessage } from 'react-intl'
 import './HomePage.scss'
 
 const CN = 'home-page'
@@ -96,8 +97,12 @@ export class HomePage extends Component {
           <Row className={`${CN}__banner`}>
             <Container>
               <div className={`${CN}__banner-content`}>
-                <h2>Find the perfect pet sitter near you today</h2>
-                <span>Lorem ipsum dolor sit amet pri mutat dicam maeistasis ad</span>
+                <h2>
+                  <FormattedMessage id="landing.banner.main" />
+                </h2>
+                <span>
+                  <FormattedMessage id="landing.banner.sub" />
+                </span>
               </div>
             </Container>
           </Row>
@@ -108,7 +113,7 @@ export class HomePage extends Component {
             <Container>
               <div className={`${CN}__ad1-content`}>
                 <div className={`${CN}__ad1-text-main`}>
-                  Download app
+                  <FormattedMessage id="download" />
                 </div>
 
                 <div className={`${CN}__ad1-buttons`}>
@@ -137,7 +142,7 @@ export class HomePage extends Component {
           <Row className={`${CN}__feedback`}>
             <Container className={`${CN}__feedback-wrapper`}>
               <h3 className={`${CN}__feedback-title`}>
-                Meet the animal lovers who will treat your pet like family
+                <FormattedMessage id="feedback.title" />
               </h3>
 
               {this.renderSlider()}

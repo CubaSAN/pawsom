@@ -11,6 +11,7 @@
     "proxyquire": "^1.8.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-intl": "^2.4.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.13",
     "react-slick": "^0.15.4",
