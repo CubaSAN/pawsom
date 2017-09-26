@@ -1,5 +1,5 @@
 export const messages = {
-  'en-US': {
+  'en': {
     landing: {
       banner: {
         main: 'Find the perfect pet sitter near you today',
@@ -22,7 +22,7 @@ export const messages = {
     }
   },
 
-  'ru-RU': {
+  'ru': {
     landing: {
       banner: {
         main: 'Найди идеального няньку для твого собаки рядом с тобой',
@@ -45,7 +45,7 @@ export const messages = {
     }
   },
 
-  'uk-UA': {
+  'uk': {
     landing: {
       banner: {
         main: 'Знайди ідеального няньку для твого собаки поруч з тобою',

@@ -12,6 +12,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { flattenMessages } from './utils';
 import { messages } from './localization';
 
+console.log(1, flattenMessages)
+console.log(2, messages)
+
 addLocaleData(
   [...en, ...ru, ...uk]
 );
@@ -21,8 +24,21 @@ const locale = (navigator.languages && navigator.languages[0])
   || navigator.userLanguage
   || 'en-US';
 
+// Supported locales
+const supportedLocales = {
+  'en': 'en',
+  'en_US': 'en',
+  'uk': 'uk',
+  'uk_UA': 'uk',
+  'ru': 'ru',
+  'ru_RU': 'ru'
+}
+
+const localizedMessages = 
+  locale in supportedLocales ? messages[locale] : messages[supportedLocales[en]]
+
 ReactDOM.render(
-  <IntlProvider locale={locale} messages={flattenMessages(messages[locale])}>
+  <IntlProvider locale={locale} messages={flattenMessages(localizedMessages)}>
     <App />
   </IntlProvider>,
   document.getElementById('root')
