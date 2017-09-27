@@ -5,7 +5,6 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import { HomePage } from '../pages/home'
 import { SearchPage } from '../pages/search'
 import { NoMatchPage } from '../pages/nomatch'
@@ -42,10 +41,6 @@ const MainRoute = ({ component: Component, ...rest }) => (
 )
 
 export class AppRouter extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
-  }
-
   render() {
     return (
       <Router>

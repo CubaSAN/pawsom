@@ -10,14 +10,14 @@
     height: 60px;
   }
 
-  @include media-breakpoint-up(lg) {
-    height: 90px;
+  // @include media-breakpoint-up(lg) {
+  //   height: 90px;
 
-    .navbar {
-      height: 90px;
-      justify-content: flex-start;
-    }
-  }
+  //   .navbar {
+  //     height: 90px;
+  //     justify-content: flex-start;
+  //   }
+  // }
 
   &__homelink {
     color: $white;

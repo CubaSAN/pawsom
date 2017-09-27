@@ -12,3 +12,7 @@ export function flattenMessages(nestedMessages, prefix = '') {
     return messages;
   }, {});
 }
+
+export function a() {
+  
+}

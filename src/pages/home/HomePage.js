@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Slider from 'react-slick'
-import { Container, Row, Col, Navbar, NavbarBrand, Button } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { LandingLayout } from '../../shared/components/LandingLayout'
-import { Header } from '../../shared/components/Header'
 import avatarDummyImage from '../../shared/assets/images/landing-page/girl.png'
 import { FormattedMessage } from 'react-intl'
 import './HomePage.scss'
@@ -91,8 +90,6 @@ export class HomePage extends Component {
   render() {
     return (
       <LandingLayout>
-        <Header />
-
         <Container fluid>
           <Row className={`${CN}__banner`}>
             <Container>
@@ -121,6 +118,7 @@ export class HomePage extends Component {
                       className={`btn ${CN}__ad1-cta`} 
                       href='https://www.appstore.com/'
                       target='_blank'
+                      rel='noopener noreferrer'
                   >
                     App Store
                   </a>
@@ -129,6 +127,7 @@ export class HomePage extends Component {
                     className={`btn ${CN}__ad1-cta`}
                     href='https://play.google.com/store'
                     target='_blank'
+                    rel='noopener noreferrer'
                   >
                     Play Market
                   </a>

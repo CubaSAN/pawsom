@@ -2,15 +2,9 @@ import React, { Component } from 'react'
 import {
   Container,
   Row,
-  Col,
   Navbar,
-  NavbarBrand,
-  Button,
-  Collapse,
-  NavbarToggler,
   Nav,
-  NavItem,
-  NavLink
+  NavItem
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'

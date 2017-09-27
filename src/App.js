@@ -1,20 +1,10 @@
-import React, { Component } from 'react'
-import { AppRouter } from './router'
+import React from 'react'
+import { RouterContainer } from './router'
 
 import './shared/scss/main.scss'
 
-export class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isAuthenticated: true
-    }
-  }
-
-  render () {
-    return (
-      <AppRouter {...this.state} />
-    )
-  }
+export const App = () => {
+  return (
+    <RouterContainer />
+  )
 }
