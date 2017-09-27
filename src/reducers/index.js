@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import localeReducer from './localization'
+import localesReducer from './locales'
 
 export default combineReducers({
   routing: routerReducer,
-  locale: localeReducer
+  locales: localesReducer
 })

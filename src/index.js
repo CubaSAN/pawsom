@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
-import { flattenMessages } from './utils';
-import { messages } from './localization';
+// import { flattenMessages } from './utils';
+// import { messages } from './localization';
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import { addLocaleData, IntlProvider } from 'react-intl'
+import { LocalesContainer } from './shared/components/Locales'
+// import { addLocaleData, IntlProvider } from 'react-intl'
 import store, { history } from './store'
 // import en from 'react-intl/locale-data/en'
 // import ru from 'react-intl/locale-data/ru'
@@ -39,9 +40,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <IntlProvider locale={store.locale} messages={store.localizedMessages}>
+      <LocalesContainer>
         <App />
-      </IntlProvider>
+      </LocalesContainer>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')

@@ -4,10 +4,17 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './reducers'
+import { getLocale, getLanguages } from './utils'
 
 export const history = createHistory()
 
-const initialState = {}
+const initialState = {
+  locales: {
+    locale: getLocale(),
+    languages: getLanguages()
+  }
+}
+
 const enhancers = []
 const middleware = [
   thunk,

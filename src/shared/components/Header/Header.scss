@@ -10,14 +10,9 @@
     height: 60px;
   }
 
-  // @include media-breakpoint-up(lg) {
-  //   height: 90px;
-
-  //   .navbar {
-  //     height: 90px;
-  //     justify-content: flex-start;
-  //   }
-  // }
+  &__lang-selector {
+    margin-left: 20px;
+  }
 
   &__homelink {
     color: $white;
@@ -41,6 +36,7 @@
 
   &__navigation {
     color: $white;
+    align-items: center;
 
     &.nav {
       padding-left: 20px;
