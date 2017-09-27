@@ -1,4 +1,7 @@
 import { messages } from '../localization'
+import Cookies from 'js-cookie'
+
+export const LOCALE = 'lc'
 
 export function flattenMessages(nestedMessages, prefix = '') {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -16,10 +19,14 @@ export function flattenMessages(nestedMessages, prefix = '') {
 }
 
 export function getBrowserLocale() {
-  return (navigator.languages && navigator.languages[0])
+  const browserLocale = (navigator.languages && navigator.languages[0])
     || navigator.language
     || navigator.userLanguage
     || 'en-US'
+
+  const storedLocale = Cookies.get(LOCALE);
+
+  return storedLocale ? storedLocale : browserLocale;
 }
 
 const SUPPORTED_LOCALES = {
@@ -44,7 +51,7 @@ export function getLocalizedMessages(requestedLocale) {
 export function getLocale() {
   const locale = getBrowserLocale();
 
-  return locale in Object.keys(SUPPORTED_LOCALES) ? locale : 'en-US'
+  return Object.keys(SUPPORTED_LOCALES).includes(locale) ? locale : 'en-US'
 }
 
 export function getLanguages() {

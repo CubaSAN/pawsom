@@ -11,9 +11,11 @@ import {
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
+import Cookies from 'js-cookie'
+import { LOCALE } from '../../../utils'
 import './Header.scss'
 
-const CN = 'main-header';
+const CN = 'main-header'
 
 export class Header extends Component {
   static propTypes = {
@@ -32,7 +34,12 @@ export class Header extends Component {
     evt.preventDefault()
 
     const { value } = evt.target
-    onLanguageChange && onLanguageChange(value)
+
+    if (onLanguageChange) {
+      onLanguageChange(value)
+
+      Cookies.set(LOCALE, value, { expires: 365 })
+    }
   }
 
   renderLanguageSelector() {
@@ -43,13 +50,13 @@ export class Header extends Component {
         className={`${CN}__lang-selector`}
         type='select'
         onChange={this.changeLanguage}
+        value={locale === 'en-US' ? 'en' : locale}
       >
         {
           languages.map((language, i) => (
             <option
               key={i}
               value={language}
-              selected={language === locale}
             >
               {language}
             </option>

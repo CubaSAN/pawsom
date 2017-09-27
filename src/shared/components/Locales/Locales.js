@@ -11,7 +11,7 @@ export class Locales extends Component {
     locale: PropTypes.string.isRequired
   }
 
-  componentDidMount () {
+  componentWillMount () {
     addLocaleData(
       [...en, ...ru, ...uk]
     );
@@ -30,6 +30,7 @@ export class Locales extends Component {
           locale={locale}
           messages={intlMessages}
           key={locale}
+          defaultLocale={locale}
       >
         {this.props.children}
       </IntlProvider>
