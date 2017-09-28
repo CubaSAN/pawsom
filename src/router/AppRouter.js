@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,9 +13,7 @@ import { Accommodation } from '../pages/accommodation'
 import { Login } from '../pages/login'
 import { Feed } from '../pages/feed'
 
-const isAuthenticated = false;
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
   <Route {...rest} render={props => (
     isAuthenticated ? (
       <Component {...props} />
@@ -27,7 +26,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
-const MainRoute = ({ component: Component, ...rest }) => (
+const MainRoute = ({ component: Component, isAuthenticated, ...rest }) => (
   <Route {...rest} render={props => (
     !isAuthenticated ? (
       <Component {...props} />
@@ -41,17 +40,47 @@ const MainRoute = ({ component: Component, ...rest }) => (
 )
 
 export class AppRouter extends Component {
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
+  }
+
   render() {
+    const { isAuthenticated } = this.props;
+
     return (
       <Router>
         <Switch>
-          <MainRoute path="/" exact component={HomePage} />
+          <MainRoute
+            path="/"
+            exact
+            component={HomePage}
+            isAuthenticated={isAuthenticated}
+          />
 
-          <PrivateRoute path="/search" component={SearchPage} />
-          <PrivateRoute path="/accommodation" component={Accommodation} />
-          <PrivateRoute path="/feed" component={Feed} />
+          <PrivateRoute
+            path="/search"
+            component={SearchPage}
+            isAuthenticated={isAuthenticated}
+          />
 
-          <MainRoute path="/login" component={Login} />
+          <PrivateRoute
+            path="/accommodation"
+            component={Accommodation}
+            isAuthenticated={isAuthenticated}
+          />
+
+          <PrivateRoute
+            path="/feed"
+            component={Feed}
+            isAuthenticated={isAuthenticated}
+          />
+
+          <MainRoute
+            path="/login"
+            component={Login}
+            isAuthenticated={isAuthenticated}
+          />
+
           <Route component={NoMatchPage} />
         </Switch>
       </Router>

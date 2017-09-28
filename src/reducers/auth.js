@@ -1,17 +1,17 @@
-import { CHANGE_LOCALE } from '../actions'
+import { AUTHENTICATE } from '../actions'
 
 const defaultState = {
-  locale: null
+  isAuthenticated: false
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case CHANGE_LOCALE:
+    case AUTHENTICATE:
       return {
         ...state,
-        locale: action.locale
+        isAuthenticated: action.isAuthenticated
       }
     default:
-     return state
+      return state
   }
 }

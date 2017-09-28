@@ -5,10 +5,12 @@ import { changeLocale } from '../../../actions'
 
 const mapStateToProps = state => {
   const { languages, locale } = state.locales
+  const { auth } = state
 
   return {
     languages,
-    locale
+    locale,
+    auth
   }
 };
 

@@ -19,6 +19,7 @@ const CN = 'main-header'
 
 export class Header extends Component {
   static propTypes = {
+    auth: PropTypes.object.isRequired,
     languages: PropTypes.array.isRequired,
     locale: PropTypes.string.isRequired,
     onLanguageChange: PropTypes.func
@@ -67,6 +68,8 @@ export class Header extends Component {
   }
 
   render () {
+    const { auth } = this.props
+
     return (
       <Container fluid>
         <Row className={CN}>
@@ -77,26 +80,46 @@ export class Header extends Component {
               </div>
 
               <Nav className={`${CN}__navigation`}>
-                <NavItem>
-                  <Link to='/search' className={`${CN}__homenav`}>
-                    <FormattedMessage id="header.links.search" />
-                  </Link>
-                </NavItem>
-                <NavItem>
-                  <Link to='/accommodation' className={`${CN}__homenav`}>
-                    <FormattedMessage id="header.links.accommodation" />
-                  </Link>
-                </NavItem>
-                <NavItem className='login'>
-                  <Link to='/login' className={`${CN}__homenav`}>
-                    <FormattedMessage id="header.links.login" />
-                  </Link>
-                </NavItem>
-                <div>
-                  {this.renderLanguageSelector()}
-                </div>
+                {
+                  auth.isAuthenticated &&
+                  <NavItem>
+                    <Link to='/search' className={`${CN}__homenav`}>
+                      <FormattedMessage id="header.links.search" />
+                    </Link>
+                  </NavItem>
+                }
+
+                {
+                  auth.isAuthenticated &&
+                  <NavItem>
+                    <Link to='/accommodation' className={`${CN}__homenav`}>
+                      <FormattedMessage id="header.links.accommodation" />
+                    </Link>
+                  </NavItem>
+                }
+
+                {
+                  !auth.isAuthenticated &&
+                  <NavItem className='login'>
+                    <Link to='/login' className={`${CN}__homenav`}>
+                      <FormattedMessage id="header.links.login" />
+                    </Link>
+                  </NavItem>
+                }
               </Nav>
+
+              {
+                auth.isAuthenticated &&
+                <div>
+                  {auth.user.name}
+                </div>
+              }
+
+              <div>
+                {this.renderLanguageSelector()}
+              </div>
             </Navbar>
+
           </Container>
         </Row>
       </Container>

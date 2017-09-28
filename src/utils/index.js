@@ -2,6 +2,7 @@ import { messages } from '../localization'
 import Cookies from 'js-cookie'
 
 export const LOCALE = 'lc'
+export const USER = 'uid'
 
 export function flattenMessages(nestedMessages, prefix = '') {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -45,15 +46,21 @@ export function getLocalizedMessages(requestedLocale) {
     messages[SUPPORTED_LOCALES[locale]] :
     messages[SUPPORTED_LOCALES['en-US']]
 
-  return flattenMessages(intlMessages);
+  return flattenMessages(intlMessages)
 }
 
 export function getLocale() {
-  const locale = getBrowserLocale();
+  const locale = getBrowserLocale()
 
   return Object.keys(SUPPORTED_LOCALES).includes(locale) ? locale : 'en-US'
 }
 
 export function getLanguages() {
-  return Object.keys(messages);
+  return Object.keys(messages)
+}
+
+export function getUser() {
+  const user = Cookies.get(USER)
+
+  return user ? JSON.parse(user) : null;
 }
