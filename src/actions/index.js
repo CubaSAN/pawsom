@@ -6,3 +6,4 @@ export {
   ADD_USER,
   addUser
 } from './authActions'
+export { CHANGE_COORDS, changeCoords } from './navigatorActions'

@@ -28,7 +28,6 @@ export class LoginPage extends Component {
   static propTypes = {
     onAuthenticate: PropTypes.func.isRequired,
     onAddUser: PropTypes.func.isRequired
-
   }
 
   constructor(props) {

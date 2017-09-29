@@ -7,7 +7,7 @@ import {
   Redirect
 } from 'react-router-dom'
 import { HomePage } from '../pages/home'
-import { SearchPage } from '../pages/search'
+import { SearchPageContainer } from '../pages/search'
 import { NoMatchPage } from '../pages/nomatch'
 import { Accommodation } from '../pages/accommodation'
 import { LoginPageContainer } from '../pages/login'
@@ -62,7 +62,7 @@ export class AppRouter extends Component {
 
           <PrivateRoute
             path="/search"
-            component={SearchPage}
+            component={SearchPageContainer}
             isAuthenticated={isAuthenticated}
           />
 
