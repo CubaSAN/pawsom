@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { FacebookLogin } from 'react-facebook-login-component'
-import { PageLayout } from '../../shared/components/PageLayout'
+import { LandingLayout } from '../../shared/components/LandingLayout'
+import { Container, Row, Col, Button } from 'reactstrap'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
 import Cookies from 'js-cookie'
 import { USER } from '../../utils'
 import store from '../../store'
-import './Login.scss'
+import { push } from 'react-router-redux'
+import './LoginPage.scss'
 
 const CN = 'login-page'
 
@@ -14,25 +17,43 @@ const socialsConfig = {
   facebookButton: {
     socialId: '559925357546946',
     scope:'public_profile',
-    fields:'id',
+    fields:'id, email, name, picture',
     version:'v2.8',
     className:'btn lg fb',
     buttonText:'Facebook'
   }
 }
 
-export class Login extends Component {
+export class LoginPage extends Component {
+  static propTypes = {
+    onAuthenticate: PropTypes.func.isRequired,
+    onAddUser: PropTypes.func.isRequired
+
+  }
+
   constructor(props) {
     super(props)
+
     autoBind(this)
   }
 
   onFacebookAuthenticate(user, expires) {
+    const { onPushToHistory } = this.props
+
+    if (user) {
+      this.props.onAuthenticate(true)
+      this.props.onAddUser(user)
+    }
+
     Cookies.set(USER, JSON.stringify(user), { expires: 365 })
+
+    store.dispatch(push('/feed'))
   }
 
   onFacebookAuthenticateFail(err) {
+    this.props.onAuthenticate(false)
 
+    Cookies.remove(USER)
   }
 
   responseFacebook(user) {
@@ -59,15 +80,14 @@ export class Login extends Component {
   render () {
     const { facebookButton } = socialsConfig
     return (
-      <PageLayout>
+      <LandingLayout>
         <div className={CN}>
-          <div>
-            <div className={`${CN}__social-block-title}`}>
-              Log in with one of social neetwork
-            </div>
+          <Container>
+            <Col className={`${CN}__social-block`}>
+              <div className={`${CN}__social-block-title`}>
+                Log in with one of social neetwork
+              </div>
 
-            <ul>
-              <li>
                 <FacebookLogin
                     socialId={facebookButton.socialId}
                     scope={facebookButton.scope}
@@ -78,11 +98,11 @@ export class Login extends Component {
                     className={facebookButton.className}
                     buttonText={facebookButton.buttonText}
                 />
-              </li>
-            </ul>
-          </div>
+
+            </Col>
+          </Container>
         </div>
-      </PageLayout>
+      </LandingLayout>
     )
   }
 }

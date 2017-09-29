@@ -12,7 +12,9 @@ import {
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import Cookies from 'js-cookie'
-import { LOCALE } from '../../../utils'
+import store from '../../../store'
+import { LOCALE, USER } from '../../../utils'
+import { push } from 'react-router-redux'
 import './Header.scss'
 
 const CN = 'main-header'
@@ -22,11 +24,14 @@ export class Header extends Component {
     auth: PropTypes.object.isRequired,
     languages: PropTypes.array.isRequired,
     locale: PropTypes.string.isRequired,
-    onLanguageChange: PropTypes.func
+    onLanguageChange: PropTypes.func,
+    onAuthenticate: PropTypes.func,
+    onAddUser: PropTypes.func
   }
 
   constructor(props) {
     super(props)
+
     autoBind(this)
   }
 
@@ -67,8 +72,17 @@ export class Header extends Component {
     )
   }
 
+  logOut() {
+    this.props.onAuthenticate(false)
+    this.props.onAddUser(null)
+
+    Cookies.remove(USER)
+
+    store.dispatch(push('/'))
+  }
+
   render () {
-    const { auth } = this.props
+    const { isAuthenticated, user } = this.props.auth
 
     return (
       <Container fluid>
@@ -81,7 +95,7 @@ export class Header extends Component {
 
               <Nav className={`${CN}__navigation`}>
                 {
-                  auth.isAuthenticated &&
+                  isAuthenticated &&
                   <NavItem>
                     <Link to='/search' className={`${CN}__homenav`}>
                       <FormattedMessage id="header.links.search" />
@@ -90,7 +104,7 @@ export class Header extends Component {
                 }
 
                 {
-                  auth.isAuthenticated &&
+                  isAuthenticated &&
                   <NavItem>
                     <Link to='/accommodation' className={`${CN}__homenav`}>
                       <FormattedMessage id="header.links.accommodation" />
@@ -99,7 +113,7 @@ export class Header extends Component {
                 }
 
                 {
-                  !auth.isAuthenticated &&
+                  !isAuthenticated &&
                   <NavItem className='login'>
                     <Link to='/login' className={`${CN}__homenav`}>
                       <FormattedMessage id="header.links.login" />
@@ -109,9 +123,11 @@ export class Header extends Component {
               </Nav>
 
               {
-                auth.isAuthenticated &&
+                isAuthenticated && user &&
                 <div>
-                  {auth.user.name}
+                  <span>{user.name}</span>
+                  {' | '}
+                  <span onClick={this.logOut}>Log out</span>
                 </div>
               }
 

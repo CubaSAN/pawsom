@@ -10,8 +10,11 @@ import { HomePage } from '../pages/home'
 import { SearchPage } from '../pages/search'
 import { NoMatchPage } from '../pages/nomatch'
 import { Accommodation } from '../pages/accommodation'
-import { Login } from '../pages/login'
+import { LoginPageContainer } from '../pages/login'
 import { Feed } from '../pages/feed'
+import { history } from '../store'
+import { ConnectedRouter } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
 
 export const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
   <Route {...rest} render={props => (
@@ -48,7 +51,7 @@ export class AppRouter extends Component {
     const { isAuthenticated } = this.props;
 
     return (
-      <Router>
+      <ConnectedRouter history={history}>
         <Switch>
           <MainRoute
             path="/"
@@ -77,13 +80,13 @@ export class AppRouter extends Component {
 
           <MainRoute
             path="/login"
-            component={Login}
+            component={LoginPageContainer}
             isAuthenticated={isAuthenticated}
           />
 
           <Route component={NoMatchPage} />
         </Switch>
-      </Router>
+      </ConnectedRouter>
     )
   }
 }
