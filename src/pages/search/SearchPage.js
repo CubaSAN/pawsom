@@ -7,10 +7,12 @@ import './SearchPage.scss'
 
 export class SearchPage extends Component {
   static propTypes = {
-    changeCoords: PropTypes.func.isRequired
+    changeCoords: PropTypes.func.isRequired,
+    lat: PropTypes.number.isRequired,
+    lon: PropTypes.number.isRequired
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getLocation();
   }
 
@@ -32,7 +34,10 @@ export class SearchPage extends Component {
   }
 
   render() {
-    const center = { lat: 49.839683, lng: 24.029717 }
+    const center = {
+      lat: this.props.lat,
+      lng: this.props.lon
+    }
 
     return (
       <PageLayout>

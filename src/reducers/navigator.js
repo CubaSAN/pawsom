@@ -1,8 +1,8 @@
 import { CHANGE_COORDS } from '../actions'
 
 const defaultState = {
-  lat: null,
-  lon: null
+  lat: 49.839683,
+  lon: 24.029717
 }
 
 export default (state = defaultState, action) => {
