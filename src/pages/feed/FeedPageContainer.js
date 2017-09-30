@@ -4,8 +4,8 @@ import { FeedPage } from './FeedPage'
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.user.token,
-    id: state.auth.user.id
+    token: state.auth.user && state.auth.user.token,
+    id: state.auth.user && state.auth.user.id
   }
 };
 
