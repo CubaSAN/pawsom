@@ -74,7 +74,6 @@ export class Header extends Component {
   }
 
   logOut() {
-    this.props.onAuthenticate(false)
     this.props.onAddUser(null)
 
     Cookies.remove(USER)

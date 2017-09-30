@@ -18,14 +18,11 @@ export class FeedPage extends Component {
 
   componentWillMount() {
     const {token, id} = this.props;
-console.log('token', token);
     if (token && id) {
       agent.Posts.all(id, this.state.postsPage, token).then((posts) => {
         this.setState({
           posts
         })
-        console.log('posts response', posts)
-        console.log('posts', this.state.posts);
       })
     }
   }
@@ -46,7 +43,7 @@ console.log('token', token);
 
   render () {
     return (
-      <PageLayout>
+      <PageLayout className={CN}>
         <Col md={9}>
           {this.renderPost()}
         </Col>
