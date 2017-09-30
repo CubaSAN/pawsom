@@ -1,1 +1,2 @@
-export { Feed } from './Feed'
+export { Feed } from './FeedPage'
+export { FeedPageContainer } from './FeedPageContainer'

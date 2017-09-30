@@ -5,6 +5,7 @@ import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './reducers'
 import { getLocale, getLanguages, getUser } from './utils'
+import { promiseMiddleware } from './enhancers'
 
 export const history = createHistory()
 
@@ -21,7 +22,10 @@ const initialState = {
   }
 }
 
-const enhancers = []
+const enhancers = [
+  applyMiddleware(promiseMiddleware)
+]
+
 const middleware = [
   thunk,
   routerMiddleware(history),

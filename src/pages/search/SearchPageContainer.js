@@ -1,18 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { SearchPage } from './SearchPage'
-import { changeCoords } from '../../actions'
+import { changeSearchRadius } from '../../actions'
 
 const mapStateToProps = state => {
-  const { navigator: { lat, lon }} = state || {};
+  const { navigator: { lat, lng }, search, auth} = state || {};
   return {
     lat,
-    lon
+    lng,
+    radius: search.radius,
+    user: auth.user
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeCoords: bindActionCreators(changeCoords, dispatch)
+  changeSearchRadius: bindActionCreators(changeSearchRadius, dispatch)
 });
 
 export const SearchPageContainer = connect(

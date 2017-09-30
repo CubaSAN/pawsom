@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { PageLayout } from '../../shared/components/PageLayout'
-import './Feed.scss'
+import './FeedPage.scss'
 
-export class Feed extends Component {
+export class FeedPage extends Component {
   render () {
     return (
       <PageLayout>

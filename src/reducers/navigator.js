@@ -1,17 +1,19 @@
-import { CHANGE_COORDS } from '../actions'
+import { GET_GEOLOCATION } from '../actions'
 
 const defaultState = {
-  lat: 49.839683,
-  lon: 24.029717
+  lat: null,
+  lng: null
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case CHANGE_COORDS:
+    case GET_GEOLOCATION:
+      const { coords } = action.payload
+
       return {
         ...state,
-        lat: action.coords.lat,
-        lon: action.coords.lon
+        lat: coords.latitude,
+        lng: coords.longitude
       }
     default:
       return state

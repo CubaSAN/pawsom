@@ -11,7 +11,7 @@ import { SearchPageContainer } from '../pages/search'
 import { NoMatchPage } from '../pages/nomatch'
 import { Accommodation } from '../pages/accommodation'
 import { LoginPageContainer } from '../pages/login'
-import { Feed } from '../pages/feed'
+import { FeedPageContainer } from '../pages/feed'
 import { history } from '../store'
 import { ConnectedRouter } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
@@ -44,11 +44,16 @@ const MainRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 
 export class AppRouter extends Component {
   static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    getLocation: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    this.props.getLocation()
   }
 
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated } = this.props
 
     return (
       <ConnectedRouter history={history}>
@@ -74,7 +79,7 @@ export class AppRouter extends Component {
 
           <PrivateRoute
             path="/feed"
-            component={Feed}
+            component={FeedPageContainer}
             isAuthenticated={isAuthenticated}
           />
 

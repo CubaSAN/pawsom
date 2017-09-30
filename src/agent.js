@@ -12,6 +12,11 @@ const responseBody = res => res.body
 const requests = {
   get: (url) =>
     superagent.get(`${API_ROOT}${url}`).then(responseBody),
+  getAuthenticated: (url, token) =>
+    superagent
+      .get(`${API_ROOT}${url}`)
+      .set('Authorization', `Bearer ${token}`)
+      .then(responseBody),
   post: (url, body) =>
     superagent.post(`${API_ROOT}${url}`, body).then(responseBody),
   getSocial: (url, token) =>
@@ -24,7 +29,7 @@ const requests = {
       .post(`${API_ROOT_SOCIAL}${url}`, body)
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json')
-      .then(responseBody),
+      .then(responseBody)
 }
 
 const Auth = {
@@ -58,7 +63,7 @@ const Posts = {
       .postSocial('/api/Social/', body, token),
   deletePosts: (body, token) =>
     requests
-      .postSocial(`/api/DeletePost/`, body, token),
+      .postSocial(`/api/DeletePost/`, body, token)
 }
 
 const Comments = {
@@ -67,13 +72,19 @@ const Comments = {
       .postSocial('/api/Comment/', body, token),
   getComments: (postId, page, token) =>
     requests
-      .getSocial(`/api/Comment/${postId}/${page}`, token),
+      .getSocial(`/api/Comment/${postId}/${page}`, token)
 }
 
 const Likes = {
   setReaction: (body, token) =>
     requests
-      .postSocial('/api/Reaction/', body, token),
+      .postSocial('/api/Reaction/', body, token)
+}
+
+const Search = {
+  searchLost: (range, latitude, longitude, token) =>
+    requests
+      .getAuthenticated(`/api/LostPet/GetLostPet/${range}/${latitude}/${longitude}`, token)
 }
 
 export default {
@@ -81,5 +92,6 @@ export default {
   Posts,
   Comments,
   Auth,
-  Likes
+  Likes,
+  Search
 }

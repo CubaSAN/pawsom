@@ -3,56 +3,98 @@ import PropTypes from 'prop-types'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider } from './components'
+import agent from '../../agent'
 import './SearchPage.scss'
+
+const CN = 'search-page'
 
 export class SearchPage extends Component {
   static propTypes = {
-    changeCoords: PropTypes.func.isRequired,
-    lat: PropTypes.number.isRequired,
-    lon: PropTypes.number.isRequired
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+    radius: PropTypes.number.isRequired,
+    changeSearchRadius: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   }
 
-  componentWillMount() {
-    this.getLocation();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.lat && nextProps.lng) {
+      this.getFindings(nextProps)
+    }
   }
 
-  getLocation() {
-    const { changeCoords } = this.props;
+  changeGeoFormat(value) {
+    return value.toString().replace(/\./g, ',')
+  }
 
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords
+  getFindings(nextProps) {
+    const { radius, lat, lng, user } = nextProps
+    const radiusInMeters = radius * 1000
+    const replacedLat = this.changeGeoFormat(lat)
+    const replacedLng = this.changeGeoFormat(lng)
 
-        changeCoords({
-          lat: latitude,
-          lon: longitude
-        })
-      });
+    agent
+      .Search
+      .searchLost(radiusInMeters, replacedLat, replacedLng, user.token)
+      .then(data => {
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  renderMap() {
+    const { lat, lng } = this.props
+    const center = { lat, lng }
+
+    return (
+      <Map
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `400px` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+        center={center}
+      />
+    )
+  }
+
+  renderMapPlaceHolder() {
+    return (
+      <div className={`${CN}__map-placeholder`}>
+        Please allow location in browser to use map
+      </div>
+    )
+  }
+
+  renderMapSection() {
+    const { lat, lng } = this.props;
+    const isNavigatorAvailable = lat && lng;
+
+    if (isNavigatorAvailable) {
+      return this.renderMap()
     } else {
-      /* geolocation IS NOT available */
+      return this.renderMapPlaceHolder()
     }
   }
 
   render() {
-    const center = {
-      lat: this.props.lat,
-      lng: this.props.lon
-    }
+    const { changeSearchRadius, radius } = this.props;
 
     return (
-      <PageLayout>
+      <PageLayout className={CN}>
         <Col md={9}>
-          <Map
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            center={center}
-          />
+          {this.renderMapSection()}
         </Col>
-        <Col md={3}>
-          <div>Apply filter</div>
-          <RangeSlider />
+        <Col className={`${CN}__sidebar`} md={3}>
+          <div className={`${CN}__sidebar-header`}>Filters</div>
+          <div className={`${CN}__sidebar-item`}>
+            <div className={`${CN}__sidebar-heading`}>Distance from your location</div>
+            <RangeSlider onRadiusChange={changeSearchRadius} value={radius} />
+          </div>
+          <div className={`${CN}__sidebar-item`}>
+            <div className={`${CN}__sidebar-heading`}>Breed</div>
+          </div>
         </Col>
       </PageLayout>
     )

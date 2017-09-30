@@ -1,0 +1,31 @@
+@import '../../shared/scss/variables.scss';
+@import '../../shared/scss/mixins.scss';
+
+.search-page {
+  &__map-placeholder {
+    width: 100%;
+    height: 400px;
+    background: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include font-size(20px);
+  }
+
+  &__sidebar {
+    &-header {
+      @include font-size(20px);
+      margin-bottom: 20px;
+    }
+
+    &-item {
+      margin-bottom: 20px;
+    }
+
+    &-heading {
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+  }
+}
