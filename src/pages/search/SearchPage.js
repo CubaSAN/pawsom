@@ -30,6 +30,14 @@ export class SearchPage extends Component {
     autoBind(this)
   }
 
+  componentDidMount() {
+    const {lat, lng} = this.props
+
+    if (lat && lng) {
+      this.getFindings(this.props)
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.lat && nextProps.lng) {
       this.getFindings(nextProps)
@@ -52,7 +60,7 @@ export class SearchPage extends Component {
       }
     })
 
-    this.setState({ findings: this.getFilteresFindings(findings) })
+    this.setState({ findings })
   }
 
   getFilteresFindings(findings) {
@@ -165,7 +173,7 @@ export class SearchPage extends Component {
                 <div>
                   <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
                   <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
-                  <div className={`${CN}__search-item-address`}>{finding.localityName}</div>
+                  <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
                 </div>
                 <div className={`${CN}__search-item-actions`}>
                   <Button color='success'>Details</Button>
@@ -189,10 +197,6 @@ export class SearchPage extends Component {
             {results}
           </Row>
         </div>
-      )
-    } else {
-      return (
-        <div>No results</div>
       )
     }
   }
@@ -247,6 +251,11 @@ export class SearchPage extends Component {
           </div>
 
           {!!findings.length && this.renderFindings()}
+
+          {
+            !findings.length &&
+              <div>No results yet, please use filters</div>
+          }
         </Col>
         <Col className={`${CN}__sidebar`} md={3}>
           <div className={`${CN}__sidebar-header`}>Filters</div>
