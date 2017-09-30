@@ -48,9 +48,9 @@ export class LoginPage extends Component {
   }
 
   onFacebookAuthenticateFail(err) {
-    this.props.onAuthenticate(false)
-
     Cookies.remove(USER)
+
+    store.dispatch(push('/login'))
   }
 
   authenticateUser(user) {

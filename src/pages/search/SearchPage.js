@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Col, Label, Input, Button } from 'reactstrap'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider } from './components'
+import autoBind from 'react-autobind'
 import agent from '../../agent'
+import _ from 'lodash'
 import './SearchPage.scss'
 
 const CN = 'search-page'
@@ -21,8 +23,11 @@ export class SearchPage extends Component {
     super(props)
 
     this.state = {
-      findings: []
+      findings: [],
+      filter: []
     }
+
+    autoBind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +37,30 @@ export class SearchPage extends Component {
   }
 
   changeGeoFormat(value) {
-    return value.toString().replace(/\./g, ',')
+    return value.toFixed(6);
+  }
+
+  setFindings(data) {
+    const findings = data.map(finding => {
+      const { breedName } = finding.breed
+
+      return {
+        breedName,
+        foundBy: finding.foundBy,
+        localityName: finding.localityName,
+        urls: finding.urls
+      }
+    })
+
+    this.setState({ findings: this.getFilteresFindings(findings) })
+  }
+
+  getFilteresFindings(findings) {
+    const { filter } = this.state
+
+    return filter.length ?
+      findings.filter(finding => filter.includes(finding.breedName)) :
+      findings
   }
 
   getFindings(nextProps) {
@@ -48,10 +76,10 @@ export class SearchPage extends Component {
       .Search
       .searchLost(radiusInMeters, replacedLat, replacedLng, user.token)
       .then(data => {
-        console.log(data)
+        data && this.setFindings(data)
       })
       .catch((err) => {
-        console.log(err)
+        new Error(err)
       })
   }
 
@@ -89,13 +117,79 @@ export class SearchPage extends Component {
     }
   }
 
+  renderFoundBy(name) {
+    if (name) {
+      return (
+        <div>Found by {name}</div>
+      )
+    } else {
+      return (
+        <div>Found by unknown person</div>
+      )
+    }
+  }
+
+  renderFindingImage(urls, breedName) {
+    if (urls.length) {
+      const imgSrc = this.parseImageUrl(urls[0])
+
+      return (
+        <img src={imgSrc} alt={breedName} /> 
+      )
+    } else {
+      return (
+        <div>No image</div>
+      )
+    }
+  }
+
+  parseImageUrl(url) {
+    const parts = url.split('/')
+
+    return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
+  }
+
   renderFindings() {
     const { findings } = this.state
 
     if (findings.length) {
-      return findings.map(finding => {
-
+      const filteredFindings = this.getFilteresFindings(findings);
+      const results = filteredFindings.map((finding, i) => {
+        return (
+          <Col lg={6} xs={12} key={i}>
+            <div className={`${CN}__search-item`}>
+              <div className={`${CN}__search-item-image`}>
+                {this.renderFindingImage(finding.urls, finding.breedName)}
+              </div>
+              <div className={`${CN}__search-item-desc`}>
+                <div>
+                  <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
+                  <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
+                  <div className={`${CN}__search-item-address`}>{finding.localityName}</div>
+                </div>
+                <div className={`${CN}__search-item-actions`}>
+                  <Button color='success'>Details</Button>
+                </div>
+              </div>
+            </div>
+          </Col>
+        )
       })
+
+      return (
+        <div>
+          <Row>
+            <Col className={`${CN}__search-header`}>
+              Found - <span className={`${CN}__search-header-secondary`}>
+                {filteredFindings.length} pets
+              </span>
+            </Col>
+          </Row>
+          <Row>
+            {results}
+          </Row>
+        </div>
+      )
     } else {
       return (
         <div>No results</div>
@@ -103,13 +197,56 @@ export class SearchPage extends Component {
     }
   }
 
+  setFilter(e) {
+    const { filter } = this.state
+    const { value } = e.target
+
+    if (filter.includes(value)) {
+      const index = filter.indexOf(value)
+      this.setState({
+        filter: filter.slice(0, index).concat(filter.slice(index + 1))
+      })
+    } else {
+      this.setState({
+        filter: filter.concat([value])
+      })
+    }
+  }
+
+  renderBreedFilter() {
+    const { findings } = this.state
+    
+    const results = _.uniqBy(findings, 'breedName').map((finding, i) => {
+      return (
+        <div className={`${CN}__sidebar-filter-string`} key={i}>
+          <Label>
+            <Input type="checkbox" onChange={this.setFilter} value={finding.breedName }/>
+            {` ${finding.breedName}`}
+          </Label>
+        </div>
+      )
+    })
+
+    return (
+      <div className={`${CN}__sidebar-item`}>
+        <div className={`${CN}__sidebar-heading`}>Breed</div>
+        {results}
+      </div>
+    )
+  }
+
   render() {
     const { changeSearchRadius, radius } = this.props;
+    const { findings } = this.state
 
     return (
       <PageLayout className={CN}>
-        <Col md={9}>
-          {this.renderMapSection()}
+        <Col md={9} xs={12}>
+          <div className={`${CN}__map`}>
+            {this.renderMapSection()}
+          </div>
+
+          {!!findings.length && this.renderFindings()}
         </Col>
         <Col className={`${CN}__sidebar`} md={3}>
           <div className={`${CN}__sidebar-header`}>Filters</div>
@@ -117,9 +254,8 @@ export class SearchPage extends Component {
             <div className={`${CN}__sidebar-heading`}>Distance from your location</div>
             <RangeSlider onRadiusChange={changeSearchRadius} value={radius} />
           </div>
-          <div className={`${CN}__sidebar-item`}>
-            <div className={`${CN}__sidebar-heading`}>Breed</div>
-          </div>
+
+          {!!findings.length && this.renderBreedFilter()}
         </Col>
       </PageLayout>
     )
