@@ -17,7 +17,6 @@ const initialState = {
     languages: getLanguages()
   },
   auth: {
-    isAuthenticated: !!user,
     user
   }
 }

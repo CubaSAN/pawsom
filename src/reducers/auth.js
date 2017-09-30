@@ -1,16 +1,11 @@
-import { AUTHENTICATE, ADD_USER } from '../actions'
+import { ADD_USER } from '../actions'
 
 const defaultState = {
-  isAuthenticated: false
+  user: null
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case AUTHENTICATE:
-      return {
-        ...state,
-        isAuthenticated: action.isAuthenticated
-      }
     case ADD_USER:
       return {
         ...state,

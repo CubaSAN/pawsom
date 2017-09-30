@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import isObject from 'is-object'
 import {
   BrowserRouter as Router,
   Route,
@@ -44,7 +45,7 @@ const MainRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 
 export class AppRouter extends Component {
   static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
+    user: PropTypes.object,
     getLocation: PropTypes.func.isRequired
   }
 
@@ -53,7 +54,8 @@ export class AppRouter extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props
+    const { user } = this.props
+    const isAuthenticated = isObject(user)
 
     return (
       <ConnectedRouter history={history}>

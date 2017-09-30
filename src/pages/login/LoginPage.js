@@ -26,7 +26,6 @@ const socialsConfig = {
 
 export class LoginPage extends Component {
   static propTypes = {
-    onAuthenticate: PropTypes.func.isRequired,
     onAddUser: PropTypes.func.isRequired
   }
 
@@ -40,7 +39,6 @@ export class LoginPage extends Component {
     const { onPushToHistory } = this.props
 
     if (user) {
-      this.props.onAuthenticate(true)
       this.props.onAddUser(user)
     }
 
@@ -55,7 +53,14 @@ export class LoginPage extends Component {
     Cookies.remove(USER)
   }
 
+  authenticateUser(user) {
+    if (typeof user === 'object' && user.accessToken) {
+
+    }
+  }
+
   responseFacebook(user) {
+    // this.authenticateUser(user)
     if (typeof user === 'object' && user.accessToken) {
       agent
         .Auth

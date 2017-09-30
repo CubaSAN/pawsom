@@ -17,6 +17,14 @@ export class SearchPage extends Component {
     user: PropTypes.object.isRequired
   }
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      findings: []
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.lat && nextProps.lng) {
       this.getFindings(nextProps)
@@ -30,8 +38,11 @@ export class SearchPage extends Component {
   getFindings(nextProps) {
     const { radius, lat, lng, user } = nextProps
     const radiusInMeters = radius * 1000
-    const replacedLat = this.changeGeoFormat(lat)
-    const replacedLng = this.changeGeoFormat(lng)
+    // const replacedLat = this.changeGeoFormat(lat)
+    // const replacedLng = this.changeGeoFormat(lng)
+
+    const replacedLng = 23.985160
+    const replacedLat = 49.815461
 
     agent
       .Search
@@ -75,6 +86,20 @@ export class SearchPage extends Component {
       return this.renderMap()
     } else {
       return this.renderMapPlaceHolder()
+    }
+  }
+
+  renderFindings() {
+    const { findings } = this.state
+
+    if (findings.length) {
+      return findings.map(finding => {
+
+      })
+    } else {
+      return (
+        <div>No results</div>
+      )
     }
   }
 

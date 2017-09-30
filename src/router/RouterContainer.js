@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
   return {
     routing,
-    isAuthenticated: auth.isAuthenticated
+    user: auth.user
   }
 };
 

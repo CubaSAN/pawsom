@@ -7,7 +7,6 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case CHANGE_SEARCH_RADIUS:
-    debugger;
       return {
         ...state,
         radius: action.payload.radius

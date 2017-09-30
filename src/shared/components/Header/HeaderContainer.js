@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Header } from './Header'
-import { changeLocale, authenticate, addUser } from '../../../actions'
+import { changeLocale, addUser } from '../../../actions'
 
 const mapStateToProps = state => {
   const { languages, locale } = state.locales
@@ -16,7 +16,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onLanguageChange: bindActionCreators(changeLocale, dispatch),
-  onAuthenticate: bindActionCreators(authenticate, dispatch),
   onAddUser: bindActionCreators(addUser, dispatch)
 });
 
