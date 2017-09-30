@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
+import isObject from 'is-object'
 import {
   Container,
   Row,
@@ -82,7 +83,8 @@ export class Header extends Component {
   }
 
   render () {
-    const { isAuthenticated, user } = this.props.auth
+    const { user } = this.props.auth
+    const isAuthenticated = isObject(user)
 
     return (
       <Container fluid>

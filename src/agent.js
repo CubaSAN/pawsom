@@ -29,7 +29,9 @@ const requests = {
       .post(`${API_ROOT_SOCIAL}${url}`, body)
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json')
-      .then(responseBody)
+      .then(responseBody),
+  postSocialAuth: (url, body) =>
+    superagent.post(`${API_ROOT_SOCIAL}${url}`, body).then(responseBody),
 }
 
 const Auth = {
@@ -39,7 +41,7 @@ const Auth = {
       grant_type: grantType
     })),
   authorizeSocial: (accesstoken, grantType) =>
-    requests.post('/auth', qs.stringify({
+    requests.postSocialAuth('/auth', qs.stringify({
       accesstoken: accesstoken,
       grant_type: grantType
     }))
@@ -84,7 +86,7 @@ const Likes = {
 const Search = {
   searchLost: (range, latitude, longitude, token) =>
     requests
-      .getAuthenticated(`/api/LostPet/GetLostPet/${range}/${latitude}/${longitude}`, token)
+      .getAuthenticated(`/api/LostPet/GetLostPet/${range}/${latitude}/${longitude}/`, token)
 }
 
 export default {
