@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Label, Input, Button } from 'reactstrap'
+import { Marker } from "react-google-maps"
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup } from './components'
 import autoBind from 'react-autobind'
@@ -102,7 +103,12 @@ export class SearchPage extends Component {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
         center={center}
-      />
+      >
+        <Marker
+          position={center}
+        />
+
+      </Map>
     )
   }
 
