@@ -174,4 +174,35 @@
     display: inline-block;
     white-space: nowrap;
   }
+
+  &__map-marker-header {
+    font-weight: 900;
+  }
+
+  &__map-marker-desc {
+    font-size: 16px;
+  }
+
+  &__map-marker-info {
+    color: green;
+  }
+
+  &__search-modal {
+    &#{&} {
+      max-width: none;
+      max-height: none;
+      margin: 0;
+
+      &#{&} {
+        transform: translate(0, 0);
+      }
+    }
+
+    .modal-content {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+    }
+  }
 }

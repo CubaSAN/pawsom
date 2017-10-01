@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Label, Input, Button } from 'reactstrap'
-import { Marker } from "react-google-maps"
+import { Marker, InfoWindow } from "react-google-maps"
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup } from './components'
 import autoBind from 'react-autobind'
@@ -9,7 +9,11 @@ import agent from '../../agent'
 import _ from 'lodash'
 import FaPhone from 'react-icons/lib/fa/phone'
 import FaClose from 'react-icons/lib/fa/close'
+import FaInfoCircle from 'react-icons/lib/fa/info-circle'
+import dog from '../../shared/assets/images/dog.png'
+import home from '../../shared/assets/images/home.png'
 import './SearchPage.scss'
+
 
 const CN = 'search-page'
 
@@ -19,7 +23,7 @@ export class SearchPage extends Component {
     lng: PropTypes.number,
     radius: PropTypes.number.isRequired,
     changeSearchRadius: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -27,7 +31,9 @@ export class SearchPage extends Component {
 
     this.state = {
       findings: [],
-      filter: []
+      filter: [],
+      infoWindow: null,
+      isPopup: false
     }
 
     autoBind(this)
@@ -60,7 +66,10 @@ export class SearchPage extends Component {
         foundBy: finding.foundBy,
         localityName: finding.localityName,
         urls: finding.urls,
-        phoneNumber: finding.phoneNumber
+        phoneNumber: finding.phoneNumber,
+        latitude: finding.latitude,
+        longitude: finding.longitude,
+        petName: finding.petName
       }
     })
 
@@ -92,9 +101,24 @@ export class SearchPage extends Component {
       })
   }
 
+  onMarkerClick(finding) {
+    this.setState({
+      infoWindow: {
+        finding
+      }
+    })
+  }
+
+  onMarkerCloseClick() {
+    this.setState({
+      infoWindow: null
+    })
+  }
+
   renderMap() {
     const { lat, lng } = this.props
     const center = { lat, lng }
+    const { findings, infoWindow } = this.state
 
     return (
       <Map
@@ -106,10 +130,66 @@ export class SearchPage extends Component {
       >
         <Marker
           position={center}
+          icon={home}
         />
 
+        {!!findings.length && this.getFilteresFindings(findings).map((finding, i) => {
+          const position = {
+            lat: finding.latitude,
+            lng: finding.longitude
+          }
+
+          return (
+            <Marker
+              key={i}
+              position={position}
+              icon={dog}
+              onClick={() => { this.onMarkerClick(finding) }}
+            />
+          )
+        })}
+
+        {
+          !!infoWindow &&
+            <InfoWindow 
+              position={{
+                lat: infoWindow.finding.latitude,
+                lng: infoWindow.finding.longitude,
+              }}
+              onCloseClick={this.onMarkerCloseClick}
+            >
+              <div>
+                <div
+                  className={`${CN}__map-marker-header`}
+                >
+                  { 
+                    !!infoWindow.finding.petName ?
+                      (<span>Lost: {infoWindow.finding.petName}</span>) :
+                      (<span>Found</span>)
+                  }
+                </div>
+                <div 
+                  className={`${CN}__map-marker-desc`}
+                >
+                  {infoWindow.finding.breedName}
+                </div>
+                <div 
+                  className={`${CN}__map-marker-info`}
+                  onClick={() => { this.onInfoWindowClick() }}
+                >
+                  <FaInfoCircle /> info
+                </div>
+              </div>
+            </InfoWindow>
+        }
       </Map>
     )
+  }
+
+  onInfoWindowClick() {
+    this.setState({
+      isPopup: true
+    })
   }
 
   renderMapPlaceHolder() {
@@ -164,7 +244,7 @@ export class SearchPage extends Component {
   }
 
   renderFindings() {
-    const { findings } = this.state
+    const { findings, isPopup, infoWindow } = this.state
 
     if (findings.length) {
       const filteredFindings = this.getFilteresFindings(findings);
@@ -208,10 +288,24 @@ export class SearchPage extends Component {
           <Row>
             {results}
           </Row>
-          {/* <ModalPopup /> */}
+          {
+            isPopup && 
+              <ModalPopup 
+                className={`${CN}__search-modal`} 
+                toggle={this.onPopupToggle}
+                isOpen={isPopup}
+                data={infoWindow}
+              />
+          }
         </div>
       )
     }
+  }
+
+  onPopupToggle() {
+    this.setState({
+      isPopup: false
+    })
   }
 
   setFilter(e) {
