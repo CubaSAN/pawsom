@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap'
+import { Gallery } from '../../../shared/components/Gallery'
 
 export class ModalPopup extends React.Component {
   static propTypes = {
@@ -11,21 +12,64 @@ export class ModalPopup extends React.Component {
     data: PropTypes.object.isRequired
   }
 
-  render() {
+  renderHeader() {
+    const { data: { finding } } = this.props
+
+    return finding.petName ? 
+      (<span>Lost pet - {finding.breedName}, pet name {finding.petName}</span>) :
+      (<span>Found pet - {finding.breedName}</span>)
+  }
+
+  renderMainContent() {
     const { data: { finding } } = this.props
 
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} className={this.props.className}>
-          <ModalHeader>{finding.breedName}</ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </ModalBody>
-          <ModalFooter>
-            <Button color="success" onClick={this.props.toggle}>Back</Button>
-          </ModalFooter>
-        </Modal>
+        <div>{finding.breedName} was found around:</div>
+        <div>{finding.localityName}</div>
+        <div>Found by: {finding.foundBy},</div>
+        <div>more information, phone: {finding.phoneNumber}</div>
+        <div>{finding.additionalInformation}</div>
       </div>
+    )
+  }
+
+  render() {
+    const { data: { finding } } = this.props
+
+    return (
+      <Modal isOpen={this.props.isOpen} className={this.props.className}>
+        <ModalHeader>{this.renderHeader()}</ModalHeader>
+        <ModalBody>
+          <Row>
+            {
+              !!finding.urls.length ?
+                (
+                  <Col lg={8} xs={12}>
+                    <Gallery images={finding.urls} />
+                  </Col>
+                ) :
+                (
+                  <div>
+                    {this.renderMainContent()}
+                  </div>
+                )
+            }
+
+            {
+              !!finding.urls.length &&
+                (
+                  <Col lg={4} xs={12}>
+                    {this.renderMainContent()}
+                  </Col>
+                )
+            }
+          </Row>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={this.props.toggle}>Back</Button>
+        </ModalFooter>
+      </Modal>
     );
   }
 }

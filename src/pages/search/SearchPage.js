@@ -33,7 +33,8 @@ export class SearchPage extends Component {
       findings: [],
       filter: [],
       infoWindow: null,
-      isPopup: false
+      isPopup: false,
+      infoPopup: null
     }
 
     autoBind(this)
@@ -69,7 +70,8 @@ export class SearchPage extends Component {
         phoneNumber: finding.phoneNumber,
         latitude: finding.latitude,
         longitude: finding.longitude,
-        petName: finding.petName
+        petName: finding.petName,
+        additionalInformation: finding.additionalInformation
       }
     })
 
@@ -175,7 +177,7 @@ export class SearchPage extends Component {
                 </div>
                 <div 
                   className={`${CN}__map-marker-info`}
-                  onClick={() => { this.onInfoWindowClick() }}
+                  onClick={() => { this.onOpenPopup() }}
                 >
                   <FaInfoCircle /> info
                 </div>
@@ -186,7 +188,7 @@ export class SearchPage extends Component {
     )
   }
 
-  onInfoWindowClick() {
+  onOpenPopup() {
     this.setState({
       isPopup: true
     })
@@ -243,6 +245,17 @@ export class SearchPage extends Component {
     return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
   }
 
+  onCardDetails(finding) {
+    debugger;
+    this.setState({
+      infoWindow: {
+        finding
+      }
+    }, () => {
+      this.onOpenPopup()
+    })
+  }
+
   renderFindings() {
     const { findings, isPopup, infoWindow } = this.state
 
@@ -268,7 +281,7 @@ export class SearchPage extends Component {
                   </div>
                 </div>
                 <div className={`${CN}__search-item-actions`}>
-                  <Button color='success'>Details</Button>
+                  <Button color='success' onClick={() => {this.onCardDetails(finding)}}>Details</Button>
                 </div>
               </div>
             </div>
