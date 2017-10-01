@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './FeedPage.scss'
+import Post from './components/Post'
 
 const CN = 'feed-page'
 
@@ -29,8 +30,11 @@ export class FeedPage extends Component {
 
   renderPost() {
     if(this.state.posts.length) {
-      return (
-        <h2>Feed Page</h2>
+      return this.state.posts.map((post) =>
+        <Post
+          key={post.id}
+          post={post}
+        />
       )
     } else {
       return (
