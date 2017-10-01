@@ -5,13 +5,31 @@ export const getLocation = () => {
 
   const location = new Promise((resolve, reject) => {
     if (!geolocation) {
-      reject(new Error('Not Supported'))
+      resolve({
+        coords: {
+          latitude: null,
+          longitude: null
+        },
+        err: new Error('Not Supported')
+      })
     }
 
     geolocation.getCurrentPosition((position) => {
       resolve(position)
-    }, () => {
-      reject(new Error('Permission denied'))
+    }, (err) => {
+      const errMsg = [
+        'Permision Denied',
+        'Position Unavailable',
+        'Timeout Error'
+      ]
+
+      resolve({
+        coords: {
+          latitude: null,
+          longitude: null
+        },
+        err: new Error(errMsg[err.code - 1])
+      })
     })
   })
 

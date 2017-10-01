@@ -56,7 +56,8 @@ export class SearchPage extends Component {
         breedName,
         foundBy: finding.foundBy,
         localityName: finding.localityName,
-        urls: finding.urls
+        urls: finding.urls,
+        phoneNumber: finding.phoneNumber
       }
     })
 
@@ -74,11 +75,8 @@ export class SearchPage extends Component {
   getFindings(nextProps) {
     const { radius, lat, lng, user } = nextProps
     const radiusInMeters = radius * 1000
-    // const replacedLat = this.changeGeoFormat(lat)
-    // const replacedLng = this.changeGeoFormat(lng)
-
-    const replacedLng = 23.985160
-    const replacedLat = 49.815461
+    const replacedLat = this.changeGeoFormat(lat)
+    const replacedLng = this.changeGeoFormat(lng)
 
     agent
       .Search
@@ -174,6 +172,7 @@ export class SearchPage extends Component {
                   <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
                   <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
                   <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
+                  <div className={`${CN}__search-item-phone`}>{finding.phoneNumber}</div>
                 </div>
                 <div className={`${CN}__search-item-actions`}>
                   <Button color='success'>Details</Button>
