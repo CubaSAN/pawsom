@@ -8,8 +8,8 @@ import Post from './components/Post'
 const CN = 'feed-page'
 
 export class FeedPage extends Component {
-  constructor(props, context) {
-    super(props, context)
+  constructor(props) {
+    super(props)
 
     this.state = {
       postsPage: 0,
@@ -18,7 +18,7 @@ export class FeedPage extends Component {
   }
 
   componentWillMount() {
-    const {token, id} = this.props;
+    const { token, id } = this.props;
     if (token && id) {
       agent.Posts.all(id, this.state.postsPage, token).then((posts) => {
         this.setState({
@@ -29,7 +29,8 @@ export class FeedPage extends Component {
   }
 
   renderPost() {
-    if(this.state.posts.length) {
+    const { posts } = this.state
+    if(posts.length) {
       return this.state.posts.map((post) =>
         <Post
           className={`${CN}__post`}
@@ -40,7 +41,7 @@ export class FeedPage extends Component {
     } else {
       return (
         <div className={`${CN}__post-placeholder`}>
-          <h2>No one added a post yet</h2>
+          <h2>There aren't any posts yet, please add one</h2>
         </div>
       )
     }

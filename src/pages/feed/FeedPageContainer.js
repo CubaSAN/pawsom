@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { FeedPage } from './FeedPage'
 
 const mapStateToProps = state => {
+  const { id, token } = state.auth.user
   return {
-    token: state.auth.user.token,
-    id: state.auth.user.id
+    id,
+    token
   }
 };
 
