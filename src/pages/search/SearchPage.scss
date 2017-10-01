@@ -112,6 +112,66 @@
   &__search-item-actions {
     display: flex;
     justify-content: flex-end;
-    padding-right: 10px;
+
+    .btn {
+      background: $green;
+      
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active, &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__search-item-phone-link {
+    color: $green;
+      
+    &:hover {
+      cursor: pointer;
+      color: $green;
+      text-decoration: none;
+    }
+  }
+
+  &__no-results {
+    @include font-size(20px);
+  }
+
+  &__selected-item {
+    background: $grey;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 5px;
+    display: inline-block;
+    height: 18px;
+
+    &-icon {
+      margin-left: 3px;
+      vertical-align: text-bottom;
+      position: relative;
+      top: -4px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__selected-filters {
+    list-style: none;
+    margin: 0 0 10px 0;
+    padding: 2px 5px;
+  }
+
+  &__selected-item-text {
+    text-overflow: ellipsis;
+    max-width: 110px;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
   }
 }

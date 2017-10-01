@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Label, Input, Button } from 'reactstrap'
 import { PageLayout } from '../../shared/components/PageLayout'
-import { Map, RangeSlider } from './components'
+import { Map, RangeSlider, ModalPopup } from './components'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
 import _ from 'lodash'
+import FaPhone from 'react-icons/lib/fa/phone'
+import FaClose from 'react-icons/lib/fa/close'
 import './SearchPage.scss'
 
 const CN = 'search-page'
@@ -172,7 +174,12 @@ export class SearchPage extends Component {
                   <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
                   <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
                   <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
-                  <div className={`${CN}__search-item-phone`}>{finding.phoneNumber}</div>
+                  <div className={`${CN}__search-item-phone`}>
+                    <FaPhone />
+                    <a href={`tel:${finding.phoneNumber}`} className={`${CN}__search-item-phone-link`}>
+                      {` ${finding.phoneNumber}`}
+                    </a>
+                  </div>
                 </div>
                 <div className={`${CN}__search-item-actions`}>
                   <Button color='success'>Details</Button>
@@ -195,6 +202,7 @@ export class SearchPage extends Component {
           <Row>
             {results}
           </Row>
+          {/* <ModalPopup /> */}
         </div>
       )
     }
@@ -217,14 +225,19 @@ export class SearchPage extends Component {
   }
 
   renderBreedFilter() {
-    const { findings } = this.state
-    
+    const { findings, filter } = this.state
+
     const results = _.uniqBy(findings, 'breedName').map((finding, i) => {
       return (
         <div className={`${CN}__sidebar-filter-string`} key={i}>
           <Label>
-            <Input type="checkbox" onChange={this.setFilter} value={finding.breedName }/>
-            {` ${finding.breedName}`}
+            <Input 
+              type="checkbox" 
+              onChange={this.setFilter} 
+              value={finding.breedName}
+              checked={filter.includes(finding.breedName)}
+            />
+              {` ${finding.breedName}`}
           </Label>
         </div>
       )
@@ -233,9 +246,32 @@ export class SearchPage extends Component {
     return (
       <div className={`${CN}__sidebar-item`}>
         <div className={`${CN}__sidebar-heading`}>Breed</div>
+        <ul className={`${CN}__selected-filters`}>
+          {filter.map((filterItem, i) => {
+            return (
+              <li key={i} className={`${CN}__selected-item`}>
+                <span className={`${CN}__selected-item-text`}>{filterItem}</span>
+                <span className={`${CN}__selected-item-icon`}>
+                  <FaClose
+                    onClick={() => { this.removeFilterItem(filterItem)} }
+                  />
+                </span>
+              </li>
+            )
+          })}
+        </ul>
         {results}
       </div>
     )
+  }
+
+  removeFilterItem(value) {
+    const { filter } = this.state
+
+    const index = filter.indexOf(value)
+    this.setState({
+      filter: filter.slice(0, index).concat(filter.slice(index + 1))
+    })
   }
 
   render() {
@@ -253,7 +289,9 @@ export class SearchPage extends Component {
 
           {
             !findings.length &&
-              <div>No results yet, please use filters</div>
+              <div className={`${CN}__no-results`}>
+                No results yet, please use filters
+              </div>
           }
         </Col>
         <Col className={`${CN}__sidebar`} md={3}>
