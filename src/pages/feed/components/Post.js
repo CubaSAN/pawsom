@@ -5,6 +5,7 @@ import TimeAgo from 'react-timeago'
 // import CommentBox from './CommentBox';
 //import ImageGrid from './../../../assets/libs/photo-grid';
 // import agent from './../../../agent'
+const CN = 'feed-page__post'
 
 const Post = props => {
   const { id, postedPersonName, created, text, commentCount } = props.post
@@ -15,13 +16,15 @@ const Post = props => {
   const renderImages = (imagesUrl) => {
     if (imagesUrl.length <= 4) {
       return (
-        <div className="post-images-container">
-          <div className="big-img-container"><img src={imagesUrl[0]} alt="" /></div>
+        <div className={`${CN}-content-images-container`}>
+          <div className="big-img-container">
+            <img src={imagesUrl[0]} alt="" />
+          </div>
         </div>
       )
     }
     return (
-      <div className="post-images-container extended">
+      <div className={`${CN}-content-images-container`}>
         <div className="big-img-container"><img src={imagesUrl[0]} alt="" /></div>
         <div className="flex-wrapper">
           {
@@ -45,27 +48,26 @@ const Post = props => {
     <span>{number > 0 && number} Like{number > 1 && 's'}</span>
 
   return (
-    <div className="post">
-      <div className="post-header">
-        <div className="post-user-container">
-          <div className="post-user-image">
-            <img src={userImage} alt="User" />
-          </div>
-          <div className="post-user">
-            <div className="post-user-name">{postedPersonName}</div>
-            <div className="post-user-created">
-              <TimeAgo date={created} />
-            </div>
+    <div>
+      <div className={`${CN}-user`}>
+        <div className={`${CN}-user-image`}>
+          <img src={userImage} alt="User" />
+        </div>
+        <div className={`${CN}-user-info`}>
+          <div className={`${CN}-user-info-name`}>{postedPersonName}</div>
+          <div className={`${CN}-user-info-created`}>
+            <TimeAgo date={created} />
           </div>
         </div>
       </div>
-      <div className="post-content">
-        <div className="post-images">
+
+      <div className={`${CN}-content`}>
+        <div className={`${CN}-content-images`}>
           { imagesUrl.length && renderImages(imagesUrl) }
         </div>
-        <p className="post-text">{text}</p>
+        <p className={`${CN}-content-text`}>{text}</p>
         read more ...
-        <div className="post-social">
+        <div className={`${CN}-content-social`}>
           <span>
             { renderLikes(likes) }
           </span>

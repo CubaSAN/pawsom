@@ -12,4 +12,57 @@
 
     @include font-size(20px);
   }
+  &__post {
+    &-user {
+      display: flex;
+      &-image {
+        margin-right: 20px;
+        img {
+          display: inline-block;
+          width: 65px;
+          height: 65px;
+          border-radius: 50%;
+        }
+      }
+      &-info {
+        display: flex;
+        flex-direction: column;
+        &-name {
+          color: #063134;
+          font-size: 16px;
+          padding-top: 10px;
+        }
+        &-created {
+          font-size: 12px;
+          color: #959595;
+        }
+      }
+    }
+
+    &-content {
+      &-images {
+        margin-bottom: 15px;
+        &-container {
+          .big-img-container {
+            border: 1px solid #ededed;
+            img {
+              max-width: 100%;
+            }
+          }
+
+          .flex-wrapper {
+            display: flex;
+            .small-img-container {
+              border: 1px solid #ededed;
+              background: white;
+              width: calc(100% / 3);
+              img {
+                max-width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

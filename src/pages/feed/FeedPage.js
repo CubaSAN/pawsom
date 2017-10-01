@@ -32,6 +32,7 @@ export class FeedPage extends Component {
     if(this.state.posts.length) {
       return this.state.posts.map((post) =>
         <Post
+          className={`${CN}__post`}
           key={post.id}
           post={post}
         />
