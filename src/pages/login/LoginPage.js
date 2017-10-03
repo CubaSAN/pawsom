@@ -59,7 +59,8 @@ export class LoginPage extends Component {
       agent
         .Auth
         .authorize(user.accessToken, 'facebook')
-        .then(({ name, id, email, pick, access_token, token_type, expires_in, need_additional_details}) => {
+        .then(({ name, id, email, pick, access_token, token_type, expires_in, need_additional_details, phone_number}) => {
+          debugger;
           this.onFacebookAuthenticate({
             name,
             id,
@@ -67,7 +68,8 @@ export class LoginPage extends Component {
             avatar: pick,
             token: access_token,
             tokenType: token_type,
-            isAdditionalInfoNeeded: need_additional_details
+            isAdditionalInfoNeeded: need_additional_details,
+            phone: phone_number
           }, expires_in)
         })
         .catch((err) => {

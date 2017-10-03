@@ -19,6 +19,12 @@ const requests = {
       .then(responseBody),
   post: (url, body) =>
     superagent.post(`${API_ROOT}${url}`, body).then(responseBody),
+  postAuthenticated: (url, body, token) =>
+    superagent
+      .post(`${API_ROOT}${url}`, body)
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-Type', 'application/json')
+      .then(responseBody),
   getSocial: (url, token) =>
     superagent
       .get(`${API_ROOT_SOCIAL}${url}`)
@@ -89,11 +95,18 @@ const Search = {
       .getAuthenticated(`/api/LostPet/GetLostPet/${range}/${latitude}/${longitude}/`, token)
 }
 
+const User = {
+  updateUser: (body, token) =>
+    requests
+      .postAuthenticated(`/api/person`, body, token)
+}
+
 export default {
   Person,
   Posts,
   Comments,
   Auth,
   Likes,
-  Search
+  Search,
+  User
 }
