@@ -4,11 +4,12 @@ import { AppRouter } from './AppRouter'
 import { getLocation } from '../actions'
 
 const mapStateToProps = state => {
-  const { routing, auth } = state
+  const { routing, auth, navigator: { err } } = state
 
   return {
     routing,
-    user: auth.user
+    user: auth.user,
+    err
   }
 }
 

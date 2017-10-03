@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FacebookLogin } from 'react-facebook-login-component'
 import { LandingLayout } from '../../shared/components/LandingLayout'
+import { WithGeolocation } from '../../shared/components/WithGeolocation'
 import { Container, Col } from 'reactstrap'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
@@ -26,7 +27,9 @@ const socialsConfig = {
 
 export class LoginPage extends Component {
   static propTypes = {
-    onAddUser: PropTypes.func.isRequired
+    onAddUser: PropTypes.func.isRequired,
+    lat: PropTypes.number,
+    lng: PropTypes.number
   }
 
   constructor(props) {
@@ -74,30 +77,34 @@ export class LoginPage extends Component {
 
   render () {
     const { facebookButton } = socialsConfig
+    const { lat, lng } = this.props
+
     return (
-      <LandingLayout>
-        <div className={CN}>
-          <Container>
-            <Col className={`${CN}__social-block`}>
-              <div className={`${CN}__social-block-title`}>
-                Log in with one of social neetwork
-              </div>
+      <WithGeolocation isPageAvailable={!!lat && !!lng}>
+        <LandingLayout>
+          <div className={CN}>
+            <Container>
+              <Col className={`${CN}__social-block`}>
+                <div className={`${CN}__social-block-title`}>
+                  Log in with one of social neetwork
+                </div>
 
-              <FacebookLogin
-                socialId={facebookButton.socialId}
-                scope={facebookButton.scope}
-                responseHandler={this.responseFacebook}
-                xfbml
-                fields={facebookButton.fields}
-                version={facebookButton.version}
-                className={facebookButton.className}
-                buttonText={facebookButton.buttonText}
-              />
+                <FacebookLogin
+                  socialId={facebookButton.socialId}
+                  scope={facebookButton.scope}
+                  responseHandler={this.responseFacebook}
+                  xfbml
+                  fields={facebookButton.fields}
+                  version={facebookButton.version}
+                  className={facebookButton.className}
+                  buttonText={facebookButton.buttonText}
+                />
 
-            </Col>
-          </Container>
-        </div>
-      </LandingLayout>
+              </Col>
+            </Container>
+          </div>
+        </LandingLayout>
+      </WithGeolocation>
     )
   }
 }

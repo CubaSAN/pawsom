@@ -10,7 +10,9 @@ export class MainRoute extends Component {
   static propTypes = {
     path: PropTypes.string.isRequired,
     component: PropTypes.any.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    withGeolocation: PropTypes.bool,
+    isHome: PropTypes.bool
   }
 
   constructor(props) {
@@ -20,7 +22,13 @@ export class MainRoute extends Component {
   }
 
   privateRenderer() {
-    const { component: RouteComponent } = this.props
+    const { component: RouteComponent, withGeolocation, isHome } = this.props
+
+    if (withGeolocation && !isHome) {
+      return (
+        <Redirect to={{ pathname: '/nogeo' }} />
+      )
+    }
 
     return !this.props.isAuthenticated ?
       (

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import autoBind from 'react-autobind'
 
-export class PrivateRoute extends Component {
+export class NoGeoRoute extends Component {
   static propTypes = {
     path: PropTypes.string.isRequired,
     component: PropTypes.any.isRequired,
@@ -21,22 +21,17 @@ export class PrivateRoute extends Component {
   }
 
   privateRenderer() {
-    const { component: RouteComponent, withGeolocation } = this.props
+    const { component: RouteComponent, withGeolocation, isAuthenticated } = this.props
 
-    if (withGeolocation) {
-      return (
-        <Redirect to={{ pathname: '/nogeo' }} />
-      )
+    if (!isAuthenticated && !withGeolocation) {
+      return <Redirect
+        to={{ pathname: '/login', state: { from: this.props.location } }} />
+    } else if (isAuthenticated && !withGeolocation) {
+      return <Redirect
+        to={{ pathname: '/feed', state: { from: this.props.location } }} />
+    } else {
+      return <RouteComponent {...this.props} />
     }
-
-    return this.props.isAuthenticated ?
-      (
-        <RouteComponent {...this.props} />
-      ) :
-      (
-        <Redirect
-          to={{ pathname: '/login', state: { from: this.props.location } }} />
-      )
   }
 
   render() {

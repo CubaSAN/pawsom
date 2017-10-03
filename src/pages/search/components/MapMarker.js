@@ -5,7 +5,7 @@ import { Marker } from 'react-google-maps'
 export class MapMarker extends Component {
   static propTypes = {
     position: PropTypes.object.isRequired,
-    icon: PropTypes.object.isRequired,
+    icon: PropTypes.string.isRequired,
     onClick: PropTypes.func,
     finding: PropTypes.object
   }

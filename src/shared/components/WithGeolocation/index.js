@@ -1,0 +1,1 @@
+export { WithGeolocation } from './WithGeolocation'

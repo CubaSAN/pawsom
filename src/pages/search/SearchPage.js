@@ -194,22 +194,12 @@ export class SearchPage extends Component {
     })
   }
 
-  renderMapPlaceHolder() {
-    return (
-      <div className={`${CN}__map-placeholder`}>
-        Please allow location in browser to use map
-      </div>
-    )
-  }
-
   renderMapSection() {
     const { lat, lng } = this.props
     const isNavigatorAvailable = lat && lng
 
     if (isNavigatorAvailable) {
       return this.renderMap()
-    } else {
-      return this.renderMapPlaceHolder()
     }
   }
 
@@ -406,12 +396,16 @@ export class SearchPage extends Component {
   }
 
   render() {
-    const { changeSearchRadius, radius } = this.props
+    const { changeSearchRadius, radius, lat, lng } = this.props
     const { findings } = this.state
 
     return (
-      <PageLayout className={CN}>
-        <Col md={9}
+      <PageLayout
+        isPageAvailable={lat && lng}
+        className={CN}
+      >
+        <Col
+          md={9}
           xs={12}
         >
           <div className={`${CN}__map`}>
@@ -427,7 +421,8 @@ export class SearchPage extends Component {
               </div>
           }
         </Col>
-        <Col className={`${CN}__sidebar`}
+        <Col
+          className={`${CN}__sidebar`}
           md={3}
         >
           <div className={`${CN}__sidebar-header`}>Filters</div>

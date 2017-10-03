@@ -27,7 +27,8 @@ export class Header extends Component {
     locale: PropTypes.string.isRequired,
     onLanguageChange: PropTypes.func,
     onAuthenticate: PropTypes.func,
-    onAddUser: PropTypes.func
+    onAddUser: PropTypes.func,
+    err: PropTypes.bool.isRequired
   }
 
   constructor(props) {
@@ -82,7 +83,7 @@ export class Header extends Component {
   }
 
   render () {
-    const { user } = this.props.auth
+    const { auth: { user }, err } = this.props
     const isAuthenticated = isObject(user)
 
     return (
@@ -98,7 +99,7 @@ export class Header extends Component {
 
               <Nav className={`${CN}__navigation`}>
                 {
-                  isAuthenticated &&
+                  !err && isAuthenticated &&
                   <NavItem>
                     <Link className={`${CN}__homenav`}
                       to="/search"
@@ -109,7 +110,7 @@ export class Header extends Component {
                 }
 
                 {
-                  isAuthenticated &&
+                  !err && isAuthenticated &&
                   <NavItem>
                     <Link className={`${CN}__homenav`}
                       to="/accommodation"
@@ -133,7 +134,7 @@ export class Header extends Component {
 
               {
                 isAuthenticated && user &&
-                <div>
+                <div className={`${CN}__links`}>
                   <span>{user.name}</span>
                   {' | '}
                   <span onClick={this.logOut}>Log out</span>

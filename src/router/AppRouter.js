@@ -11,15 +11,18 @@ import { NoMatchPage } from '../pages/nomatch'
 import { Accommodation } from '../pages/accommodation'
 import { LoginPageContainer } from '../pages/login'
 import { FeedPageContainer } from '../pages/feed'
+import { NoGeoPage } from '../pages/nogeo'
 import { history } from '../store'
 import { ConnectedRouter } from 'react-router-redux'
 import { MainRoute } from './MainRoute'
 import { PrivateRoute } from './PrivateRoute'
+import { NoGeoRoute } from './NoGeoRoute'
 
 export class AppRouter extends Component {
   static propTypes = {
     user: PropTypes.object,
-    getLocation: PropTypes.func.isRequired
+    getLocation: PropTypes.func.isRequired,
+    err: PropTypes.bool.isRequired
   }
 
   componentWillMount() {
@@ -27,41 +30,54 @@ export class AppRouter extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user, err } = this.props
     const isAuthenticated = isObject(user)
 
     return (
       <ConnectedRouter history={history}>
         <Switch>
           <MainRoute
-            path="/"
+            path='/'
             exact
             component={HomePage}
             isAuthenticated={isAuthenticated}
+            withGeolocation={err}
+            isHome
           />
 
           <PrivateRoute
-            path="/search"
+            path='/search'
             component={SearchPageContainer}
             isAuthenticated={isAuthenticated}
+            withGeolocation={err}
           />
 
           <PrivateRoute
-            path="/accommodation"
+            path='/accommodation'
             component={Accommodation}
             isAuthenticated={isAuthenticated}
+            withGeolocation={err}
           />
 
           <PrivateRoute
-            path="/feed"
+            path='/feed'
             component={FeedPageContainer}
             isAuthenticated={isAuthenticated}
+            withGeolocation={err}
           />
 
           <MainRoute
-            path="/login"
+            path='/login'
             component={LoginPageContainer}
             isAuthenticated={isAuthenticated}
+            withGeolocation={err}
+          />
+
+          <NoGeoRoute
+            path='/nogeo'
+            component={NoGeoPage}
+            isAuthenticated={isAuthenticated}
+            withGeolocation={err}
           />
 
           <Route component={NoMatchPage} />
