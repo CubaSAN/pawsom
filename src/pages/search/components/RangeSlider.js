@@ -16,7 +16,7 @@ export class RangeSlider extends Component {
       value: this.props.value
     }
 
-    autoBind(this);
+    autoBind(this)
   }
 
   convertValue(value, converter) {
@@ -35,11 +35,11 @@ export class RangeSlider extends Component {
     this.setState({
       value: value
     })
-  };
+  }
 
   handleChangeComplete() {
-    const { onRadiusChange } = this.props;
-    onRadiusChange(this.state.value);
+    const { onRadiusChange } = this.props
+    onRadiusChange(this.state.value)
   }
 
   render() {

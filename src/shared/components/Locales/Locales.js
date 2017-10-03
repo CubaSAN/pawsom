@@ -14,7 +14,7 @@ export class Locales extends Component {
   componentWillMount () {
     addLocaleData(
       [...en, ...ru, ...uk]
-    );
+    )
   }
 
   getMessages(locale) {
@@ -27,10 +27,10 @@ export class Locales extends Component {
 
     return (
       <IntlProvider
-          locale={locale}
-          messages={intlMessages}
-          key={locale}
-          defaultLocale={locale}
+        locale={locale}
+        messages={intlMessages}
+        key={locale}
+        defaultLocale={locale}
       >
         {this.props.children}
       </IntlProvider>

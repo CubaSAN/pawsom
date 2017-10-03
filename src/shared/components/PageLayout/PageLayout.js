@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row } from 'reactstrap';
+import { Container, Row } from 'reactstrap'
 import { HeaderContainer } from '../Header'
 import './PageLayout.scss'
 

@@ -15,7 +15,7 @@ export function flattenMessages(nestedMessages, prefix = '') {
       Object.assign(messages, flattenMessages(value, prefixedKey))
     }
 
-    return messages;
+    return messages
   }, {})
 }
 
@@ -25,9 +25,9 @@ export function getBrowserLocale() {
     || navigator.userLanguage
     || 'en-US'
 
-  const storedLocale = Cookies.get(LOCALE);
+  const storedLocale = Cookies.get(LOCALE)
 
-  return storedLocale ? storedLocale : browserLocale;
+  return storedLocale ? storedLocale : browserLocale
 }
 
 const SUPPORTED_LOCALES = {
@@ -62,5 +62,5 @@ export function getLanguages() {
 export function getUser() {
   const user = Cookies.get(USER)
 
-  return user ? JSON.parse(user) : null;
+  return user ? JSON.parse(user) : null
 }

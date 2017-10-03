@@ -10,11 +10,11 @@ const mapStateToProps = state => {
     routing,
     user: auth.user
   }
-};
+}
 
 const mapDispatchToProps = dispatch => ({
   getLocation: bindActionCreators(getLocation, dispatch)
-});
+})
 
 export const RouterContainer = connect(
   mapStateToProps,

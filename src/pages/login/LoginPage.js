@@ -92,16 +92,16 @@ export class LoginPage extends Component {
                 Log in with one of social neetwork
               </div>
 
-                <FacebookLogin
-                    socialId={facebookButton.socialId}
-                    scope={facebookButton.scope}
-                    responseHandler={this.responseFacebook}
-                    xfbml={true}
-                    fields={facebookButton.fields}
-                    version={facebookButton.version}
-                    className={facebookButton.className}
-                    buttonText={facebookButton.buttonText}
-                />
+              <FacebookLogin
+                socialId={facebookButton.socialId}
+                scope={facebookButton.scope}
+                responseHandler={this.responseFacebook}
+                xfbml={true}
+                fields={facebookButton.fields}
+                version={facebookButton.version}
+                className={facebookButton.className}
+                buttonText={facebookButton.buttonText}
+              />
 
             </Col>
           </Container>

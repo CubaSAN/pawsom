@@ -36,11 +36,11 @@ export class HomePage extends Component {
           }
         }
       ]
-    };
+    }
 
     return (
       <Slider {...settings}
-          className={`${CN}__feedback-carousel`}
+        className={`${CN}__feedback-carousel`}
       >
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
@@ -84,7 +84,7 @@ export class HomePage extends Component {
           </div>
         </div>
       </Slider>
-    );
+    )
   }
 
   render() {
@@ -115,10 +115,10 @@ export class HomePage extends Component {
 
                 <div className={`${CN}__ad1-buttons`}>
                   <a 
-                      className={`btn ${CN}__ad1-cta`} 
-                      href='https://www.appstore.com/'
-                      target='_blank'
-                      rel='noopener noreferrer'
+                    className={`btn ${CN}__ad1-cta`} 
+                    href='https://www.appstore.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     App Store
                   </a>

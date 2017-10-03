@@ -1,6 +1,6 @@
 export const promiseMiddleware = ({ dispatch }) => {
   const isPromise = val => {
-    return val && typeof val.then === 'function';
+    return val && typeof val.then === 'function'
   }
 
   return next => action => {
@@ -9,6 +9,6 @@ export const promiseMiddleware = ({ dispatch }) => {
         result => dispatch({ ...action, payload: result }),
         error => dispatch({ ...action, payload: error, error: true })
       )
-      : next(action);
-  };
+      : next(action)
+  }
 }

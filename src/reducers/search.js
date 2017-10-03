@@ -6,12 +6,12 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case CHANGE_SEARCH_RADIUS:
-      return {
-        ...state,
-        radius: action.payload.radius
-      }
-    default:
-      return state
+  case CHANGE_SEARCH_RADIUS:
+    return {
+      ...state,
+      radius: action.payload.radius
+    }
+  default:
+    return state
   }
 }

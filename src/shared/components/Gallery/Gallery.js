@@ -50,7 +50,7 @@ export class Gallery extends Component {
           showPlayButton={false}
         />
       </div>
-    );
+    )
   }
 
 }

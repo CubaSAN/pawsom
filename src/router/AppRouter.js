@@ -22,11 +22,11 @@ export const PrivateRoute = ({ component: Component, isAuthenticated, ...rest })
     isAuthenticated ? (
       <Component {...props} />
     ) : (
-        <Redirect to={{
-          pathname: '/login',
-          state: { from: props.location }
-        }} />
-      )
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }} />
+    )
   )} />
 )
 
@@ -35,11 +35,11 @@ const MainRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     !isAuthenticated ? (
       <Component {...props} />
     ) : (
-        <Redirect to={{
-          pathname: '/feed',
-          state: { from: props.location }
-        }} />
-      )
+      <Redirect to={{
+        pathname: '/feed',
+        state: { from: props.location }
+      }} />
+    )
   )} />
 )
 

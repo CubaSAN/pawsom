@@ -6,7 +6,7 @@ import { addUser } from '../../actions'
 
 const mapDispatchToProps = dispatch => ({
   onAddUser: bindActionCreators(addUser, dispatch)
-});
+})
 
 export const LoginPageContainer = connect(
   null,

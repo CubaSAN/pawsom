@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Label, Input, Button } from 'reactstrap'
-import { Marker, InfoWindow } from "react-google-maps"
+import { Marker, InfoWindow } from 'react-google-maps'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup } from './components'
 import autoBind from 'react-autobind'
@@ -55,7 +55,7 @@ export class SearchPage extends Component {
   }
 
   changeGeoFormat(value) {
-    return value.toFixed(6);
+    return value.toFixed(6)
   }
 
   setFindings(data) {
@@ -125,9 +125,9 @@ export class SearchPage extends Component {
     return (
       <Map
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
+        loadingElement={<div style={{ height: '100%' }} />}
+        containerElement={<div style={{ height: '400px' }} />}
+        mapElement={<div style={{ height: '100%' }} />}
         center={center}
       >
         <Marker
@@ -165,7 +165,7 @@ export class SearchPage extends Component {
                   className={`${CN}__map-marker-header`}
                 >
                   { 
-                    !!infoWindow.finding.petName ?
+                    infoWindow.finding.petName ?
                       (<span>Lost: {infoWindow.finding.petName}</span>) :
                       (<span>Found</span>)
                   }
@@ -203,8 +203,8 @@ export class SearchPage extends Component {
   }
 
   renderMapSection() {
-    const { lat, lng } = this.props;
-    const isNavigatorAvailable = lat && lng;
+    const { lat, lng } = this.props
+    const isNavigatorAvailable = lat && lng
 
     if (isNavigatorAvailable) {
       return this.renderMap()
@@ -246,7 +246,7 @@ export class SearchPage extends Component {
   }
 
   onCardDetails(finding) {
-    debugger;
+    
     this.setState({
       infoWindow: {
         finding
@@ -260,7 +260,7 @@ export class SearchPage extends Component {
     const { findings, isPopup, infoWindow } = this.state
 
     if (findings.length) {
-      const filteredFindings = this.getFilteresFindings(findings);
+      const filteredFindings = this.getFilteresFindings(findings)
       const results = filteredFindings.map((finding, i) => {
         return (
           <Col lg={6} xs={12} key={i}>
@@ -350,7 +350,7 @@ export class SearchPage extends Component {
               value={finding.breedName}
               checked={filter.includes(finding.breedName)}
             />
-              {` ${finding.breedName}`}
+            {` ${finding.breedName}`}
           </Label>
         </div>
       )
@@ -388,7 +388,7 @@ export class SearchPage extends Component {
   }
 
   render() {
-    const { changeSearchRadius, radius } = this.props;
+    const { changeSearchRadius, radius } = this.props
     const { findings } = this.state
 
     return (

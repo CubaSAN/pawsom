@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap'
@@ -43,7 +43,7 @@ export class ModalPopup extends React.Component {
         <ModalBody>
           <Row>
             {
-              !!finding.urls.length ?
+              finding.urls.length ?
                 (
                   <Col lg={8} xs={12}>
                     <Gallery images={finding.urls} />
@@ -70,6 +70,6 @@ export class ModalPopup extends React.Component {
           <Button color="success" onClick={this.props.toggle}>Back</Button>
         </ModalFooter>
       </Modal>
-    );
+    )
   }
 }

@@ -12,12 +12,12 @@ const mapStateToProps = state => {
     locale,
     auth
   }
-};
+}
 
 const mapDispatchToProps = dispatch => ({
   onLanguageChange: bindActionCreators(changeLocale, dispatch),
   onAddUser: bindActionCreators(addUser, dispatch)
-});
+})
 
 export const HeaderContainer = connect(
   mapStateToProps,

@@ -65,7 +65,7 @@ const Posts = {
       .postSocial('/api/Social/', body, token),
   deletePosts: (body, token) =>
     requests
-      .postSocial(`/api/DeletePost/`, body, token)
+      .postSocial('/api/DeletePost/', body, token)
 }
 
 const Comments = {
