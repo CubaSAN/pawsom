@@ -11,7 +11,8 @@ export class PrivateRoute extends Component {
     path: PropTypes.string.isRequired,
     component: PropTypes.any.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    withGeolocation: PropTypes.bool
+    withGeolocation: PropTypes.bool,
+    isAdditionalInfoNeeded: PropTypes.bool.isRequired
   }
 
   constructor(props) {
@@ -21,7 +22,18 @@ export class PrivateRoute extends Component {
   }
 
   privateRenderer() {
-    const { component: RouteComponent, withGeolocation } = this.props
+    const {
+      component: RouteComponent,
+      withGeolocation,
+      isAdditionalInfoNeeded,
+      isAuthenticated
+    } = this.props
+
+    if (isAuthenticated && isAdditionalInfoNeeded) {
+      return (
+        <Redirect to={{ pathname: '/user' }} />
+      )
+    }
 
     if (withGeolocation) {
       return (

@@ -17,6 +17,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import { MainRoute } from './MainRoute'
 import { PrivateRoute } from './PrivateRoute'
 import { NoGeoRoute } from './NoGeoRoute'
+import { UserPageContainer } from '../pages/user'
 
 export class AppRouter extends Component {
   static propTypes = {
@@ -32,6 +33,8 @@ export class AppRouter extends Component {
   render() {
     const { user, err } = this.props
     const isAuthenticated = isObject(user)
+    const isAdditionalInfoNeeded = 
+      user !== null && user.isAdditionalInfoNeeded
 
     return (
       <ConnectedRouter history={history}>
@@ -50,6 +53,7 @@ export class AppRouter extends Component {
             component={SearchPageContainer}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
+            isAdditionalInfoNeeded={isAdditionalInfoNeeded}
           />
 
           <PrivateRoute
@@ -57,6 +61,7 @@ export class AppRouter extends Component {
             component={Accommodation}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
+            isAdditionalInfoNeeded={isAdditionalInfoNeeded}
           />
 
           <PrivateRoute
@@ -64,6 +69,13 @@ export class AppRouter extends Component {
             component={FeedPageContainer}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
+            isAdditionalInfoNeeded={isAdditionalInfoNeeded}
+          />
+
+          <PrivateRoute
+            path='/user'
+            component={UserPageContainer}
+            isAuthenticated={isAuthenticated}
           />
 
           <MainRoute
