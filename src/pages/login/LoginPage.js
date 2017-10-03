@@ -67,7 +67,7 @@ export class LoginPage extends Component {
             avatar: pick,
             token: access_token,
             tokenType: token_type,
-            isAdditionalInfoNeeded: true
+            isAdditionalInfoNeeded: need_additional_details
           }, expires_in)
         })
         .catch((err) => {

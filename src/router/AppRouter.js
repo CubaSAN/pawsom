@@ -76,6 +76,7 @@ export class AppRouter extends Component {
             path='/user'
             component={UserPageContainer}
             isAuthenticated={isAuthenticated}
+            isAdditionalInfoNeeded={false}
           />
 
           <MainRoute
