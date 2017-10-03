@@ -45,8 +45,8 @@ export class RangeSlider extends Component {
   render() {
     const { value } = this.state
     return (
-      <div className='slider'>
-        <div className='value'>{this.addDistanceDimentions(value)}</div>
+      <div className="slider">
+        <div className="value">{this.addDistanceDimentions(value)}</div>
 
         <Slider
           min={1}

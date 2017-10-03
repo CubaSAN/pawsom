@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Container, Row, Col, Label, Input, Button } from 'reactstrap'
-import { Marker, InfoWindow } from 'react-google-maps'
+import { Row, Col, Label, Input } from 'reactstrap'
+import { InfoWindow } from 'react-google-maps'
 import { PageLayout } from '../../shared/components/PageLayout'
-import { Map, RangeSlider, ModalPopup } from './components'
+import { Map, RangeSlider, ModalPopup, MapMarker, CloseIcon, ActionButton } from './components'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
 import _ from 'lodash'
 import FaPhone from 'react-icons/lib/fa/phone'
-import FaClose from 'react-icons/lib/fa/close'
 import FaInfoCircle from 'react-icons/lib/fa/info-circle'
 import dog from '../../shared/assets/images/dog.png'
 import home from '../../shared/assets/images/home.png'
@@ -130,7 +129,7 @@ export class SearchPage extends Component {
         mapElement={<div style={{ height: '100%' }} />}
         center={center}
       >
-        <Marker
+        <MapMarker
           position={center}
           icon={home}
         />
@@ -142,11 +141,12 @@ export class SearchPage extends Component {
           }
 
           return (
-            <Marker
+            <MapMarker
               key={i}
               position={position}
               icon={dog}
-              onClick={() => { this.onMarkerClick(finding) }}
+              onClick={this.onMarkerClick}
+              finding={finding}
             />
           )
         })}
@@ -170,14 +170,14 @@ export class SearchPage extends Component {
                       (<span>Found</span>)
                   }
                 </div>
-                <div 
+                <div
                   className={`${CN}__map-marker-desc`}
                 >
                   {infoWindow.finding.breedName}
                 </div>
-                <div 
+                <div
                   className={`${CN}__map-marker-info`}
-                  onClick={() => { this.onOpenPopup() }}
+                  onClick={this.onOpenPopup}
                 >
                   <FaInfoCircle /> info
                 </div>
@@ -230,7 +230,9 @@ export class SearchPage extends Component {
       const imgSrc = this.parseImageUrl(urls[0])
 
       return (
-        <img src={imgSrc} alt={breedName} /> 
+        <img alt={breedName}
+          src={imgSrc}
+        /> 
       )
     } else {
       return (
@@ -263,7 +265,10 @@ export class SearchPage extends Component {
       const filteredFindings = this.getFilteresFindings(findings)
       const results = filteredFindings.map((finding, i) => {
         return (
-          <Col lg={6} xs={12} key={i}>
+          <Col key={i}
+            lg={6}
+            xs={12}
+          >
             <div className={`${CN}__search-item`}>
               <div className={`${CN}__search-item-image`}>
                 {this.renderFindingImage(finding.urls, finding.breedName)}
@@ -275,13 +280,21 @@ export class SearchPage extends Component {
                   <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
                   <div className={`${CN}__search-item-phone`}>
                     <FaPhone />
-                    <a href={`tel:${finding.phoneNumber}`} className={`${CN}__search-item-phone-link`}>
+                    <a className={`${CN}__search-item-phone-link`}
+                      href={`tel:${finding.phoneNumber}`}
+                    >
                       {` ${finding.phoneNumber}`}
                     </a>
                   </div>
                 </div>
                 <div className={`${CN}__search-item-actions`}>
-                  <Button color='success' onClick={() => {this.onCardDetails(finding)}}>Details</Button>
+                  <ActionButton
+                    color={'success'}
+                    onClick={this.onCardDetails}
+                    finding={finding}
+                  >
+                    Details
+                  </ActionButton>
                 </div>
               </div>
             </div>
@@ -342,7 +355,9 @@ export class SearchPage extends Component {
 
     const results = _.uniqBy(findings, 'breedName').map((finding, i) => {
       return (
-        <div className={`${CN}__sidebar-filter-string`} key={i}>
+        <div className={`${CN}__sidebar-filter-string`}
+          key={i}
+        >
           <Label>
             <Input 
               type="checkbox" 
@@ -362,11 +377,14 @@ export class SearchPage extends Component {
         <ul className={`${CN}__selected-filters`}>
           {filter.map((filterItem, i) => {
             return (
-              <li key={i} className={`${CN}__selected-item`}>
+              <li className={`${CN}__selected-item`}
+                key={i}
+              >
                 <span className={`${CN}__selected-item-text`}>{filterItem}</span>
                 <span className={`${CN}__selected-item-icon`}>
-                  <FaClose
-                    onClick={() => { this.removeFilterItem(filterItem)} }
+                  <CloseIcon 
+                    onClick={this.removeFilterItem}
+                    item={filterItem}
                   />
                 </span>
               </li>
@@ -393,7 +411,9 @@ export class SearchPage extends Component {
 
     return (
       <PageLayout className={CN}>
-        <Col md={9} xs={12}>
+        <Col md={9}
+          xs={12}
+        >
           <div className={`${CN}__map`}>
             {this.renderMapSection()}
           </div>
@@ -407,11 +427,15 @@ export class SearchPage extends Component {
               </div>
           }
         </Col>
-        <Col className={`${CN}__sidebar`} md={3}>
+        <Col className={`${CN}__sidebar`}
+          md={3}
+        >
           <div className={`${CN}__sidebar-header`}>Filters</div>
           <div className={`${CN}__sidebar-item`}>
             <div className={`${CN}__sidebar-heading`}>Distance from your location</div>
-            <RangeSlider onRadiusChange={changeSearchRadius} value={radius} />
+            <RangeSlider onRadiusChange={changeSearchRadius}
+              value={radius}
+            />
           </div>
 
           {!!findings.length && this.renderBreedFilter()}

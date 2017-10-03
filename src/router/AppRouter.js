@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import isObject from 'is-object'
 import {
-  BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect
+  Switch
 } from 'react-router-dom'
 import { HomePage } from '../pages/home'
 import { SearchPageContainer } from '../pages/search'
@@ -15,33 +13,8 @@ import { LoginPageContainer } from '../pages/login'
 import { FeedPageContainer } from '../pages/feed'
 import { history } from '../store'
 import { ConnectedRouter } from 'react-router-redux'
-import { withRouter } from 'react-router-dom'
-
-export const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
-  <Route {...rest} render={props => (
-    isAuthenticated ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }} />
-    )
-  )} />
-)
-
-const MainRoute = ({ component: Component, isAuthenticated, ...rest }) => (
-  <Route {...rest} render={props => (
-    !isAuthenticated ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to={{
-        pathname: '/feed',
-        state: { from: props.location }
-      }} />
-    )
-  )} />
-)
+import { MainRoute } from './MainRoute'
+import { PrivateRoute } from './PrivateRoute'
 
 export class AppRouter extends Component {
   static propTypes = {

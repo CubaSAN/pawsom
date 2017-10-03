@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import autoBind from 'react-autobind'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap'
 import { Gallery } from '../../../shared/components/Gallery'
 
@@ -38,14 +37,18 @@ export class ModalPopup extends React.Component {
     const { data: { finding } } = this.props
 
     return (
-      <Modal isOpen={this.props.isOpen} className={this.props.className}>
+      <Modal className={this.props.className}
+        isOpen={this.props.isOpen}
+      >
         <ModalHeader>{this.renderHeader()}</ModalHeader>
         <ModalBody>
           <Row>
             {
               finding.urls.length ?
                 (
-                  <Col lg={8} xs={12}>
+                  <Col lg={8}
+                    xs={12}
+                  >
                     <Gallery images={finding.urls} />
                   </Col>
                 ) :
@@ -59,7 +62,9 @@ export class ModalPopup extends React.Component {
             {
               !!finding.urls.length &&
                 (
-                  <Col lg={4} xs={12}>
+                  <Col lg={4}
+                    xs={12}
+                  >
                     {this.renderMainContent()}
                   </Col>
                 )
@@ -67,7 +72,9 @@ export class ModalPopup extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={this.props.toggle}>Back</Button>
+          <Button color="success"
+            onClick={this.props.toggle}
+          >Back</Button>
         </ModalFooter>
       </Modal>
     )

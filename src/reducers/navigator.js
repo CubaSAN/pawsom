@@ -7,15 +7,13 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-  case GET_GEOLOCATION:
-    const { coords } = action.payload
-
-    return {
-      ...state,
-      lat: coords.latitude,
-      lng: coords.longitude
-    }
-  default:
-    return state
+    case GET_GEOLOCATION:
+      return {
+        ...state,
+        lat: action.payload.latitude,
+        lng: action.payload.longitude
+      }
+    default:
+      return state
   }
 }

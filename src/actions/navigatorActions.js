@@ -3,7 +3,7 @@ export const GET_GEOLOCATION = 'GET_GEOLOCATION'
 export const getLocation = () => {
   const geolocation = navigator.geolocation
 
-  const location = new Promise((resolve, reject) => {
+  const location = new Promise((resolve) => {
     if (!geolocation) {
       resolve({
         coords: {

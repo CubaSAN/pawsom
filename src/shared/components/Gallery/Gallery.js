@@ -21,7 +21,7 @@ export class Gallery extends Component {
     autoBind(this)
   }
 
-  handleImageLoad(event) {
+  handleImageLoad() {
     if (this.state.isLoaded) return
 
     this.setState({
@@ -37,8 +37,6 @@ export class Gallery extends Component {
         original: imageUrl
       }
     })
-
-    const { isLoaded } = this.state
 
     return (
       <div className={CN}>

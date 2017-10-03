@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FacebookLogin } from 'react-facebook-login-component'
 import { LandingLayout } from '../../shared/components/LandingLayout'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Col } from 'reactstrap'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
 import Cookies from 'js-cookie'
@@ -35,9 +35,7 @@ export class LoginPage extends Component {
     autoBind(this)
   }
 
-  onFacebookAuthenticate(user, expires) {
-    const { onPushToHistory } = this.props
-
+  onFacebookAuthenticate(user) {
     if (user) {
       this.props.onAddUser(user)
     }
@@ -47,20 +45,13 @@ export class LoginPage extends Component {
     store.dispatch(push('/feed'))
   }
 
-  onFacebookAuthenticateFail(err) {
+  onFacebookAuthenticateFail() {
     Cookies.remove(USER)
 
     store.dispatch(push('/login'))
   }
 
-  authenticateUser(user) {
-    if (typeof user === 'object' && user.accessToken) {
-
-    }
-  }
-
   responseFacebook(user) {
-    // this.authenticateUser(user)
     if (typeof user === 'object' && user.accessToken) {
       agent
         .Auth
@@ -96,7 +87,7 @@ export class LoginPage extends Component {
                 socialId={facebookButton.socialId}
                 scope={facebookButton.scope}
                 responseHandler={this.responseFacebook}
-                xfbml={true}
+                xfbml
                 fields={facebookButton.fields}
                 version={facebookButton.version}
                 className={facebookButton.className}

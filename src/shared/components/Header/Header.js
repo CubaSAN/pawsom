@@ -55,7 +55,7 @@ export class Header extends Component {
     return (
       <Input
         className={`${CN}__lang-selector`}
-        type='select'
+        type="select"
         onChange={this.changeLanguage}
         value={locale === 'en-US' ? 'en' : locale}
       >
@@ -91,14 +91,18 @@ export class Header extends Component {
           <Container>
             <Navbar>
               <div className={`${CN}__logo`}>
-                <Link to='/' className={`${CN}__homelink`}>Pawsom</Link>
+                <Link className={`${CN}__homelink`}
+                  to="/"
+                >Pawsom</Link>
               </div>
 
               <Nav className={`${CN}__navigation`}>
                 {
                   isAuthenticated &&
                   <NavItem>
-                    <Link to='/search' className={`${CN}__homenav`}>
+                    <Link className={`${CN}__homenav`}
+                      to="/search"
+                    >
                       <FormattedMessage id="header.links.search" />
                     </Link>
                   </NavItem>
@@ -107,7 +111,9 @@ export class Header extends Component {
                 {
                   isAuthenticated &&
                   <NavItem>
-                    <Link to='/accommodation' className={`${CN}__homenav`}>
+                    <Link className={`${CN}__homenav`}
+                      to="/accommodation"
+                    >
                       <FormattedMessage id="header.links.accommodation" />
                     </Link>
                   </NavItem>
@@ -115,8 +121,10 @@ export class Header extends Component {
 
                 {
                   !isAuthenticated &&
-                  <NavItem className='login'>
-                    <Link to='/login' className={`${CN}__homenav`}>
+                  <NavItem className="login">
+                    <Link className={`${CN}__homenav`}
+                      to="/login"
+                    >
                       <FormattedMessage id="header.links.login" />
                     </Link>
                   </NavItem>
