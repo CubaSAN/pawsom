@@ -44,7 +44,7 @@ export class HomePage extends Component {
       >
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis est inventore, pariatur repellat, ad esse obcaecati vero, possimus assumenda iure amet cumque blanditiis autem. Quas laboriosam incidunt libero sed officiis.
+            <FormattedMessage id="landing.feedback.first" />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
@@ -60,7 +60,7 @@ export class HomePage extends Component {
 
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis est inventore, pariatur repellat, ad esse obcaecati vero, possimus assumenda iure amet cumque blanditiis autem. Quas laboriosam incidunt libero sed officiis.
+            <FormattedMessage id="landing.feedback.second" />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
