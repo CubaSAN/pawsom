@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Col } from 'reactstrap'
 import PropTypes from 'prop-types'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
@@ -57,12 +57,14 @@ export class FeedPage extends Component {
     const { lat, lng } = this.props
 
     return (
-      <PageLayout className={CN} isPageAvailable={lat && lng}>
+      <PageLayout className={CN}
+        isPageAvailable={lat && lng}>
         <Col md={9}>
           {this.renderPost()}
         </Col>
 
-        <Col className={`${CN}__sidebar`} md={3}>
+        <Col className={`${CN}__sidebar`}
+          md={3}>
         </Col>
       </PageLayout>
     )

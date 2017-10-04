@@ -5,7 +5,7 @@ import TimeAgo from 'react-timeago'
 // import CommentBox from './CommentBox';
 //import ImageGrid from './../../../assets/libs/photo-grid';
 // import agent from './../../../agent'
-const CN = 'feed-page__post'
+const CN = 'feed-page__post-wrapper'
 
 const Post = props => {
   const { id, postedPersonName, created, text, commentCount } = props.post
@@ -18,20 +18,23 @@ const Post = props => {
       return (
         <div className={`${CN}-content-images-container`}>
           <div className="big-img-container">
-            <img src={imagesUrl[0]} alt="" />
+            <img src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
+              alt="" />
           </div>
         </div>
       )
     }
     return (
       <div className={`${CN}-content-images-container`}>
-        <div className="big-img-container"><img src={imagesUrl[0]} alt="" /></div>
+        <div className="big-img-container"><img src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
+          alt="" /></div>
         <div className="flex-wrapper">
           {
             imagesUrl.slice(1, 4).map(img => {
               return (
                 <div className="small-img-container">
-                  <img src={img} alt="" />
+                  <img src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
+                    alt="" />
                 </div>
               )
             })
@@ -54,10 +57,11 @@ const Post = props => {
     <span>{number > 0 && number} Like{number > 1 && 's'}</span>
 
   return (
-    <div>
+    <div className={`${CN}`}>
       <div className={`${CN}-user`}>
         <div className={`${CN}-user-image`}>
-          <img src={userImage} alt="User" />
+          <img src={userImage}
+            alt="User" />
         </div>
         <div className={`${CN}-user-info`}>
           <div className={`${CN}-user-info-name`}>{postedPersonName}</div>
