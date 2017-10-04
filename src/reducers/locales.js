@@ -12,6 +12,6 @@ export default (state = defaultState, action) => {
         locale: action.locale
       }
     default:
-     return state
+      return state
   }
 }

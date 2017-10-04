@@ -1,0 +1,10 @@
+@import '../../shared/scss/variables.scss';
+@import '../../shared/scss/mixins.scss';
+
+.no-match-page {
+  &__title {
+    @include font-size(24px);
+    padding-top: 20px;
+    margin-bottom: 15px;
+  }
+}

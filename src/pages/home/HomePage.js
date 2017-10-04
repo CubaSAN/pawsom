@@ -36,11 +36,11 @@ export class HomePage extends Component {
           }
         }
       ]
-    };
+    }
 
     return (
       <Slider {...settings}
-          className={`${CN}__feedback-carousel`}
+        className={`${CN}__feedback-carousel`}
       >
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
@@ -48,7 +48,9 @@ export class HomePage extends Component {
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
-              <img src={avatarDummyImage} alt="User" />
+              <img alt="User"
+                src={avatarDummyImage}
+              />
             </div>
             <div className={`${CN}__feedback-carousel-user`}>
               Angel Adam
@@ -62,7 +64,9 @@ export class HomePage extends Component {
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
-              <img src={avatarDummyImage} alt="User" />
+              <img alt="User"
+                src={avatarDummyImage}
+              />
             </div>
             <div className={`${CN}__feedback-carousel-user`}>
               Angel Adam
@@ -76,7 +80,9 @@ export class HomePage extends Component {
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
-              <img src={avatarDummyImage} alt="User" />
+              <img alt="User"
+                src={avatarDummyImage}
+              />
             </div>
             <div className={`${CN}__feedback-carousel-user`}>
               Angel Adam
@@ -84,7 +90,7 @@ export class HomePage extends Component {
           </div>
         </div>
       </Slider>
-    );
+    )
   }
 
   render() {
@@ -115,19 +121,19 @@ export class HomePage extends Component {
 
                 <div className={`${CN}__ad1-buttons`}>
                   <a 
-                      className={`btn ${CN}__ad1-cta`} 
-                      href='https://www.appstore.com/'
-                      target='_blank'
-                      rel='noopener noreferrer'
+                    className={`btn ${CN}__ad1-cta`} 
+                    href="https://www.appstore.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     App Store
                   </a>
 
                   <a
                     className={`btn ${CN}__ad1-cta`}
-                    href='https://play.google.com/store'
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    href="https://play.google.com/store"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Play Market
                   </a>
@@ -156,28 +162,54 @@ export class HomePage extends Component {
                 We promise you perfect service
               </h3>
 
-              <Row noGutters className={`${CN}__facilities-wrapper`}>
-                <Col md="4" xs="12" sm="6" className={`${CN}__facilities-item`}>
+              <Row className={`${CN}__facilities-wrapper`}
+                noGutters
+              >
+                <Col className={`${CN}__facilities-item`}
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
                   <h4>Benefit 1</h4>
                   <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
                 </Col>
-                <Col md="4" xs="12" sm="6" className={`${CN}__facilities-item`}>
+                <Col className={`${CN}__facilities-item`}
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
                   <h4>Benefit 2</h4>
                   <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
                 </Col>
-                <Col md="4" xs="12" sm="6" className={`${CN}__facilities-item`}>
+                <Col className={`${CN}__facilities-item`}
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
                   <h4>Benefit 3</h4>
                   <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
                 </Col>
-                <Col md="4" xs="12" sm="6" className={`${CN}__facilities-item`}>
+                <Col className={`${CN}__facilities-item`}
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
                   <h4>Benefit 4</h4>
                   <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
                 </Col>
-                <Col md="4" xs="12" sm="6" className={`${CN}__facilities-item`}>
+                <Col className={`${CN}__facilities-item`}
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
                   <h4>Benefit 5</h4>
                   <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
                 </Col>
-                <Col md="4" xs="12" sm="6" className={`${CN}__facilities-item`}>
+                <Col className={`${CN}__facilities-item`}
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
                   <h4>Benefit 6</h4>
                   <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
                 </Col>

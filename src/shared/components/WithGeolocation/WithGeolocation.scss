@@ -1,0 +1,67 @@
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
+
+.with-geolocation {
+  position: relative;
+
+  &:after {
+    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $white;
+    z-index: 1000
+  }
+
+  &--visible {
+    &:after {
+      display: block;
+    }
+  }
+
+  &--hidden {
+    &:after {
+      display: none;
+    }
+  }
+
+  &__message {
+    position: absolute;
+    z-index: 1001;
+    background: url('../../assets/images/loading-dog.gif') no-repeat center 40px $white;
+    width: 300px;
+    height: 300px;
+    top: 50vh;
+    left: 50vw;
+    padding: 200px 10px 0;
+    transform: translate(-150px, -150px);
+    color: $green;
+    font-weight: 900;
+    text-align: center;
+    visibility: hidden;
+    animation: 0.4s fadeIn;
+    animation-fill-mode: forwards;
+  }
+
+  &__message {
+    &--visible {
+      display: block;
+    }
+
+    &--hidden {
+      display: none;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  99% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}

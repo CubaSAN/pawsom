@@ -9,7 +9,7 @@ import { promiseMiddleware } from './enhancers'
 
 export const history = createHistory()
 
-const user = getUser();
+const user = getUser()
 
 const initialState = {
   locales: {

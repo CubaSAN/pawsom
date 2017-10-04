@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FacebookLogin } from 'react-facebook-login-component'
 import { LandingLayout } from '../../shared/components/LandingLayout'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { WithGeolocation } from '../../shared/components/WithGeolocation'
+import { Container, Col } from 'reactstrap'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
 import Cookies from 'js-cookie'
@@ -26,7 +27,9 @@ const socialsConfig = {
 
 export class LoginPage extends Component {
   static propTypes = {
-    onAddUser: PropTypes.func.isRequired
+    onAddUser: PropTypes.func.isRequired,
+    lat: PropTypes.number,
+    lng: PropTypes.number
   }
 
   constructor(props) {
@@ -35,9 +38,7 @@ export class LoginPage extends Component {
     autoBind(this)
   }
 
-  onFacebookAuthenticate(user, expires) {
-    const { onPushToHistory } = this.props
-
+  onFacebookAuthenticate(user) {
     if (user) {
       this.props.onAddUser(user)
     }
@@ -47,32 +48,41 @@ export class LoginPage extends Component {
     store.dispatch(push('/feed'))
   }
 
-  onFacebookAuthenticateFail(err) {
-    this.props.onAuthenticate(false)
-
+  onFacebookAuthenticateFail() {
     Cookies.remove(USER)
-  }
 
-  authenticateUser(user) {
-    if (typeof user === 'object' && user.accessToken) {
-
-    }
+    store.dispatch(push('/login'))
   }
 
   responseFacebook(user) {
-    // this.authenticateUser(user)
     if (typeof user === 'object' && user.accessToken) {
       agent
         .Auth
         .authorize(user.accessToken, 'facebook')
-        .then(({ name, id, email, pick, access_token, token_type, expires_in }) => {
+        .then((
+          { 
+            name,
+            id,
+            email,
+            pick,
+            access_token,
+            token_type,
+            expires_in,
+            need_additional_details,
+            phone_number,
+            socid
+          }
+        ) => {
           this.onFacebookAuthenticate({
             name,
             id,
             email,
             avatar: pick,
             token: access_token,
-            tokenType: token_type
+            tokenType: token_type,
+            isAdditionalInfoNeeded: need_additional_details,
+            phone: phone_number,
+            socid
           }, expires_in)
         })
         .catch((err) => {
@@ -83,30 +93,34 @@ export class LoginPage extends Component {
 
   render () {
     const { facebookButton } = socialsConfig
+    const { lat, lng } = this.props
+
     return (
-      <LandingLayout>
-        <div className={CN}>
-          <Container>
-            <Col className={`${CN}__social-block`}>
-              <div className={`${CN}__social-block-title`}>
-                Log in with one of social neetwork
-              </div>
+      <WithGeolocation isPageAvailable={!!lat && !!lng}>
+        <LandingLayout>
+          <div className={CN}>
+            <Container>
+              <Col className={`${CN}__social-block`}>
+                <div className={`${CN}__social-block-title`}>
+                  Log in with one of social neetwork
+                </div>
 
                 <FacebookLogin
-                    socialId={facebookButton.socialId}
-                    scope={facebookButton.scope}
-                    responseHandler={this.responseFacebook}
-                    xfbml={true}
-                    fields={facebookButton.fields}
-                    version={facebookButton.version}
-                    className={facebookButton.className}
-                    buttonText={facebookButton.buttonText}
+                  socialId={facebookButton.socialId}
+                  scope={facebookButton.scope}
+                  responseHandler={this.responseFacebook}
+                  xfbml
+                  fields={facebookButton.fields}
+                  version={facebookButton.version}
+                  className={facebookButton.className}
+                  buttonText={facebookButton.buttonText}
                 />
 
-            </Col>
-          </Container>
-        </div>
-      </LandingLayout>
+              </Col>
+            </Container>
+          </div>
+        </LandingLayout>
+      </WithGeolocation>
     )
   }
 }

@@ -20,12 +20,193 @@
     }
 
     &-item {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     &-heading {
       font-style: italic;
       margin-bottom: 10px;
+    }
+  }
+
+  &__search-item {
+    border: 1px solid $grey;
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+  }
+
+  &__search-item-image {
+    height: 160px;
+    width: 160px;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    border: 1px solid $grey;
+    background: $light-gray;
+    flex: 0 0 160px;
+
+    img {
+      display: inline-block;
+      height: 100%;
+      width: auto;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 160px;
+        height: 160px;
+        top: 0;
+        left: 0;
+        background: url('../../shared/assets/images/noimage.jpg') no-repeat center center $white;
+        background-size: 80%;
+        opacity: 0.1;
+      }
+    }
+  }
+
+  &__map {
+    margin-bottom: 20px;
+  }
+
+  &__search-header {
+    @include font-size(20px);
+    margin-bottom: 10px;
+  }
+
+  &__search-header-secondary {
+    @include font-size(16px);
+    color: $green;
+  }
+
+  &__sidebar-filter-string {
+    @include font-size(15px);
+    .form-check-input {
+      margin: 0 0 0 4px;
+    }
+  }
+
+  &__search-item-name {
+    @include font-size(14px);
+    font-style: italic;
+  }
+
+  &__search-item-breed {
+    font-weight: 900;
+  }
+
+  &__search-item-address {
+    @include font-size(14px);
+    font-style: italic;
+  }
+
+  &__search-item-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  &__search-item-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn {
+      background: $green;
+      
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active, &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__search-item-phone-link {
+    color: $green;
+      
+    &:hover {
+      cursor: pointer;
+      color: $green;
+      text-decoration: none;
+    }
+  }
+
+  &__no-results {
+    @include font-size(20px);
+  }
+
+  &__selected-item {
+    background: $grey;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-right: 5px;
+    display: inline-block;
+    height: 18px;
+
+    &-icon {
+      margin-left: 3px;
+      vertical-align: text-bottom;
+      position: relative;
+      top: -4px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__selected-filters {
+    list-style: none;
+    margin: 0 0 10px 0;
+    padding: 2px 5px;
+  }
+
+  &__selected-item-text {
+    text-overflow: ellipsis;
+    max-width: 110px;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__map-marker-header {
+    font-weight: 900;
+  }
+
+  &__map-marker-desc {
+    font-size: 16px;
+  }
+
+  &__map-marker-info {
+    color: green;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__search-modal {
+    &#{&} {
+      max-width: none;
+      max-height: none;
+      margin: 0;
+
+      &#{&} {
+        transform: translate(0, 0);
+      }
+    }
+
+    .modal-content {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
     }
   }
 }
