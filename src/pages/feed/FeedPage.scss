@@ -15,6 +15,7 @@
   &__post {
     &-user {
       display: flex;
+      margin-bottom: 10px;
       &-image {
         margin-right: 20px;
         img {
@@ -40,6 +41,7 @@
     }
 
     &-content {
+      margin-bottom: 20px;
       &-images {
         margin-bottom: 15px;
         &-container {
@@ -61,6 +63,25 @@
               }
             }
           }
+        }
+      }
+      &-text {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        &-read-more {
+          text-decoration: underline;
+          color: #5093ec;
+          cursor: pointer;
+          display: block;
+        }
+      }
+      &-social {
+        color: #9b9b9b;
+        font-size: 12px;
+        text-decoration: none;
+        cursor: pointer;
+        a {
+          color: #9b9b9b;
         }
       }
     }

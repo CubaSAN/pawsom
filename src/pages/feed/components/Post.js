@@ -41,6 +41,12 @@ const Post = props => {
     )
   }
 
+  const renderText = () => {
+    const spaceIndex = text.slice(0, 200).lastIndexOf(' ')
+    const shortText = text.slice(0, spaceIndex)
+    return `${shortText} ...`
+  }
+
   const renderCommentCount = number =>
     <span>{number} Comment{number > 1 && 's'}</span>
 
@@ -65,8 +71,11 @@ const Post = props => {
         <div className={`${CN}-content-images`}>
           { imagesUrl.length && renderImages(imagesUrl) }
         </div>
-        <p className={`${CN}-content-text`}>{text}</p>
-        read more ...
+        <p className={`${CN}-content-text`}>
+          {renderText()}
+          <span className={`${CN}-content-text-read-more`}>read more</span>
+        </p>
+
         <div className={`${CN}-content-social`}>
           <span>
             { renderLikes(likes) }
