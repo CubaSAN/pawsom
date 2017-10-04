@@ -6,6 +6,7 @@ import agent from '../../agent'
 import autoBind from 'react-autobind'
 import Cookies from 'js-cookie'
 import { USER } from '../../utils'
+import NodeGeocoder from 'node-geocoder'
 import './UserPage.scss'
 
 const CN = 'user-page'
@@ -13,7 +14,9 @@ const CN = 'user-page'
 export class UserPage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    onAddUser: PropTypes.func.isRequired
+    onAddUser: PropTypes.func.isRequired,
+    lat: PropTypes.number,
+    lng: PropTypes.number
   }
 
   constructor(props) {
@@ -24,20 +27,44 @@ export class UserPage extends Component {
     this.state = {
       name: user.name,
       phoneNumber: user.phone || '',
-      city: 'Lviv',
-      country: 'Ukraine',
-      state: 'Lviv Oblast',
+      city: '',
+      country: '',
       profilePick: user.avatar,
-      longitude: 24.008956,
-      latitude: 49.843469,
+      longitude: this.props.lat,
+      latitude: this.props.lng,
       email: user.email || '',
-      isoCountryCode: 'UA',
+      isoCountryCode: '',
       id: user.id,
       token: user.token,
       tokenType: user.tokenType,
+      socialId: user.socid
     }
 
+    this.geocoder = NodeGeocoder({
+      provider: 'google'
+    })
+
     autoBind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.lat && nextProps.lng) {
+      this.geocoder.reverse({ lat: nextProps.lat, lon: nextProps.lng })
+        .then((res) => {
+          const resData = res[0]
+
+          this.setState({
+            city: resData.city,
+            country: resData.country,
+            isoCountryCode: resData.countryCode,
+            latitude: nextProps.lat,
+            longitude: nextProps.lng
+          })
+        })
+        .catch(() => {
+
+        })
+    }
   }
 
   changeEmail(e) {
@@ -66,7 +93,8 @@ export class UserPage extends Component {
       latitude: this.state.latitude,
       email: this.state.email,
       isoCountryCode: this.state.isoCountryCode,
-      id: this.state.id
+      id: this.state.id,
+      socialId: this.state.socialId
     }
 
     agent
