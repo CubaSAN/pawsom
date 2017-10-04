@@ -4,10 +4,12 @@ import { UserPage } from './UserPage'
 import { addUser } from '../../actions'
 
 const mapStateToProps = state => {
-  const { auth } = state;
+  const { auth, navigator: { lat, lng } } = state;
 
   return {
-    user: auth.user
+    user: auth.user,
+    lat,
+    lng
   }
 }
 
