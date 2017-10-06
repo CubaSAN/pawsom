@@ -44,7 +44,7 @@ export class HomePage extends Component {
       >
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            <FormattedMessage id="landing.feedback.first" />
+            <FormattedMessage id="feedback.first" />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
@@ -60,7 +60,7 @@ export class HomePage extends Component {
 
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            <FormattedMessage id="landing.feedback.second" />
+            <FormattedMessage id="feedback.second" />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
@@ -76,7 +76,7 @@ export class HomePage extends Component {
 
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis est inventore, pariatur repellat, ad esse obcaecati vero, possimus assumenda iure amet cumque blanditiis autem. Quas laboriosam incidunt libero sed officiis.
+            <FormattedMessage id="feedback.third" />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
@@ -159,7 +159,7 @@ export class HomePage extends Component {
           <Row className={`${CN}__facilities`}>
             <Container>
               <h3 className={`${CN}__facilities-title`}>
-                We promise you perfect service
+                <FormattedMessage id="benefit.title" />
               </h3>
 
               <Row className={`${CN}__facilities-wrapper`}
@@ -170,48 +170,48 @@ export class HomePage extends Component {
                   sm="6"
                   xs="12"
                 >
-                  <h4>Benefit 1</h4>
-                  <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
+                  <h4><FormattedMessage id="benefit.first.header" /></h4>
+                  <p><FormattedMessage id="benefit.first.message" /></p>
                 </Col>
                 <Col className={`${CN}__facilities-item`}
                   md="4"
                   sm="6"
                   xs="12"
                 >
-                  <h4>Benefit 2</h4>
-                  <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
+                  <h4><FormattedMessage id="benefit.second.header" /></h4>
+                  <p><FormattedMessage id="benefit.second.message" /></p>
                 </Col>
                 <Col className={`${CN}__facilities-item`}
                   md="4"
                   sm="6"
                   xs="12"
                 >
-                  <h4>Benefit 3</h4>
-                  <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
+                  <h4><FormattedMessage id="benefit.third.header" /></h4>
+                  <p><FormattedMessage id="benefit.third.message" /></p>
                 </Col>
                 <Col className={`${CN}__facilities-item`}
                   md="4"
                   sm="6"
                   xs="12"
                 >
-                  <h4>Benefit 4</h4>
-                  <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
+                  <h4><FormattedMessage id="benefit.fourth.header" /></h4>
+                  <p><FormattedMessage id="benefit.fourth.message" /></p>
                 </Col>
                 <Col className={`${CN}__facilities-item`}
                   md="4"
                   sm="6"
                   xs="12"
                 >
-                  <h4>Benefit 5</h4>
-                  <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
+                  <h4><FormattedMessage id="benefit.fifth.header" /></h4>
+                  <p><FormattedMessage id="benefit.fifth.message" /></p>
                 </Col>
                 <Col className={`${CN}__facilities-item`}
                   md="4"
                   sm="6"
                   xs="12"
                 >
-                  <h4>Benefit 6</h4>
-                  <p>Lorem ipsum dolor sit amet, pri mutat dicam maiestatis</p>
+                <h4><FormattedMessage id="benefit.sixth.header" /></h4>
+                <p><FormattedMessage id="benefit.sixth.message" /></p>
                 </Col>
               </Row>
             </Container>
