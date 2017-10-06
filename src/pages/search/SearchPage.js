@@ -232,9 +232,10 @@ export class SearchPage extends Component {
   }
 
   parseImageUrl(url) {
-    const parts = url.split('/')
+    // const parts = url.split('/')
 
-    return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
+    // return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
+    return url;
   }
 
   onCardDetails(finding) {

@@ -30,8 +30,8 @@ export class UserPage extends Component {
       city: '',
       country: '',
       profilePick: user.avatar,
-      longitude: this.props.lat,
-      latitude: this.props.lng,
+      longitude: props.lat,
+      latitude: props.lng,
       email: user.email || '',
       isoCountryCode: '',
       id: user.id,
@@ -95,6 +95,10 @@ export class UserPage extends Component {
       isoCountryCode: this.state.isoCountryCode,
       id: this.state.id,
       socialId: this.state.socialId
+    }
+
+    if (!formData.latitude && !formData.longitude) {
+      return false
     }
 
     agent
