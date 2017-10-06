@@ -15,7 +15,15 @@ export class PostPage extends Component {
 
   constructor(props) {
     super(props)
-    console.log('yo');
+  }
+
+  componentWillMount() {
+    const token = this.props.token
+    const id = this.props.computedMatch.params.id
+
+    agent.Posts.byId(id, token).then((post) => {
+      console.log(post);
+    })
   }
 
   render () {
