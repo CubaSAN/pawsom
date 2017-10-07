@@ -13,13 +13,12 @@
     @include font-size(20px);
   }
   &__post {
-    &-wrapper {
-        margin-bottom: 40px;
-        padding-bottom: 40px;
-        border-bottom: 1px solid #dedede;
-        &:last-child {
-          border: none;
-        }
+      &-wrapper {
+      background: $white;
+      border: 1px solid $light-grey;
+      padding: 24px;
+      margin-bottom: 40px;
+
       &-user {
         display: flex;
         margin-bottom: 10px;
