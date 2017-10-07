@@ -6,7 +6,7 @@ import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './PostPage.scss'
 
-const CN = 'post-page'
+const CN = 'post-page__post'
 
 export class PostPage extends Component {
   static propTypes = {
@@ -38,27 +38,23 @@ export class PostPage extends Component {
 
     return (
       post ?
-      <div>
-        <div className="post">
-          <div className="post-header">
-            <div className="post-user-container">
-              <div className="post-user-image">
-                 <img src={post.postedPersonString} alt="User"/>
-              </div>
-              <div className="post-user">
-                <div className="post-user-name">{post.postedPersonName}</div>
-                <div className="post-user-created">
-                  <TimeAgo date={post.created} />
-                </div>
-              </div>
+      <div className={`${CN}`}>
+        <div className={`${CN}-user`}>
+          <div className={`${CN}-user-image`}>
+             <img src={post.postedPersonString} alt="User"/>
+          </div>
+          <div className={`${CN}-user-info`}>
+            <div className={`${CN}-user-info-name`}>{post.postedPersonName}</div>
+            <div className={`${CN}-user-info-created`}>
+              <TimeAgo date={post.created} />
             </div>
           </div>
-          <div className="post-content">
-              {post.url.length && <img className="post-image" src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg" alt="" />}
-            <p className="post-text">{post.text}</p>
-          </div>
-          <div onClick={() => this.deletePost()}>Delete Post</div>
         </div>
+        <div className={`${CN}-content`}>
+          {post.url.length && <img className={`${CN}-content-images`} src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg" alt="" />}
+          <p className={`${CN}-content-text`}>{post.text}</p>
+        </div>
+        <div onClick={() => this.deletePost()}>Delete Post</div>
       </div>
       :
       <div>post load...</div>
