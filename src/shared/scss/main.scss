@@ -44,8 +44,12 @@
   font-style: normal;
 }
 
-#root {
+html, body {
+  font-size: 100%;
   font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
   color: $dark-text;
   background: $grey-back;
 }

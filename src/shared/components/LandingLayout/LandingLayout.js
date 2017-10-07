@@ -1,5 +1,6 @@
 import React from 'react'
 import { HeaderContainer } from '../Header'
+import './LandingLayout.scss'
 
 const CN = 'landing-layout'
 

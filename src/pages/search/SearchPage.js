@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Label, Input } from 'reactstrap'
+import { Row, Col, Label, FormControl } from 'react-bootstrap'
 import { InfoWindow } from 'react-google-maps'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup, MapMarker, CloseIcon, ActionButton } from './components'
@@ -350,7 +350,7 @@ export class SearchPage extends Component {
           key={i}
         >
           <Label>
-            <Input 
+            <FormControl 
               type="checkbox" 
               onChange={this.setFilter} 
               value={finding.breedName}

@@ -3,19 +3,22 @@ import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
 import isObject from 'is-object'
 import {
-  Container,
+  Grid,
   Row,
   Navbar,
   Nav,
   NavItem,
-  Input
-} from 'reactstrap'
+  NavDropdown,
+  MenuItem
+} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import Cookies from 'js-cookie'
 import store from '../../../store'
 import { LOCALE, USER } from '../../../utils'
 import { push } from 'react-router-redux'
+import { LinkContainer } from 'react-router-bootstrap';
+import Flag from 'react-world-flags'
 import './Header.scss'
 
 const CN = 'main-header'
@@ -37,40 +40,56 @@ export class Header extends Component {
     autoBind(this)
   }
 
-  changeLanguage(evt) {
+  setLanguage(language) {
     const { onLanguageChange } = this.props
-    evt.preventDefault()
 
-    const { value } = evt.target
+    return function() {
+      if (onLanguageChange) {
+        onLanguageChange(language)
 
-    if (onLanguageChange) {
-      onLanguageChange(value)
-
-      Cookies.set(LOCALE, value, { expires: 365 })
+        Cookies.set(LOCALE, language, { expires: 365 })
+      }
     }
   }
 
   renderLanguageSelector() {
     const { languages, locale } = this.props
 
+    const languageCode = {
+      'en': 'us',
+      'ru': 'ru',
+      'uk': 'ua',
+      'en-US': 'us',
+    }
+
+    const currentFlag = 
+      <span>
+        <span className={`${CN}__lang-selector-title`}>Language:</span>
+        <Flag code={languageCode[locale]}
+          height='16'
+          width='24' />
+      </span>
+
     return (
-      <Input
+      <NavDropdown title={currentFlag}
         className={`${CN}__lang-selector`}
-        type="select"
-        onChange={this.changeLanguage}
-        value={locale === 'en-US' ? 'en' : locale}
-      >
+        id='lang-selector'
+        pullRight>
         {
-          languages.map((language, i) => (
-            <option
-              key={i}
-              value={language}
-            >
-              {language}
-            </option>
-          ))
+          languages.map((language, i) => {
+            
+
+            return (
+              <MenuItem key={i}
+                onClick={this.setLanguage(language)}>
+                <Flag code={languageCode[language]}
+                  height='16'
+                  width='24'/> {language}
+              </MenuItem>
+            )
+          })
         }
-      </Input>
+      </NavDropdown>
     )
   }
 
@@ -87,68 +106,73 @@ export class Header extends Component {
     const isAuthenticated = isObject(user)
 
     return (
-      <Container fluid>
+      <Grid fluid>
         <Row className={CN}>
-          <Container>
-            <Navbar>
-              <div className={`${CN}__logo`}>
-                <Link className={`${CN}__homelink`}
+          <Navbar collapseOnSelect
+            fixedTop>
+            <Navbar.Header>
+              <Navbar.Brand className={`${CN}__logo`}>
+                <Link
+                  className={`${CN}__homelink`}
                   to="/"
-                >Pawsom</Link>
-              </div>
+                >
+                  Pawsom
+                </Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              {
+                !err && isAuthenticated &&
+                <Nav className={`${CN}__mainmenu`}>
+                  <LinkContainer to='/search'>
+                    <NavItem className={`${CN}__mainnav`}>
+                      <FormattedMessage id='header.links.search' />
+                    </NavItem>
+                  </LinkContainer>
+                  <LinkContainer to='/accommodation'>
+                    <NavItem className={`${CN}__mainnav`}>
+                      <FormattedMessage id='header.links.accommodation' />
+                    </NavItem>
+                  </LinkContainer>
+                </Nav>
+              }
 
-              <Nav className={`${CN}__navigation`}>
-                {
-                  !err && isAuthenticated &&
-                  <NavItem>
-                    <Link className={`${CN}__homenav`}
-                      to="/search"
-                    >
-                      <FormattedMessage id="header.links.search" />
-                    </Link>
-                  </NavItem>
-                }
+              {
+                !isAuthenticated &&
+                <div className={`${CN}__mainmenu-push`}></div>
+              }
 
-                {
-                  !err && isAuthenticated &&
-                  <NavItem>
-                    <Link className={`${CN}__homenav`}
-                      to="/accommodation"
-                    >
-                      <FormattedMessage id="header.links.accommodation" />
-                    </Link>
-                  </NavItem>
-                }
-
+              <Nav pullRight
+                className={`${CN}__mainmenu-user`}>
                 {
                   !isAuthenticated &&
-                  <NavItem className="login">
-                    <Link className={`${CN}__homenav`}
-                      to="/login"
-                    >
-                      <FormattedMessage id="header.links.login" />
-                    </Link>
-                  </NavItem>
+                  <LinkContainer to='/login'>
+                    <NavItem className={`${CN}__mainnav ${CN}__mainnav--login`}>
+                      <FormattedMessage id='header.links.login' />
+                    </NavItem>
+                  </LinkContainer>
                 }
+                {this.renderLanguageSelector()}
               </Nav>
 
               {
                 isAuthenticated && user &&
-                <div className={`${CN}__links`}>
-                  <span>{user.name}</span>
-                  {' | '}
-                  <span onClick={this.logOut}>Log out</span>
-                </div>
+                <Navbar.Text pullRight
+                  className={`${CN}__links`}>
+                  <span className={`${CN}__avatar`}>
+                    <img src={user.avatar}
+                      alt={user.name} />
+                  </span>
+                  <span className={`${CN}__links ${CN}__links--user-name`}>{`${user.name} | `}</span>
+                  <span onClick={this.logOut}
+                    className={`${CN}__links ${CN}__links--log-out`}>Log out</span>
+                </Navbar.Text>
               }
-
-              <div>
-                {this.renderLanguageSelector()}
-              </div>
-            </Navbar>
-
-          </Container>
+            </Navbar.Collapse>
+          </Navbar>
         </Row>
-      </Container>
+      </Grid>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { PageLayout } from '../../shared/components/PageLayout'
-import { Button, Form, FormGroup, Label, Input, Row, Col, Container } from 'reactstrap'
+import { Button, Form, FormGroup, Label, FormControl, Row, Col, Grid } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import agent from '../../agent'
 import autoBind from 'react-autobind'
@@ -128,7 +128,7 @@ export class UserPage extends Component {
         isPageAvailable
         className={CN}
       >
-        <Container>
+        <Grid>
           <Row>
             <Col>
               <div className={`${CN}__title`}>Additional Info Needed</div>
@@ -141,7 +141,7 @@ export class UserPage extends Component {
               <Form>
                 <FormGroup>
                   <Label for='name'>Name</Label>
-                  <Input type='name'
+                  <FormControl type='name'
                     name='name'
                     id='name'
                     value={this.state.name}
@@ -150,7 +150,7 @@ export class UserPage extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Label for='email'>Email</Label>
-                  <Input type='email'
+                  <FormControl type='email'
                     name='email'
                     id='email'
                     value={this.state.email}
@@ -158,7 +158,7 @@ export class UserPage extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Label for='phone'>Phone</Label>
-                  <Input type='phone'
+                  <FormControl type='phone'
                     name='phone'
                     id='phone'
                     value={this.state.phoneNumber}
@@ -168,7 +168,7 @@ export class UserPage extends Component {
               </Form>
             </Col>
           </Row>
-        </Container>
+        </Grid>
       </PageLayout>
     )
   }

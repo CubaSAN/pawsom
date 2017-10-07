@@ -80,13 +80,14 @@ const Post = props => {
       </div>
 
       <div className={`${CN}-content`}>
-        <div className={`${CN}-content-images`}>
-          { imagesUrl.length && renderImages(imagesUrl) }
-        </div>
         <p className={`${CN}-content-text`}>
           {renderText()}
           <span className={`${CN}-content-text-read-more`}>read more</span>
         </p>
+
+        <div className={`${CN}-content-images`}>
+          {renderImages(imagesUrl)}
+        </div>
 
         <div className={`${CN}-content-social`}>
           <span className={`${CN}-content-social-text`}>

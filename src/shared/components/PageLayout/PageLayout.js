@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row } from 'reactstrap'
+import { Grid, Row } from 'react-bootstrap'
 import { HeaderContainer } from '../Header'
 import { WithGeolocation } from '../WithGeolocation'
 import './PageLayout.scss'
@@ -10,17 +10,17 @@ export const PageLayout = (props) => {
   return (
     <WithGeolocation isPageAvailable={!!props.isPageAvailable}>
       <div className={CN}>
-        <Container fluid>
+        <Grid fluid>
           <Row>
             <HeaderContainer />
           </Row>
 
-          <Container>
+          <Grid>
             <Row className={`${CN}__content`}>
               {props.children}
             </Row>
-          </Container>
-        </Container>
+          </Grid>
+        </Grid>
       </div>
     </WithGeolocation>
   )

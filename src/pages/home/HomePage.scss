@@ -1,6 +1,6 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
-@import "~bootstrap/scss/mixins/breakpoints";
+//@import "~bootstrap/scss/mixins/breakpoints";
 @import '../../shared/scss/variables.scss';
 @import '../../shared/scss/mixins.scss';
 
@@ -27,20 +27,20 @@
       left: 0;
       opacity: 0.7;
 
-      @include media-breakpoint-up(sm) {
-        background-position: right -300px top 45px;
-      }
+      // @include media-breakpoint-up(sm) {
+      //   background-position: right -300px top 45px;
+      // }
 
-      @include media-breakpoint-up(lg) {
-        background-size: auto;
-        background-position: right -150px top 45px;
-        opacity: 1;
-      }
+      // @include media-breakpoint-up(lg) {
+      //   background-size: auto;
+      //   background-position: right -150px top 45px;
+      //   opacity: 1;
+      // }
 
-      @include media-breakpoint-up(xl) {
-        background-size: auto;
-        background-position: right 0 top 45px;
-      }
+      // @include media-breakpoint-up(xl) {
+      //   background-size: auto;
+      //   background-position: right 0 top 45px;
+      // }
     }
 
     &-content {
@@ -50,13 +50,13 @@
       z-index: 1;
       @include font-size(24px);
 
-      @include media-breakpoint-up(sm) {
-        max-width: 60vw;
-      }
+      // @include media-breakpoint-up(sm) {
+      //   max-width: 60vw;
+      // }
 
-      @include media-breakpoint-up(lg) {
-        max-width: 38vw;
-      }
+      // @include media-breakpoint-up(lg) {
+      //   max-width: 38vw;
+      // }
 
       h2 {
         font-weight: 900;
@@ -117,15 +117,15 @@
       justify-content: center;
       align-items: center;
 
-      @include media-breakpoint-up(sm) {
-        flex-direction: row;
-        #{$ad1}-cta {
-          &:first-of-type {
-            margin-bottom: 0;
-            margin-right: 20px;
-          }
-        }
-      }
+      // @include media-breakpoint-up(sm) {
+      //   flex-direction: row;
+      //   #{$ad1}-cta {
+      //     &:first-of-type {
+      //       margin-bottom: 0;
+      //       margin-right: 20px;
+      //     }
+      //   }
+      // }
     }
   }
 
@@ -149,20 +149,20 @@
       background-size: cover;
       background-position: left -275px bottom -180px;
 
-      @include media-breakpoint-up(md) {
-        background-size: auto;
-        background-position: left -600px top 45px;
-      }
+      // @include media-breakpoint-up(md) {
+      //   background-size: auto;
+      //   background-position: left -600px top 45px;
+      // }
     }
 
     &:after {
       background: url('../../shared/assets/images/landing-page/dog-2.png') no-repeat;
       display: none;
 
-      @include media-breakpoint-up(md) {
-        display: block;
-        background-position: right -275px top 105px;
-      }
+      // @include media-breakpoint-up(md) {
+      //   display: block;
+      //   background-position: right -275px top 105px;
+      // }
     }
 
     &-wrapper {
@@ -253,7 +253,7 @@
       background-position: right 20px center;
 
       &#{&} {
-        padding: 15px 25px !important;
+        padding: 15px 25px;
       }
 
       &:nth-child(2n) {

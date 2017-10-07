@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FacebookLogin } from 'react-facebook-login-component'
 import { LandingLayout } from '../../shared/components/LandingLayout'
 import { WithGeolocation } from '../../shared/components/WithGeolocation'
-import { Container, Col } from 'reactstrap'
+import { Grid, Col } from 'react-bootstrap'
 import autoBind from 'react-autobind'
 import agent from '../../agent'
 import Cookies from 'js-cookie'
@@ -99,7 +99,7 @@ export class LoginPage extends Component {
       <WithGeolocation isPageAvailable={!!lat && !!lng}>
         <LandingLayout>
           <div className={CN}>
-            <Container>
+            <Grid>
               <Col className={`${CN}__social-block`}>
                 <div className={`${CN}__social-block-title`}>
                   Log in with one of social neetwork
@@ -117,7 +117,7 @@ export class LoginPage extends Component {
                 />
 
               </Col>
-            </Container>
+            </Grid>
           </div>
         </LandingLayout>
       </WithGeolocation>

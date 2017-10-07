@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Slider from 'react-slick'
-import { Container, Row, Col } from 'reactstrap'
+import { Grid, Row, Col } from 'react-bootstrap'
 import { LandingLayout } from '../../shared/components/LandingLayout'
 import avatarDummyImage from '../../shared/assets/images/landing-page/girl.png'
 import { FormattedMessage } from 'react-intl'
@@ -44,11 +44,11 @@ export class HomePage extends Component {
       >
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            <FormattedMessage id="feedback.first" />
+            <FormattedMessage id='feedback.first' />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
-              <img alt="User"
+              <img alt='User'
                 src={avatarDummyImage}
               />
             </div>
@@ -60,11 +60,11 @@ export class HomePage extends Component {
 
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            <FormattedMessage id="feedback.second" />
+            <FormattedMessage id='feedback.second' />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
-              <img alt="User"
+              <img alt='User'
                 src={avatarDummyImage}
               />
             </div>
@@ -76,11 +76,11 @@ export class HomePage extends Component {
 
         <div className={`${CN}__feedback-carousel-item`}>
           <div className={`${CN}__feedback-carousel-body`}>
-            <FormattedMessage id="feedback.third" />
+            <FormattedMessage id='feedback.third' />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
             <div className={`${CN}__feedback-carousel-avatar`}>
-              <img alt="User"
+              <img alt='User'
                 src={avatarDummyImage}
               />
             </div>
@@ -96,128 +96,122 @@ export class HomePage extends Component {
   render() {
     return (
       <LandingLayout>
-        <Container fluid>
+        <Grid fluid>
           <Row className={`${CN}__banner`}>
-            <Container>
+            <Grid>
               <div className={`${CN}__banner-content`}>
                 <h2>
-                  <FormattedMessage id="landing.banner.main" />
+                  <FormattedMessage id='landing.banner.main' />
                 </h2>
                 <span>
-                  <FormattedMessage id="landing.banner.sub" />
+                  <FormattedMessage id='landing.banner.sub' />
                 </span>
               </div>
-            </Container>
+            </Grid>
           </Row>
-        </Container>
+        </Grid>
 
-        <Container fluid>
+        <Grid fluid>
           <Row className={`${CN}__ad1`}>
-            <Container>
+            <Grid>
               <div className={`${CN}__ad1-content`}>
                 <div className={`${CN}__ad1-text-main`}>
-                  <FormattedMessage id="download" />
+                  <FormattedMessage id='download' />
                 </div>
 
                 <div className={`${CN}__ad1-buttons`}>
                   <a 
                     className={`btn ${CN}__ad1-cta`} 
-                    href="https://www.appstore.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://www.appstore.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     App Store
                   </a>
 
                   <a
                     className={`btn ${CN}__ad1-cta`}
-                    href="https://play.google.com/store"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://play.google.com/store'
+                    target='_blank'
+                    rel='noopener noreferrer'
                   >
                     Play Market
                   </a>
                 </div>
               </div>
-            </Container>
+            </Grid>
           </Row>
-        </Container>
+        </Grid>
 
-        <Container fluid>
+        <Grid fluid>
           <Row className={`${CN}__feedback`}>
-            <Container className={`${CN}__feedback-wrapper`}>
+            <Grid className={`${CN}__feedback-wrapper`}>
               <h3 className={`${CN}__feedback-title`}>
-                <FormattedMessage id="feedback.title" />
+                <FormattedMessage id='feedback.title' />
               </h3>
 
               {this.renderSlider()}
-            </Container>
+            </Grid>
           </Row>
-        </Container>
+        </Grid>
 
-        <Container fluid>
-          <Row className={`${CN}__facilities`}>
-            <Container>
-              <h3 className={`${CN}__facilities-title`}>
-                <FormattedMessage id="benefit.title" />
-              </h3>
-
-              <Row className={`${CN}__facilities-wrapper`}
-                noGutters
-              >
-                <Col className={`${CN}__facilities-item`}
-                  md="4"
-                  sm="6"
-                  xs="12"
-                >
-                  <h4><FormattedMessage id="benefit.first.header" /></h4>
-                  <p><FormattedMessage id="benefit.first.message" /></p>
-                </Col>
-                <Col className={`${CN}__facilities-item`}
-                  md="4"
-                  sm="6"
-                  xs="12"
-                >
-                  <h4><FormattedMessage id="benefit.second.header" /></h4>
-                  <p><FormattedMessage id="benefit.second.message" /></p>
-                </Col>
-                <Col className={`${CN}__facilities-item`}
-                  md="4"
-                  sm="6"
-                  xs="12"
-                >
-                  <h4><FormattedMessage id="benefit.third.header" /></h4>
-                  <p><FormattedMessage id="benefit.third.message" /></p>
-                </Col>
-                <Col className={`${CN}__facilities-item`}
-                  md="4"
-                  sm="6"
-                  xs="12"
-                >
-                  <h4><FormattedMessage id="benefit.fourth.header" /></h4>
-                  <p><FormattedMessage id="benefit.fourth.message" /></p>
-                </Col>
-                <Col className={`${CN}__facilities-item`}
-                  md="4"
-                  sm="6"
-                  xs="12"
-                >
-                  <h4><FormattedMessage id="benefit.fifth.header" /></h4>
-                  <p><FormattedMessage id="benefit.fifth.message" /></p>
-                </Col>
-                <Col className={`${CN}__facilities-item`}
-                  md="4"
-                  sm="6"
-                  xs="12"
-                >
-                <h4><FormattedMessage id="benefit.sixth.header" /></h4>
-                <p><FormattedMessage id="benefit.sixth.message" /></p>
-                </Col>
-              </Row>
-            </Container>
+        <Grid fluid>
+          <h3 className={`${CN}__facilities-title`}>
+            <FormattedMessage id='benefit.title' />
+          </h3>
+          <Row className={`${CN}__facilities-wrapper`}
+            noGutters
+          >
+            <Col className={`${CN}__facilities-item`}
+              md='4'
+              sm='6'
+              xs='12'
+            >
+              <h4><FormattedMessage id='benefit.first.header' /></h4>
+              <p><FormattedMessage id='benefit.first.message' /></p>
+            </Col>
+            <Col className={`${CN}__facilities-item`}
+              md='4'
+              sm='6'
+              xs='12'
+            >
+              <h4><FormattedMessage id='benefit.second.header' /></h4>
+              <p><FormattedMessage id='benefit.second.message' /></p>
+            </Col>
+            <Col className={`${CN}__facilities-item`}
+              md='4'
+              sm='6'
+              xs='12'
+            >
+              <h4><FormattedMessage id='benefit.third.header' /></h4>
+              <p><FormattedMessage id='benefit.third.message' /></p>
+            </Col>
+            <Col className={`${CN}__facilities-item`}
+              md='4'
+              sm='6'
+              xs='12'
+            >
+              <h4><FormattedMessage id='benefit.fourth.header' /></h4>
+              <p><FormattedMessage id='benefit.fourth.message' /></p>
+            </Col>
+            <Col className={`${CN}__facilities-item`}
+              md='4'
+              sm='6'
+              xs='12'
+            >
+              <h4><FormattedMessage id='benefit.fifth.header' /></h4>
+              <p><FormattedMessage id='benefit.fifth.message' /></p>
+            </Col>
+            <Col className={`${CN}__facilities-item`}
+              md='4'
+              sm='6'
+              xs='12'
+            >
+              <h4><FormattedMessage id='benefit.sixth.header' /></h4>
+              <p><FormattedMessage id='benefit.sixth.message' /></p>
+            </Col>
           </Row>
-        </Container>
-
+        </Grid>
       </LandingLayout>
     )
   }

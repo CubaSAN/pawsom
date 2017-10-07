@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'react-bootstrap'
 import { Gallery } from '../../../shared/components/Gallery'
 
 export class ModalPopup extends React.Component {

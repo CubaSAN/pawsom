@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Col } from 'reactstrap'
+import { Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
 import { PageLayout } from '../../shared/components/PageLayout'
@@ -38,26 +38,29 @@ export class PostPage extends Component {
 
     return (
       post ?
-      <div className={`${CN}`}>
-        <div className={`${CN}-user`}>
-          <div className={`${CN}-user-image`}>
-             <img src={post.postedPersonString} alt="User"/>
-          </div>
-          <div className={`${CN}-user-info`}>
-            <div className={`${CN}-user-info-name`}>{post.postedPersonName}</div>
-            <div className={`${CN}-user-info-created`}>
-              <TimeAgo date={post.created} />
+        <div className={`${CN}`}>
+          <div className={`${CN}-user`}>
+            <div className={`${CN}-user-image`}>
+              <img src={post.postedPersonString}
+                alt="User"/>
+            </div>
+            <div className={`${CN}-user-info`}>
+              <div className={`${CN}-user-info-name`}>{post.postedPersonName}</div>
+              <div className={`${CN}-user-info-created`}>
+                <TimeAgo date={post.created} />
+              </div>
             </div>
           </div>
+          <div className={`${CN}-content`}>
+            {post.url.length && <img className={`${CN}-content-images`}
+              src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
+              alt="" />}
+            <p className={`${CN}-content-text`}>{post.text}</p>
+          </div>
+          <div onClick={() => this.deletePost()}>Delete Post</div>
         </div>
-        <div className={`${CN}-content`}>
-          {post.url.length && <img className={`${CN}-content-images`} src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg" alt="" />}
-          <p className={`${CN}-content-text`}>{post.text}</p>
-        </div>
-        <div onClick={() => this.deletePost()}>Delete Post</div>
-      </div>
-      :
-      <div>post load...</div>
+        :
+        <div>post load...</div>
     )
   }
 

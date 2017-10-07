@@ -1,6 +1,6 @@
 import React from 'react'
 import { LandingLayout } from '../../shared/components/LandingLayout'
-import { Container, Col, Row } from 'reactstrap'
+import { Grid, Col, Row } from 'react-bootstrap'
 import './NoGeoPage.scss'
 
 const CN = 'no-geo-page'
@@ -8,7 +8,7 @@ const CN = 'no-geo-page'
 export const NoGeoPage = () => {
   return (
     <LandingLayout>
-      <Container className={CN}>
+      <Grid className={CN}>
         <Row>
           <Col>
             <div className={`${CN}__title`}>
@@ -19,7 +19,7 @@ export const NoGeoPage = () => {
             </p>
           </Col>
         </Row>
-      </Container>
+      </Grid>
     </LandingLayout>
   )
 }

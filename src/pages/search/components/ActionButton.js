@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'reactstrap'
+import { Button } from 'react-bootstrap'
 
 export class ActionButton extends Component {
   static propTypes = {
