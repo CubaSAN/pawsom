@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
+import FaCommentO from 'react-icons/lib/fa/comments-o'
+import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 // import CommentBox from './CommentBox';
 //import ImageGrid from './../../../assets/libs/photo-grid';
 // import agent from './../../../agent'
@@ -51,10 +53,16 @@ const Post = props => {
   }
 
   const renderCommentCount = number =>
-    <span>{number} Comment{number > 1 && 's'}</span>
+    <div>
+      {number > 0 && number} Comment{number > 1 && 's'}
+      <FaCommentO className={`${CN}-content-social-icon`} />
+    </div>
 
   const renderLikes = number =>
-    <span>{number > 0 && number} Like{number > 1 && 's'}</span>
+    <div>
+      {number > 0 && number} Like{number > 1 && 's'}
+      <FaThumbsOUp className={`${CN}-content-social-icon`} />
+    </div>
 
   return (
     <div className={`${CN}`}>
@@ -81,13 +89,16 @@ const Post = props => {
         </p>
 
         <div className={`${CN}-content-social`}>
-          <span>
+          <span className={`${CN}-content-social-text`}>
             { renderLikes(likes) }
           </span>
           <span> | </span>
-          <span>Share</span>
+          <span className={`${CN}-content-social-text`}>Share</span>
           <span> | </span>
-          <Link to={`/post/${id}`}>
+          <Link
+            to={`/post/${id}`}
+            className={`${CN}-content-social-text`}
+          >
             { renderCommentCount(commentCount) }
           </Link>
         </div>

@@ -82,12 +82,20 @@
           }
         }
         &-social {
+          display: flex;
           color: #9b9b9b;
           font-size: 12px;
           text-decoration: none;
           cursor: pointer;
           a {
             color: #9b9b9b;
+          }
+          &-icon {
+            margin-left: 5px;
+            margin-bottom: 2px;
+          }
+          &-text {
+            margin: 0 3px;
           }
         }
       }
