@@ -11,6 +11,7 @@ import { NoMatchPage } from '../pages/nomatch'
 import { Accommodation } from '../pages/accommodation'
 import { LoginPageContainer } from '../pages/login'
 import { FeedPageContainer } from '../pages/feed'
+import { PostPageContainer } from '../pages/post'
 import { NoGeoPage } from '../pages/nogeo'
 import { history } from '../store'
 import { ConnectedRouter } from 'react-router-redux'
@@ -33,7 +34,7 @@ export class AppRouter extends Component {
   render() {
     const { user, err } = this.props
     const isAuthenticated = isObject(user)
-    const isAdditionalInfoNeeded = 
+    const isAdditionalInfoNeeded =
       user !== null && user.isAdditionalInfoNeeded
 
     return (
@@ -67,6 +68,14 @@ export class AppRouter extends Component {
           <PrivateRoute
             path='/feed'
             component={FeedPageContainer}
+            isAuthenticated={isAuthenticated}
+            withGeolocation={err}
+            isAdditionalInfoNeeded={isAdditionalInfoNeeded}
+          />
+
+          <PrivateRoute
+            path='/post/:id'
+            component={PostPageContainer}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
             isAdditionalInfoNeeded={isAdditionalInfoNeeded}
