@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import PropTypes from 'prop-types'
+import autoBind from 'react-autobind'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './FeedPage.scss'
 import Post from './components/Post'
+import { AddPostForm } from './components/AddPostForm'
 
 const CN = 'feed-page'
 
 export class FeedPage extends Component {
   static propTypes = {
     lat: PropTypes.number,
-    lng: PropTypes.number
+    lng: PropTypes.number,
+    user: PropTypes.object,
+    changeRoute: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -21,12 +25,15 @@ export class FeedPage extends Component {
       postsPage: 0,
       posts: []
     }
+
+    autoBind(this)
   }
 
   componentWillMount() {
-    const { token, id } = this.props;
-    if (token && id) {
-      agent.Posts.all(id, this.state.postsPage, token).then((posts) => {
+    const { user } = this.props
+
+    if (user.token && user.id) {
+      agent.Posts.all(user.id, this.state.postsPage, user.token).then((posts) => {
         this.setState({
           posts
         })
@@ -34,7 +41,7 @@ export class FeedPage extends Component {
     }
   }
 
-  renderPost() {
+  renderPosts() {
     const { posts } = this.state
     if(posts.length) {
       return this.state.posts.map((post) =>
@@ -53,6 +60,23 @@ export class FeedPage extends Component {
     }
   }
 
+  renderAddPostForm() {
+    const { user } = this.props
+
+    return (
+      <AddPostForm
+        user={user} 
+        onSuccess={this.redirectToInitialState}
+      />
+    )
+  }
+
+  redirectToInitialState() {
+    const { changeRoute } = this.props
+
+    changeRoute('/')
+  }
+
   render () {
     const { lat, lng } = this.props
 
@@ -64,7 +88,8 @@ export class FeedPage extends Component {
             <Col xs={12}
               md={8}
               mdOffset={2}>
-              {this.renderPost()}
+              {this.renderAddPostForm()}
+              {this.renderPosts()}
             </Col>
 
             <Col className={`${CN}__sidebar`}

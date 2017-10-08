@@ -1,0 +1,17 @@
+@import '../../../../shared/scss/variables.scss';
+@import '../../../../shared/scss/mixins.scss';
+
+.add-post-form {
+  background: $white;
+  border: 1px solid $light-grey;
+  padding: 15px;
+  margin-bottom: 20px;
+
+  &__textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-radius: 0;
+    border: 1px solid $grey;
+  }
+}

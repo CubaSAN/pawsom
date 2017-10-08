@@ -47,9 +47,7 @@ const Post = props => {
   }
 
   const renderText = () => {
-    const spaceIndex = text.slice(0, 200).lastIndexOf(' ')
-    const shortText = text.slice(0, spaceIndex)
-    return `${shortText} ...`
+    return text.length > 200 ? `${text.slice(0, 200)}...` : text
   }
 
   const renderCommentCount = number =>
