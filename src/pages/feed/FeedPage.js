@@ -57,21 +57,23 @@ export class FeedPage extends Component {
     const { lat, lng } = this.props
 
     return (
-      <PageLayout className={CN}
-        isPageAvailable={lat && lng}>
-        <Row>
-          <Col xs={12}
-            md={8}
-            mdOffset={2}>
-            {this.renderPost()}
-          </Col>
+      <div className={`${CN}__background`}>
+        <PageLayout className={CN}
+          isPageAvailable={lat && lng}>
+          <Row>
+            <Col xs={12}
+              md={8}
+              mdOffset={2}>
+              {this.renderPost()}
+            </Col>
 
-          <Col className={`${CN}__sidebar`}
-            md={3}
-            xs={12}>
-          </Col>
-        </Row>
-      </PageLayout>
+            <Col className={`${CN}__sidebar`}
+              md={3}
+              xs={12}>
+            </Col>
+          </Row>
+        </PageLayout>
+      </div>
     )
   }
 }

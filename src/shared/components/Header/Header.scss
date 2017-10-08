@@ -81,6 +81,10 @@
       text-decoration: none;
     }
 
+    & > a {
+      color: $white !important;
+    }
+
     &--login {
       color: $white;
 
