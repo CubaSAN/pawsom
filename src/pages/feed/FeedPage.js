@@ -14,8 +14,7 @@ export class FeedPage extends Component {
   static propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
-    user: PropTypes.object,
-    changeRoute: PropTypes.func.isRequired
+    user: PropTypes.object
   }
 
   constructor(props) {
@@ -30,6 +29,10 @@ export class FeedPage extends Component {
   }
 
   componentWillMount() {
+    this.updatePosts()
+  }
+
+  updatePosts() {
     const { user } = this.props
 
     if (user.token && user.id) {
@@ -66,15 +69,13 @@ export class FeedPage extends Component {
     return (
       <AddPostForm
         user={user} 
-        onSuccess={this.redirectToInitialState}
+        onSuccess={this.onPostAddSuccess}
       />
     )
   }
 
-  redirectToInitialState() {
-    const { changeRoute } = this.props
-
-    changeRoute('/')
+  onPostAddSuccess() {
+    this.updatePosts()
   }
 
   render () {

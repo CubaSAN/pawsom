@@ -12,6 +12,25 @@
     max-width: 100%;
     min-width: 100%;
     border-radius: 0;
-    border: 1px solid $grey;
+    border: 1px solid $dark-grey;
+  }
+
+  &__formgroup {
+    margin-bottom: 0;
+
+    &--controls {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 8px;
+    }
+  }
+
+  &__checkbox {
+    @include font-size(13px);
+  }
+
+  &__submit, &__submit:hover, &__submit:focus {
+    background: $green;
+    color: $white;
   }
 }

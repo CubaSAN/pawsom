@@ -26,6 +26,15 @@ export class AddPostForm extends Component {
     autoBind(this)
   }
 
+  resetForm() {
+    this.setState({
+      text: '',
+      images: null,
+      сommentsAllowed: false,
+      isValid: false
+    })
+  }
+
   onPostContantChange(evt) {
     evt.preventDefault()
 
@@ -39,7 +48,9 @@ export class AddPostForm extends Component {
   submitNewPost(evt) {
     evt.preventDefault()
 
-    const { user, onSuccess } = this.props
+    if (text === '') return
+
+    const { user } = this.props
     const { text, сommentsAllowed } = this.state
 
     const post = {
@@ -53,34 +64,53 @@ export class AddPostForm extends Component {
       .Posts
       .addPost(post, user.token)
       .then(() => {
-        onSuccess()
+        this.onSuccess()
       })
+  }
+
+  onSuccess() {
+    this.props.onSuccess()
+    this.resetForm()
+  }
+
+  onAllowCommentsChange(evt) {
+    const { checked } = evt.target
+
+    this.setState({
+      сommentsAllowed: checked,
+    })
   }
 
   render () {
     return (
       <div className={CN}>
         <form onSubmit={this.submitNewPost}>
-          <FormGroup controlId='newPost'>
-            <ControlLabel>Post Body</ControlLabel>
+          <FormGroup 
+            className={`${CN}__formgroup`}
+            controlId='newPost'
+          >
             <FormControl
               className={`${CN}__textarea`}
               componentClass='textarea' 
-              placeholder='Post Content ...'
-              onBlur={this.onPostContantChange} />
+              placeholder='Add new post...'
+              onChange={this.onPostContantChange} 
+              value={this.state.text} />
           </FormGroup>
 
-          <FormGroup>
-            <Checkbox inline>
+          <FormGroup className={`${CN}__formgroup ${CN}__formgroup--controls`}>
+            <Checkbox
+              className={`${CN}__checkbox`}
+              inline
+              onChange={this.onAllowCommentsChange}>
               Comments Allowed
             </Checkbox>
-          </FormGroup>
 
-          <Button
-            className={`${CN}__submit`}
-            type="submit">
-            Submit
-          </Button>
+            <Button
+              className={`${CN}__submit`}
+              type="submit">
+              Submit
+            </Button>
+          </FormGroup>
         </form>
       </div>
     )
