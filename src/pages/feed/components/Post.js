@@ -16,27 +16,36 @@ const Post = props => {
   const likes = props.post.reactions
 
   const renderImages = (imagesUrl) => {
+    if (!imagesUrl.length) return null
+
     if (imagesUrl.length <= 4) {
+      const imageUrl = imagesUrl[0]
       return (
         <div className={`${CN}-content-images-container`}>
-          <div className="big-img-container">
-            <img src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
-              alt="" />
+          <div className='big-img-container'>
+            <img
+              src={imageUrl} 
+              alt=''
+            />
           </div>
         </div>
       )
     }
     return (
       <div className={`${CN}-content-images-container`}>
-        <div className="big-img-container"><img src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
-          alt="" /></div>
-        <div className="flex-wrapper">
+        <div className='big-img-container'>
+          <img
+            src={imagesUrl[0]}
+            alt='' />
+        </div>
+        <div className='flex-wrapper'>
           {
-            imagesUrl.slice(1, 4).map(img => {
+            imagesUrl.slice(1, 4).map(imageUrl => {
               return (
-                <div className="small-img-container">
-                  <img src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
-                    alt="" />
+                <div className='small-img-container'>
+                  <img
+                    src={imageUrl}
+                    alt='' />
                 </div>
               )
             })
@@ -67,7 +76,7 @@ const Post = props => {
       <div className={`${CN}-user`}>
         <div className={`${CN}-user-image`}>
           <img src={userImage}
-            alt="User" />
+            alt='User' />
         </div>
         <div className={`${CN}-user-info`}>
           <div className={`${CN}-user-info-name`}>{postedPersonName}</div>

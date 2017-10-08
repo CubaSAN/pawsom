@@ -32,5 +32,11 @@
   &__submit, &__submit:hover, &__submit:focus {
     background: $green;
     color: $white;
+    margin-left: 10px;
+  }
+
+  &__upload-icon {
+    color: $green;
+    @include font-size(24px);
   }
 }

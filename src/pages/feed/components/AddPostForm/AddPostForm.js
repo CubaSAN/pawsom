@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import autoBind from 'react-autobind'
 import PropTypes from 'prop-types'
-import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap'
+import { FormGroup, FormControl, Button, Checkbox } from 'react-bootstrap'
+import FaCamera from 'react-icons/lib/fa/camera'
 import agent from '../../../../agent'
 import './AddPostForm.scss'
 
@@ -105,11 +106,16 @@ export class AddPostForm extends Component {
               Comments Allowed
             </Checkbox>
 
-            <Button
-              className={`${CN}__submit`}
-              type="submit">
-              Submit
-            </Button>
+            <div>
+              <FaCamera 
+                className={`${CN}__upload-icon`}
+              />
+              <Button
+                className={`${CN}__submit`}
+                type="submit">
+                Submit
+              </Button>
+            </div>
           </FormGroup>
         </form>
       </div>
