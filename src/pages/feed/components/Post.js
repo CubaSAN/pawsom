@@ -18,13 +18,13 @@ const Post = props => {
   const renderImages = (imagesUrl) => {
     if (!imagesUrl.length) return null
 
-    if (imagesUrl.length <= 4) {
+    if (imagesUrl.length < 4) {
       const imageUrl = imagesUrl[0]
       return (
         <div className={`${CN}-content-images-container`}>
           <div className='big-img-container'>
             <img
-              src={imageUrl} 
+              src={imageUrl}
               alt=''
             />
           </div>

@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
+import FaCommentO from 'react-icons/lib/fa/comments-o'
+import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './PostPage.scss'
 
-const CN = 'post-page__post'
+const CN = 'post-page'
 
 export class PostPage extends Component {
   static propTypes = {
@@ -33,34 +35,100 @@ export class PostPage extends Component {
     })
   }
 
+  renderImages(imagesUrl) {
+    if (!imagesUrl.length) return null
+
+    if (imagesUrl.length < 4) {
+      const imageUrl = imagesUrl[0]
+      return (
+        <div className={`${CN}__content-images`}>
+          <div className='big-img-container'>
+            <img
+              src={imageUrl}
+              alt=''
+            />
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className={`${CN}__content-images`}>
+        <div className='big-img-container'>
+          <img
+            src={imagesUrl[0]}
+            alt='' />
+        </div>
+        <div className='flex-wrapper'>
+          {
+            imagesUrl.slice(1, 4).map(imageUrl => {
+              return (
+                <div className='small-img-container'>
+                  <img
+                    src={imageUrl}
+                    alt='' />
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
+    )
+  }
+
+  renderLikes(number) {
+    return (
+      <div>
+        {number > 0 && number} Like{number > 1 && 's'}
+        <FaThumbsOUp className={`${CN}__social-icon`} />
+      </div>
+    )
+  }
+
+  renderCommentCount(number) {
+    return (
+      <div>
+        {number > 0 && number} Comment{number > 1 && 's'}
+        <FaCommentO className={`${CN}__social-icon`} />
+      </div>
+    )
+  }
+
   renderPost() {
-    const post = this.state.post
+    const { postedPersonString, postedPersonName, created, text, commentCount } = this.state.post
+    const imagesUrl = this.state.post.url
+    const likes = this.state.post.reactions
 
     return (
-      post ?
-        <div className={`${CN}`}>
-          <div className={`${CN}-user`}>
-            <div className={`${CN}-user-image`}>
-              <img src={post.postedPersonString}
-                alt="User"/>
-            </div>
-            <div className={`${CN}-user-info`}>
-              <div className={`${CN}-user-info-name`}>{post.postedPersonName}</div>
-              <div className={`${CN}-user-info-created`}>
-                <TimeAgo date={post.created} />
-              </div>
+      <div className={`${CN}__post-wrapper`}>
+        <div className={`${CN}__user`}>
+          <div className={`${CN}__user-image`}>
+            <img src={postedPersonString} alt="User" />
+          </div>
+          <div className={`${CN}__user-info`}>
+            <div className={`${CN}__user-info-name`}>{postedPersonName}</div>
+            <div className={`${CN}__user-info-created`}>
+              <TimeAgo date={created} />
             </div>
           </div>
-          <div className={`${CN}-content`}>
-            {post.url.length && <img className={`${CN}-content-images`}
-              src="https://static.pexels.com/photos/59523/pexels-photo-59523.jpeg"
-              alt="" />}
-            <p className={`${CN}-content-text`}>{post.text}</p>
-          </div>
-          <div onClick={() => this.deletePost()}>Delete Post</div>
         </div>
-        :
-        <div>post load...</div>
+
+        <div className={`${CN}__content`}>
+          <p className={`${CN}__content-text`}>{text}</p>
+          {this.renderImages(imagesUrl)}
+        </div>
+
+        <div className={`${CN}__social`}>
+          <span className={`${CN}__social-text`}>
+            { this.renderLikes(likes) }
+          </span>
+          <span> | </span>
+          <span className={`${CN}__social-text`}>Share</span>
+          <span> | </span>
+          <span className={`${CN}__social-text`}>
+            { this.renderCommentCount(commentCount) }
+          </span>
+        </div>
+      </div>
     )
   }
 
@@ -68,15 +136,17 @@ export class PostPage extends Component {
     const { lat, lng } = this.props
 
     return (
-      <PageLayout className={CN}
-        isPageAvailable={lat && lng}>
-        <Col md={9}>
-          {this.renderPost()}
-        </Col>
+      <div className={`${CN}__background`}>
+        <PageLayout className={CN}
+          isPageAvailable={lat && lng}>
+          <Col md={9}>
+            {this.state.post && this.renderPost()}
+          </Col>
 
-        <Col md={3}>
-        </Col>
-      </PageLayout>
+          <Col md={3}>
+          </Col>
+        </PageLayout>
+      </div>
     )
   }
 }
