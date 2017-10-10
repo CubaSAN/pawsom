@@ -75,9 +75,30 @@ export class PostPage extends Component {
     )
   }
 
+  changePostlikes(likes) {
+    const post = this.state.post
+    post.reactions = likes
+    this.setState({
+      post
+    })
+  }
+
+  setReaction() {
+    const { token, id } = this.props
+    const postId = this.props.computedMatch.params.id
+    const body = {
+      postId,
+      postedBy: id
+    }
+
+    agent.Likes.setReaction(body, token).then((likes) => {
+      this.changePostlikes(likes)
+    })
+  }
+
   renderLikes(number) {
     return (
-      <div>
+      <div onClick={ () => this.setReaction() }>
         {number > 0 && number} Like{number > 1 && 's'}
         <FaThumbsOUp className={`${CN}__social-icon`} />
       </div>
