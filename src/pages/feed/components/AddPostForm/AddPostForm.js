@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { FormGroup, FormControl, Button, Checkbox } from 'react-bootstrap'
 import FaCamera from 'react-icons/lib/fa/camera'
 import agent from '../../../../agent'
+import { FileUploader } from '../../../../shared/components/FileUploader'
 import './AddPostForm.scss'
 
 const CN = 'add-post-form'
@@ -118,6 +119,7 @@ export class AddPostForm extends Component {
             </div>
           </FormGroup>
         </form>
+        <FileUploader />
       </div>
     )
   }
