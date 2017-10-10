@@ -44,14 +44,33 @@ export class FeedPage extends Component {
     }
   }
 
+  changePostlikes(postId, likes) {
+    const { posts } = this.state
+    let index = posts.findIndex((post) => post.id === postId)
+    const changePost = posts.map(post => {
+      if (post.id === postId) {
+        post.reactions = likes
+      }
+      return post
+    })
+
+    this.setState({
+      posts: changePost
+    })
+  }
+
   renderPosts() {
     const { posts } = this.state
+    const { user } = this.props
     if(posts.length) {
       return this.state.posts.map((post) =>
         <Post
           className={`${CN}__post`}
           key={post.id}
           post={post}
+          id={user.id}
+          token={user.token}
+          changePostlikes={this.changePostlikes}
         />
       )
     } else {
@@ -68,7 +87,7 @@ export class FeedPage extends Component {
 
     return (
       <AddPostForm
-        user={user} 
+        user={user}
         onSuccess={this.onPostAddSuccess}
       />
     )

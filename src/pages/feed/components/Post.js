@@ -6,7 +6,7 @@ import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 // import CommentBox from './CommentBox';
 //import ImageGrid from './../../../assets/libs/photo-grid';
-// import agent from './../../../agent'
+import agent from './../../../agent'
 const CN = 'feed-page__post-wrapper'
 
 const Post = props => {
@@ -14,17 +14,18 @@ const Post = props => {
   const userImage = props.post.postedPersonString
   const imagesUrl = props.post.url
   const likes = props.post.reactions
+  const userId = props.id
 
   const renderImages = (imagesUrl) => {
     if (!imagesUrl.length) return null
 
-    if (imagesUrl.length <= 4) {
+    if (imagesUrl.length < 4) {
       const imageUrl = imagesUrl[0]
       return (
         <div className={`${CN}-content-images-container`}>
           <div className='big-img-container'>
             <img
-              src={imageUrl} 
+              src={imageUrl}
               alt=''
             />
           </div>
@@ -65,8 +66,20 @@ const Post = props => {
       <FaCommentO className={`${CN}-content-social-icon`} />
     </div>
 
+  const setReaction = () => {
+    const token = props.token
+    const body = {
+      postId: id,
+      postedBy: userId
+    }
+
+    agent.Likes.setReaction(body, token).then((likes) => {
+      props.changePostlikes(id, likes)
+    })
+  }
+
   const renderLikes = number =>
-    <div>
+    <div onClick={ setReaction }>
       {number > 0 && number} Like{number > 1 && 's'}
       <FaThumbsOUp className={`${CN}-content-social-icon`} />
     </div>
