@@ -105,4 +105,23 @@
       }
     }
   }
+  &__pagination {
+    display: flex;
+    color: #9b9b9b;
+    text-decoration: none;
+    &-item {
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    &-number {
+      margin: 0 5px;
+      color: #252046;
+    }
+
+    &-icon {
+      margin-bottom: 4px;
+      font-size: 1.4rem;
+    }
+  }
 }

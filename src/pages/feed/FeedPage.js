@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
+import FaAngleDoubleLeft from 'react-icons/lib/fa/angle-double-left'
+import FaAngleDoubleRight from 'react-icons/lib/fa/angle-double-right'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './FeedPage.scss'
@@ -62,6 +64,7 @@ export class FeedPage extends Component {
   renderPosts() {
     const { posts } = this.state
     const { user } = this.props
+
     if(posts.length) {
       return this.state.posts.map((post) =>
         <Post
@@ -97,6 +100,24 @@ export class FeedPage extends Component {
     this.updatePosts()
   }
 
+  renderPagination() {
+    return (
+      <div className={`${CN}__pagination`}>
+        <div className={`${CN}__pagination-item`}>
+          <FaAngleDoubleLeft className={`${CN}__pagination-icon`} />
+          <span>Previous</span>
+        </div>
+        <span> | </span>
+        <span className={`${CN}__pagination-number`}>{this.state.postsPage + 1}</span>
+        <span> | </span>
+        <div className={`${CN}__pagination-item`}>
+          <span>Next</span>
+          <FaAngleDoubleRight className={`${CN}__pagination-icon`} />
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const { lat, lng } = this.props
 
@@ -110,6 +131,7 @@ export class FeedPage extends Component {
               mdOffset={2}>
               {this.renderAddPostForm()}
               {this.renderPosts()}
+              {this.renderPagination()}
             </Col>
 
             <Col className={`${CN}__sidebar`}
