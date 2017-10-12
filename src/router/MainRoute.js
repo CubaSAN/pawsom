@@ -36,7 +36,7 @@ export class MainRoute extends Component {
       ) :
       (
         <Redirect
-          to={{ pathname: '/feed', state: { from: this.props.location } }} />
+          to={{ pathname: '/feed/:id', state: { from: this.props.location } }} />
       )
   }
 
