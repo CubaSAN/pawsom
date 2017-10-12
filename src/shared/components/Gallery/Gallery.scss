@@ -1,10 +1,28 @@
-@import '~react-image-gallery/styles/css/image-gallery.css';
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
 
-.gallery {
-  .image-gallery-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 135px);
+.lightbox-gallery {
+  &__image-wrapper {
+    &--ratio-4-3 {
+      @include aspect-ratio(4, 3);
+    }
+
+    &--ratio-2-3 {
+      @include aspect-ratio(2, 3);
+    }
+
+    & > .content {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__image-container {
+    &--half {
+      width: 50%;
+      display: inline-block;
+    }
   }
 }

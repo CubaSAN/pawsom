@@ -1,135 +1,139 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import autoBind from 'react-autobind'
 import TimeAgo from 'react-timeago'
 import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
-// import CommentBox from './CommentBox';
-//import ImageGrid from './../../../assets/libs/photo-grid';
-import agent from './../../../agent'
+import { Gallery } from '../../../shared/components/Gallery'
+import agent from '../../../agent'
+
 const CN = 'feed-page__post-wrapper'
 
-const Post = props => {
-  const { id, postedPersonName, created, text, commentCount } = props.post
-  const userImage = props.post.postedPersonString
-  const imagesUrl = props.post.url
-  const likes = props.post.reactions
-  const userId = props.id
+export class Post extends Component {
+  static propTypes = {
+    post: PropTypes.object.isRequired
+  }
 
-  const renderImages = (imagesUrl) => {
+  constructor(props) {
+    super(props)
+
+    autoBind(this)
+  }
+
+  renderText() {
+    const { text } = this.props.post
+    const processedText = text.length > 200 ? `${text.slice(0, 200)}...` : text
+
+    return (
+      <p>
+        {processedText}
+        <span className={`${CN}-content-text-read-more`}>read more</span>
+      </p>
+    )
+  }
+
+  onImagesGalleryClose() {
+
+  }
+
+  renderImages(imagesUrl) {
     if (!imagesUrl.length) return null
 
-    if (imagesUrl.length < 4) {
-      const imageUrl = imagesUrl[0]
-      return (
-        <div className={`${CN}-content-images-container`}>
-          <div className='big-img-container'>
-            <img
-              src={imageUrl}
-              alt=''
-            />
-          </div>
-        </div>
-      )
-    }
+    const images = imagesUrl.map(image => {
+      return {
+        src: image
+      }
+    })
+
     return (
-      <div className={`${CN}-content-images-container`}>
-        <div className='big-img-container'>
-          <img
-            src={imagesUrl[0]}
-            alt='' />
-        </div>
-        <div className='flex-wrapper'>
-          {
-            imagesUrl.slice(1, 4).map(imageUrl => {
-              return (
-                <div className='small-img-container'>
-                  <img
-                    src={imageUrl}
-                    alt='' />
-                </div>
-              )
-            })
-          }
-        </div>
+      <Gallery images={images} />
+    )
+  }
+
+  renderLikes(number) {
+    return (
+      <div onClick={this.setReaction}>
+        {number > 0 && number} Like{number > 1 && 's'}
+        <FaThumbsOUp className={`${CN}-content-social-icon`} />
       </div>
     )
   }
 
-  const renderText = () => {
-    return text.length > 200 ? `${text.slice(0, 200)}...` : text
-  }
+  setReaction() {
+    const { token, id: userId } = this.props
+    const { id } = this.props.post
 
-  const renderCommentCount = number =>
-    <div>
-      {number > 0 && number} Comment{number > 1 && 's'}
-      <FaCommentO className={`${CN}-content-social-icon`} />
-    </div>
-
-  const setReaction = () => {
-    const token = props.token
     const body = {
       postId: id,
       postedBy: userId
     }
 
     agent.Likes.setReaction(body, token).then((likes) => {
-      props.changePostlikes(id, likes)
+      this.props.changePostlikes(id, likes)
     })
   }
 
-  const renderLikes = number =>
-    <div onClick={ setReaction }>
-      {number > 0 && number} Like{number > 1 && 's'}
-      <FaThumbsOUp className={`${CN}-content-social-icon`} />
-    </div>
+  renderCommentCount(number) {
+    return (
+      <div>
+        {number > 0 && number} Comment{number > 1 && 's'}
+        <FaCommentO className={`${CN}-content-social-icon`} />
+      </div>
+    )
+  }
 
-  return (
-    <div className={`${CN}`}>
-      <div className={`${CN}-user`}>
-        <div className={`${CN}-user-image`}>
-          <img src={userImage}
-            alt='User' />
+  render() {
+    const {
+      id,
+      postedPersonName,
+      created,
+      text,
+      commentCount,
+      postedPersonString,
+      url,
+      reactions
+    } = this.props.post
+
+    return (
+      <div className={`${CN}`}>
+        <div className={`${CN}-user`}>
+          <div className={`${CN}-user-image`}>
+            <img
+              src={postedPersonString}
+              alt={postedPersonName} 
+            />
+          </div>
+          <div className={`${CN}-user-info`}>
+            <div className={`${CN}-user-info-name`}>{postedPersonName}</div>
+            <div className={`${CN}-user-info-created`}>
+              <TimeAgo date={created} />
+            </div>
+          </div>
         </div>
-        <div className={`${CN}-user-info`}>
-          <div className={`${CN}-user-info-name`}>{postedPersonName}</div>
-          <div className={`${CN}-user-info-created`}>
-            <TimeAgo date={created} />
+        <div className={`${CN}-content`}>
+          <div className={`${CN}-content-text`}>
+            { text && this.renderText() }
+          </div>
+          <div className={`${CN}-content-images`}>
+            {this.renderImages(url)}
+          </div>
+          <div className={`${CN}-content-social`}>
+            <span className={`${CN}-content-social-text`}>
+              {this.renderLikes(reactions)}
+            </span>
+            <span> | </span>
+            <span className={`${CN}-content-social-text`}>Share</span>
+            <span> | </span>
+            <Link
+              to={`/post/${id}`}
+              className={`${CN}-content-social-text`}
+            >
+              {this.renderCommentCount(commentCount)}
+            </Link>
           </div>
         </div>
       </div>
-
-      <div className={`${CN}-content`}>
-        <p className={`${CN}-content-text`}>
-          {renderText()}
-          <span className={`${CN}-content-text-read-more`}>read more</span>
-        </p>
-
-        <div className={`${CN}-content-images`}>
-          {renderImages(imagesUrl)}
-        </div>
-
-        <div className={`${CN}-content-social`}>
-          <span className={`${CN}-content-social-text`}>
-            { renderLikes(likes) }
-          </span>
-          <span> | </span>
-          <span className={`${CN}-content-social-text`}>Share</span>
-          <span> | </span>
-          <Link
-            to={`/post/${id}`}
-            className={`${CN}-content-social-text`}
-          >
-            { renderCommentCount(commentCount) }
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
+    )
+  }
 }
-
-Post.propTypes = {
-  post: PropTypes.object.isRequired
-};
-
-export default Post

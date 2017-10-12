@@ -5,7 +5,7 @@ import autoBind from 'react-autobind'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './FeedPage.scss'
-import Post from './components/Post'
+import { Post } from './components/Post'
 import { AddPostForm } from './components/AddPostForm'
 
 const CN = 'feed-page'
@@ -46,7 +46,7 @@ export class FeedPage extends Component {
 
   changePostlikes(postId, likes) {
     const { posts } = this.state
-    let index = posts.findIndex((post) => post.id === postId)
+    // let index = posts.findIndex((post) => post.id === postId)
     const changePost = posts.map(post => {
       if (post.id === postId) {
         post.reactions = likes

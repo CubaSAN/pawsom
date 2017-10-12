@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { FormGroup, FormControl, Button, Checkbox } from 'react-bootstrap'
 import FaCamera from 'react-icons/lib/fa/camera'
 import agent from '../../../../agent'
-import { FileUploader } from '../../../../shared/components/FileUploader'
+import { FileUploaderContainer } from '../../../../shared/components/FileUploader'
 import './AddPostForm.scss'
 
 const CN = 'add-post-form'
@@ -33,7 +33,8 @@ export class AddPostForm extends Component {
       text: '',
       images: null,
       сommentsAllowed: false,
-      isValid: false
+      isValid: false,
+      url: []
     })
   }
 
@@ -53,13 +54,13 @@ export class AddPostForm extends Component {
     if (text === '') return
 
     const { user } = this.props
-    const { text, сommentsAllowed } = this.state
+    const { text, сommentsAllowed, url } = this.state
 
     const post = {
       postedBy: user.id,
       text,
       сommentsAllowed,
-      url: []
+      url
     }
 
     agent
@@ -81,6 +82,10 @@ export class AddPostForm extends Component {
     this.setState({
       сommentsAllowed: checked,
     })
+  }
+
+  onUpload(urls) {
+    this.setState({ url: urls })
   }
 
   render () {
@@ -119,7 +124,7 @@ export class AddPostForm extends Component {
             </div>
           </FormGroup>
         </form>
-        <FileUploader />
+        <FileUploaderContainer onUpload={this.onUpload}/>
       </div>
     )
   }
