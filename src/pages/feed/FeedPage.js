@@ -103,19 +103,36 @@ export class FeedPage extends Component {
   renderPagination() {
     return (
       <div className={`${CN}__pagination`}>
-        <div className={`${CN}__pagination-item`}>
+        <div
+          className={`${CN}__pagination-item`}
+          onClick={() => this.changePage(-1)}
+        >
           <FaAngleDoubleLeft className={`${CN}__pagination-icon`} />
           <span>Previous</span>
         </div>
         <span> | </span>
         <span className={`${CN}__pagination-number`}>{this.state.postsPage + 1}</span>
         <span> | </span>
-        <div className={`${CN}__pagination-item`}>
+        <div
+          className={`${CN}__pagination-item`}
+          onClick={() => this.changePage(1)}
+        >
           <span>Next</span>
           <FaAngleDoubleRight className={`${CN}__pagination-icon`} />
         </div>
       </div>
     )
+  }
+
+  changePage(page) {
+
+    this.setState({
+      postsPage: this.state.postsPage + page
+    })
+
+    setTimeout(()=> {
+      this.updatePosts()
+    }, 0)
   }
 
   render () {
