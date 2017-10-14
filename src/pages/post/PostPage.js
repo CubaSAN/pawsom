@@ -5,6 +5,7 @@ import TimeAgo from 'react-timeago'
 import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { PageLayout } from '../../shared/components/PageLayout'
+import Comment from './components/Comment'
 import agent from '../../agent'
 import './PostPage.scss'
 
@@ -20,7 +21,8 @@ export class PostPage extends Component {
     super(props)
 
     this.state = {
-      post: null
+      post: null,
+      comments: []
     }
   }
 
@@ -33,6 +35,21 @@ export class PostPage extends Component {
         post
       })
     })
+
+    agent.Comments.getComments(id, 0, token).then((comments) => {
+      this.setState({
+        comments
+      })
+    })
+  }
+
+  renderComments() {
+    return this.state.comments.map(comment =>
+      <Comment
+        key={comment.id}
+        comment={comment}
+      />
+    )
   }
 
   renderImages(imagesUrl) {
@@ -162,6 +179,7 @@ export class PostPage extends Component {
           isPageAvailable={lat && lng}>
           <Col md={9}>
             {this.state.post && this.renderPost()}
+            {this.renderComments()}
           </Col>
 
           <Col md={3}>
