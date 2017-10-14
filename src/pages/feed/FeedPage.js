@@ -25,15 +25,19 @@ export class FeedPage extends Component {
 
     this.state = {
       postsPage: 0,
-      posts: []
+      posts: [],
+      prevDisabled: '',
+      nextDisabled: ''
     }
 
     autoBind(this)
   }
 
   componentWillMount() {
+    let id = +this.props.computedMatch.params.id
     this.setState({
-      postsPage: +this.props.computedMatch.params.id
+      postsPage: id,
+      prevDisabled: id ? '' : 'disabled',
     }, () => {
       this.updatePosts()
     })
@@ -44,7 +48,8 @@ export class FeedPage extends Component {
     if (user.token && user.id) {
       agent.Posts.all(user.id, this.state.postsPage , user.token).then((posts) => {
         this.setState({
-          posts
+          posts,
+          nextDisabled: posts.length < 20 ? 'disabled' : ''
         })
       })
     }
@@ -104,10 +109,14 @@ export class FeedPage extends Component {
     this.updatePosts()
   }
 
-  changePosts(page) {
-    if (this.state.postsPage >= 0) {
+  changePosts(event, page) {
+    let newPostPage = this.state.postsPage + page
+    if (newPostPage < 0 || (this.state.posts.length < 20 && page !== -1)) {
+      event.preventDefault()
+    } else {
       this.setState({
-        postsPage: this.state.postsPage + page
+        postsPage: newPostPage,
+        prevDisabled: newPostPage ? '' : 'disabled'
       }, () => {
         this.updatePosts()
       })
@@ -119,8 +128,8 @@ export class FeedPage extends Component {
       <div className={`${CN}__pagination`}>
         <Link
           to={`/feed/${this.state.postsPage - 1}`}
-          className={`${CN}__pagination-item`}
-          onClick={() => this.changePosts(-1)}
+          className={`${CN}__pagination-item ${this.state.prevDisabled}`}
+          onClick={(e) => this.changePosts(e, -1)}
         >
           <FaAngleDoubleLeft className={`${CN}__pagination-icon`} />
           <span>Previous</span>
@@ -130,8 +139,8 @@ export class FeedPage extends Component {
         <span> | </span>
         <Link
           to={`/feed/${this.state.postsPage + 1}`}
-          className={`${CN}__pagination-item`}
-          onClick={() => this.changePosts(1)}
+          className={`${CN}__pagination-item ${this.state.nextDisabled}`}
+          onClick={(e) => this.changePosts(e, 1)}
         >
           <span>Next</span>
           <FaAngleDoubleRight className={`${CN}__pagination-icon`} />
