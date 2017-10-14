@@ -179,7 +179,9 @@ export class PostPage extends Component {
           isPageAvailable={lat && lng}>
           <Col md={9}>
             {this.state.post && this.renderPost()}
-            {this.renderComments()}
+            <div className={`${CN}__comments`}>
+              {this.renderComments()}
+            </div>
           </Col>
 
           <Col md={3}>

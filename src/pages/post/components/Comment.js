@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
 
+const CN = 'comment'
+
 const Comment = (props) => {
   const {
     created,
@@ -9,25 +11,22 @@ const Comment = (props) => {
     posterName,
     posterPick
   } = props.comment
-
+console.log(props.comment);
   return (
-    <div className="post">
-      <div className="post-header">
-        <div className="post-user-container">
-          <div className="post-user-image">
-            <img src={posterPick} alt="User" />
-          </div>
-          <div className="post-user">
-            <div className="post-user-name">{posterName}</div>
-            <div className="post-user-created">
-              <TimeAgo date={created} />
-            </div>
+    <div className={`${CN}`}>
+      <div className={`${CN}__user`}>
+        <div className={`${CN}__user-image`}>
+          <img src={posterPick} alt="User" />
+        </div>
+        <div className={`${CN}__user-info`}>
+          <div className={`${CN}__user-name`}>{posterName}</div>
+          <div className={`${CN}__created`}>
+            <TimeAgo date={created} />
           </div>
         </div>
       </div>
-      <div className="post-content">
-        <p className="post-text">{message}</p>
-        read more ...
+      <div className={`${CN}__content`}>
+        <p className={`${CN}__content-text`}>{message}</p>
       </div>
     </div>
   )

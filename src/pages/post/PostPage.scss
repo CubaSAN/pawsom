@@ -10,7 +10,6 @@
     background: $white;
     border: 1px solid $light-grey;
     padding: 15px;
-    margin-bottom: 20px;
   }
 
   &__user {
@@ -25,6 +24,7 @@
         border-radius: 50%;
       }
     }
+
     &-info {
       display: flex;
       flex-direction: column;
@@ -92,6 +92,60 @@
 
     &-text {
       margin: 0 3px;
+    }
+  }
+
+  &__comments {
+    background: #f6f7f9;
+    .comment {
+      padding: 8px 25px;
+      &__user {
+        display: flex;
+        margin-bottom: 10px;
+        &-image {
+          margin-right: 10px;
+          img {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+          }
+        }
+
+        &-info {
+          display: flex;
+          flex-direction: column;
+        }
+
+        &-name {
+          color: #063134;
+          font-size: 12px;
+          padding-top: 3px;
+        }
+      }
+
+      &__created {
+        font-size: 12px;
+        color: #959595;
+      }
+
+      &__content {
+        &-text {
+          margin-bottom: 0;
+          color: #464242;
+          font-size: 12px;
+          border-bottom: 1px solid #caccd0;
+          padding-bottom: 12px;
+        }
+      }
+
+      &:last-child {
+        .comment__content {
+          &-text {
+            border-bottom: none;
+          }
+        }
+      }
     }
   }
 }
