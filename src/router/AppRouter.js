@@ -66,7 +66,7 @@ export class AppRouter extends Component {
           />
 
           <PrivateRoute
-            path='/feed'
+            path='/feed/:id'
             component={FeedPageContainer}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Col, Row } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
@@ -24,23 +25,31 @@ export class FeedPage extends Component {
 
     this.state = {
       postsPage: 0,
-      posts: []
+      posts: [],
+      prevDisabled: '',
+      nextDisabled: ''
     }
 
     autoBind(this)
   }
 
   componentWillMount() {
-    this.updatePosts()
+    let id = +this.props.computedMatch.params.id
+    this.setState({
+      postsPage: id,
+      prevDisabled: id ? '' : 'disabled',
+    }, () => {
+      this.updatePosts()
+    })
   }
 
   updatePosts() {
     const { user } = this.props
-
     if (user.token && user.id) {
-      agent.Posts.all(user.id, this.state.postsPage, user.token).then((posts) => {
+      agent.Posts.all(user.id, this.state.postsPage , user.token).then((posts) => {
         this.setState({
-          posts
+          posts,
+          nextDisabled: posts.length < 20 ? 'disabled' : ''
         })
       })
     }
@@ -65,7 +74,7 @@ export class FeedPage extends Component {
     const { posts } = this.state
     const { user } = this.props
 
-    if(posts.length) {
+    if (posts.length) {
       return this.state.posts.map((post) =>
         <Post
           className={`${CN}__post`}
@@ -100,39 +109,44 @@ export class FeedPage extends Component {
     this.updatePosts()
   }
 
+  changePosts(event, page) {
+    let newPostPage = this.state.postsPage + page
+    if (newPostPage < 0 || (this.state.posts.length < 20 && page !== -1)) {
+      event.preventDefault()
+    } else {
+      this.setState({
+        postsPage: newPostPage,
+        prevDisabled: newPostPage ? '' : 'disabled'
+      }, () => {
+        this.updatePosts()
+      })
+    }
+  }
+
   renderPagination() {
     return (
       <div className={`${CN}__pagination`}>
-        <div
-          className={`${CN}__pagination-item`}
-          onClick={() => this.changePage(-1)}
+        <Link
+          to={`/feed/${this.state.postsPage - 1}`}
+          className={`${CN}__pagination-item ${this.state.prevDisabled}`}
+          onClick={(e) => this.changePosts(e, -1)}
         >
           <FaAngleDoubleLeft className={`${CN}__pagination-icon`} />
           <span>Previous</span>
-        </div>
+        </Link>
         <span> | </span>
         <span className={`${CN}__pagination-number`}>{this.state.postsPage + 1}</span>
         <span> | </span>
-        <div
-          className={`${CN}__pagination-item`}
-          onClick={() => this.changePage(1)}
+        <Link
+          to={`/feed/${this.state.postsPage + 1}`}
+          className={`${CN}__pagination-item ${this.state.nextDisabled}`}
+          onClick={(e) => this.changePosts(e, 1)}
         >
           <span>Next</span>
           <FaAngleDoubleRight className={`${CN}__pagination-icon`} />
-        </div>
+        </Link>
       </div>
     )
-  }
-
-  changePage(page) {
-
-    this.setState({
-      postsPage: this.state.postsPage + page
-    })
-
-    setTimeout(()=> {
-      this.updatePosts()
-    }, 0)
   }
 
   render () {

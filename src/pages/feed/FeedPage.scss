@@ -112,6 +112,10 @@
     &-item {
       margin: 0 5px;
       cursor: pointer;
+      &.disabled {
+        cursor: no-drop;
+        color: #bdbaba;
+      }
     }
 
     &-number {
