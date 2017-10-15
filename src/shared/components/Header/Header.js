@@ -145,14 +145,14 @@ export class Header extends Component {
 
               <Nav pullRight
                 className={`${CN}__mainmenu-user`}>
-                {
+                {/* {
                   !isAuthenticated &&
                   <LinkContainer to='/login'>
                     <NavItem className={`${CN}__mainnav ${CN}__mainnav--login`}>
                       <FormattedMessage id='header.links.login' />
                     </NavItem>
                   </LinkContainer>
-                }
+                } */}
                 {this.renderLanguageSelector()}
               </Nav>
 

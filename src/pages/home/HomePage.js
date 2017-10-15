@@ -47,14 +47,14 @@ export class HomePage extends Component {
             <FormattedMessage id='feedback.first' />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
-            <div className={`${CN}__feedback-carousel-avatar`}>
+            {/* <div className={`${CN}__feedback-carousel-avatar`}>
               <img alt='User'
                 src={avatarDummyImage}
               />
             </div>
             <div className={`${CN}__feedback-carousel-user`}>
               Angel Adam
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -63,14 +63,14 @@ export class HomePage extends Component {
             <FormattedMessage id='feedback.second' />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
-            <div className={`${CN}__feedback-carousel-avatar`}>
+            {/* <div className={`${CN}__feedback-carousel-avatar`}>
               <img alt='User'
                 src={avatarDummyImage}
               />
             </div>
             <div className={`${CN}__feedback-carousel-user`}>
               Angel Adam
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -79,14 +79,14 @@ export class HomePage extends Component {
             <FormattedMessage id='feedback.third' />
           </div>
           <div className={`${CN}__feedback-carousel-meta`}>
-            <div className={`${CN}__feedback-carousel-avatar`}>
+            {/* <div className={`${CN}__feedback-carousel-avatar`}>
               <img alt='User'
                 src={avatarDummyImage}
               />
             </div>
             <div className={`${CN}__feedback-carousel-user`}>
               Angel Adam
-            </div>
+            </div> */}
           </div>
         </div>
       </Slider>
