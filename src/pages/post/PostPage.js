@@ -6,6 +6,7 @@ import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { PageLayout } from '../../shared/components/PageLayout'
 import Comment from './components/Comment'
+import AddCommentForm from './components/AddCommentForm'
 import agent from '../../agent'
 import './PostPage.scss'
 
@@ -170,6 +171,12 @@ export class PostPage extends Component {
     )
   }
 
+  addComment(comments) {
+    this.setState({
+      comments
+    })
+  }
+
   render () {
     const { lat, lng } = this.props
 
@@ -181,6 +188,12 @@ export class PostPage extends Component {
             {this.state.post && this.renderPost()}
             <div className={`${CN}__comments`}>
               {this.renderComments()}
+              <AddCommentForm
+                token={this.props.token}
+                userId={this.props.id}
+                postId={this.props.computedMatch.params.id}
+                addComment={this.addComment.bind(this)}
+              />
             </div>
           </Col>
 

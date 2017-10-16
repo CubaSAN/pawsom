@@ -11,7 +11,7 @@ const Comment = (props) => {
     posterName,
     posterPick
   } = props.comment
-console.log(props.comment);
+
   return (
     <div className={`${CN}`}>
       <div className={`${CN}__user`}>
@@ -26,7 +26,7 @@ console.log(props.comment);
         </div>
       </div>
       <div className={`${CN}__content`}>
-        <p className={`${CN}__content-text`}>{message}</p>
+        <p className={`${CN}__ccontent-text`}>{message}</p>
       </div>
     </div>
   )

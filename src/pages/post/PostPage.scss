@@ -147,5 +147,14 @@
         }
       }
     }
+
+    .add-comment {
+      padding: 8px 25px;
+      &__submit {
+        background: #398228;
+        color: #ffffff;
+        float: right;
+      }
+    }
   }
 }
