@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Slider from 'react-slick'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { LandingLayout } from '../../shared/components/LandingLayout'
-import avatarDummyImage from '../../shared/assets/images/landing-page/girl.png'
+import queryString from 'query-string'
 import { FormattedMessage } from 'react-intl'
+
 import './HomePage.scss'
 
 const CN = 'home-page'
@@ -94,6 +95,9 @@ export class HomePage extends Component {
   }
 
   render() {
+    const parsed = queryString.parse(window.location.search)
+    const ifMobileMarketsAvailable = parsed.showDownload !== 'hide'
+
     return (
       <div className={CN}>
         <LandingLayout>
@@ -112,37 +116,39 @@ export class HomePage extends Component {
             </Row>
           </Grid>
 
-          <Grid fluid>
-            <Row className={`${CN}__ad1`}>
-              <Grid>
-                <div className={`${CN}__ad1-content`}>
-                  <div className={`${CN}__ad1-text-main`}>
-                    <FormattedMessage id='download' />
-                  </div>
+          {
+            ifMobileMarketsAvailable &&
+            <Grid fluid>
+              <Row className={`${CN}__ad1`}>
+                <Grid>
+                  <div className={`${CN}__ad1-content`}>
+                    <div className={`${CN}__ad1-text-main`}>
+                      <FormattedMessage id='download' />
+                    </div>
+                    <div className={`${CN}__ad1-buttons`}>
+                      <a
+                        className={`btn ${CN}__ad1-cta`}
+                        href='https://www.appstore.com/'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        App Store
+                      </a>
 
-                  <div className={`${CN}__ad1-buttons`}>
-                    <a 
-                      className={`btn ${CN}__ad1-cta`} 
-                      href='https://www.appstore.com/'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      App Store
-                    </a>
-
-                    <a
-                      className={`btn ${CN}__ad1-cta`}
-                      href='https://play.google.com/store'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      Play Market
-                    </a>
+                      <a
+                        className={`btn ${CN}__ad1-cta`}
+                        href='https://play.google.com/store'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        Play Market
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </Grid>
-            </Row>
-          </Grid>
+                </Grid>
+              </Row>
+            </Grid>
+          }
 
           <Grid fluid>
             <Row className={`${CN}__feedback`}>

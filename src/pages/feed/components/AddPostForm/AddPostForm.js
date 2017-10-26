@@ -51,10 +51,10 @@ export class AddPostForm extends Component {
   submitNewPost(evt) {
     evt.preventDefault()
 
-    if (text === '') return
-
     const { user } = this.props
     const { text, сommentsAllowed, url } = this.state
+
+    if (text === '') return
 
     const post = {
       postedBy: user.id,

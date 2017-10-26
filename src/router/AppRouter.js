@@ -49,6 +49,14 @@ export class AppRouter extends Component {
             isHome
           />
 
+          <MainRoute
+            path='/home'
+            component={HomePage}
+            isAuthenticated={isAuthenticated}
+            withGeolocation={err}
+            isHome
+          />
+
           <PrivateRoute
             path='/search'
             component={SearchPageContainer}
