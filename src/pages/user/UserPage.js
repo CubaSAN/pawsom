@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { PageLayout } from '../../shared/components/PageLayout'
-import { Button, Form, FormGroup, Label, FormControl, Row, Col, Grid } from 'react-bootstrap'
+import { Row, Col, Grid, FormControl } from 'react-bootstrap'
+import { Button, Form, FormGroup, Label  } from 'reactstrap'
 import PropTypes from 'prop-types'
 import agent from '../../agent'
 import autoBind from 'react-autobind'

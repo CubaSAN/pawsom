@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Gallery } from '../../../shared/components/Gallery'
 
 export class ModalPopup extends React.Component {
@@ -35,6 +36,7 @@ export class ModalPopup extends React.Component {
 
   render() {
     const { data: { finding } } = this.props
+    debugger;
 
     return (
       <Modal className={this.props.className}

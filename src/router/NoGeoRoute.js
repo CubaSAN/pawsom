@@ -28,7 +28,7 @@ export class NoGeoRoute extends Component {
         to={{ pathname: '/login', state: { from: this.props.location } }} />
     } else if (isAuthenticated && !withGeolocation) {
       return <Redirect
-        to={{ pathname: '/feed', state: { from: this.props.location } }} />
+        to={{ pathname: '/feed/0', state: { from: this.props.location } }} />
     } else {
       return <RouteComponent {...this.props} />
     }

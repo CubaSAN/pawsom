@@ -1,13 +1,20 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap'
+import { Button } from 'reactstrap'
+import autoBind from 'react-autobind'
 
 export class ActionButton extends Component {
   static propTypes = {
     color: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     finding: PropTypes.object.isRequired
+  }
+
+  constructor(props) {
+    super(props)
+
+    autoBind(this)
   }
 
   onClickHandler() {

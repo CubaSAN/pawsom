@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Label, FormControl } from 'react-bootstrap'
+import { Row, Col, Thumbnail, FormControl } from 'react-bootstrap'
+import { Label, Button } from 'reactstrap'
 import { InfoWindow } from 'react-google-maps'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup, MapMarker, CloseIcon, ActionButton } from './components'
@@ -250,6 +251,7 @@ export class SearchPage extends Component {
   }
 
   renderFindings() {
+    debugger;
     const { findings, isPopup, infoWindow } = this.state
 
     if (findings.length) {
@@ -257,38 +259,32 @@ export class SearchPage extends Component {
       const results = filteredFindings.map((finding, i) => {
         return (
           <Col key={i}
-            lg={6}
+            sm={6}
+            md={4}
             xs={12}
           >
-            <div className={`${CN}__search-item`}>
-              <div className={`${CN}__search-item-image`}>
-                {this.renderFindingImage(finding.urls, finding.breedName)}
+            <Thumbnail src={finding.urls[0]} alt={finding.breedName}>
+              <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
+              <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
+              <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
+              <div className={`${CN}__search-item-phone`}>
+                <FaPhone />
+                <a className={`${CN}__search-item-phone-link`}
+                  href={`tel:${finding.phoneNumber}`}
+                >
+                  {` ${finding.phoneNumber}`}
+                </a>
               </div>
-              <div className={`${CN}__search-item-desc`}>
-                <div>
-                  <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
-                  <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
-                  <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
-                  <div className={`${CN}__search-item-phone`}>
-                    <FaPhone />
-                    <a className={`${CN}__search-item-phone-link`}
-                      href={`tel:${finding.phoneNumber}`}
-                    >
-                      {` ${finding.phoneNumber}`}
-                    </a>
-                  </div>
-                </div>
-                <div className={`${CN}__search-item-actions`}>
-                  <ActionButton
-                    color={'success'}
-                    onClick={this.onCardDetails}
-                    finding={finding}
-                  >
-                    Details
-                  </ActionButton>
-                </div>
+              <div className={`${CN}__search-item-actions`}>
+                <ActionButton
+                  color={'success'}
+                  onClick={this.onCardDetails}
+                  finding={finding}
+                >
+                  Details
+                </ActionButton>
               </div>
-            </div>
+            </Thumbnail>
           </Col>
         )
       })
@@ -321,7 +317,7 @@ export class SearchPage extends Component {
 
   onPopupToggle() {
     this.setState({
-      isPopup: false
+      isPopup: !this.state.isPopup
     })
   }
 
@@ -403,11 +399,11 @@ export class SearchPage extends Component {
     return (
       <PageLayout
         isPageAvailable={lat && lng}
-        className={CN}
       >
         <Col
           md={9}
           xs={12}
+          className={CN}
         >
           <div className={`${CN}__map`}>
             {this.renderMapSection()}
@@ -425,6 +421,7 @@ export class SearchPage extends Component {
         <Col
           className={`${CN}__sidebar`}
           md={3}
+          xs={12}
         >
           <div className={`${CN}__sidebar-header`}>Filters</div>
           <div className={`${CN}__sidebar-item`}>

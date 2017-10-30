@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import autoBind from 'react-autobind'
-import { FormGroup, FormControl, Button } from 'react-bootstrap'
+import { FormControl } from 'react-bootstrap'
+import { FormGroup, Button } from 'reactstrap'
 import agent from '../../../agent'
 
 const CN = 'add-comment'

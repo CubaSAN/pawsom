@@ -45,7 +45,7 @@ export class LoginPage extends Component {
 
     Cookies.set(USER, JSON.stringify(user), { expires: 365 })
 
-    store.dispatch(push('/feed'))
+    store.dispatch(push('/feed/0'))
   }
 
   onFacebookAuthenticateFail() {

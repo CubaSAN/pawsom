@@ -32,9 +32,9 @@ export class Gallery extends Component {
     return (
       <div className={`${CN}__image-container`}>
         {
-          images.map(image => 
+          images.map((image, i) => 
             (
-              <div className={`${CN}__image-container--half`}>
+              <div key={i} className={`${CN}__image-container--half`}>
                 <div className={`${CN}__image-wrapper ${CN}__image-wrapper--ratio-2-3`}>
                   <div className='content'>
                     <img
