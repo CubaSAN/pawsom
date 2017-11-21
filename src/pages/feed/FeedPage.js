@@ -109,7 +109,12 @@ export class FeedPage extends Component {
     this.updatePosts()
   }
 
+  scrollToTop() {
+    window.scroll(0, 0);
+  }
+
   changePosts(event, page) {
+    this.scrollToTop()
     let newPostPage = this.state.postsPage + page
     if (newPostPage < 0 || (this.state.posts.length < 20 && page !== -1)) {
       event.preventDefault()
