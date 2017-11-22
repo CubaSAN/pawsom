@@ -233,10 +233,9 @@ export class SearchPage extends Component {
   }
 
   parseImageUrl(url) {
-    // const parts = url.split('/')
+    const parts = url.split('/')
 
-    // return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
-    return url;
+    return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
   }
 
   onCardDetails(finding) {
@@ -251,7 +250,6 @@ export class SearchPage extends Component {
   }
 
   renderFindings() {
-    debugger;
     const { findings, isPopup, infoWindow } = this.state
 
     if (findings.length) {
@@ -259,32 +257,38 @@ export class SearchPage extends Component {
       const results = filteredFindings.map((finding, i) => {
         return (
           <Col key={i}
-            sm={6}
-            md={4}
             xs={12}
           >
-            <Thumbnail src={finding.urls[0]} alt={finding.breedName}>
-              <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
-              <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
-              <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
-              <div className={`${CN}__search-item-phone`}>
-                <FaPhone />
-                <a className={`${CN}__search-item-phone-link`}
-                  href={`tel:${finding.phoneNumber}`}
-                >
-                  {` ${finding.phoneNumber}`}
-                </a>
-              </div>
-              <div className={`${CN}__search-item-actions`}>
-                <ActionButton
-                  color={'success'}
-                  onClick={this.onCardDetails}
-                  finding={finding}
-                >
-                  Details
-                </ActionButton>
-              </div>
-            </Thumbnail>
+            {finding.urls[0] &&
+              <Thumbnail
+                alt={finding.breedName}
+                src={this.parseImageUrl(finding.urls[0])}
+              >
+                <div className={`${CN}__search-item-holder`}>
+                  <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
+                  <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
+                  <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
+                  <div className={`${CN}__search-item-phone`}>
+                    <FaPhone />
+                    <a className={`${CN}__search-item-phone-link`}
+                      href={`tel:${finding.phoneNumber}`}
+                    >
+                      {` ${finding.phoneNumber}`}
+                    </a>
+                    <span></span>
+                  </div>
+                </div>
+                <div className={`${CN}__search-item-actions`}>
+                  <ActionButton
+                    color={'success'}
+                    onClick={this.onCardDetails}
+                    finding={finding}
+                  >
+                    Details
+                  </ActionButton>
+                </div>
+              </Thumbnail>
+            }
           </Col>
         )
       })
@@ -346,7 +350,7 @@ export class SearchPage extends Component {
           key={i}
         >
           <Label>
-            <FormControl 
+            <input 
               type="checkbox" 
               onChange={this.setFilter} 
               value={finding.breedName}
