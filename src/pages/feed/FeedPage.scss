@@ -112,9 +112,14 @@
     &-item {
       margin: 0 5px;
       cursor: pointer;
+      color: #418229;
       &.disabled {
         cursor: no-drop;
         color: #bdbaba;
+      }
+
+      &:focus {
+        color: #418229;
       }
     }
 
