@@ -4,7 +4,7 @@ import { Row, Col, Thumbnail, FormControl } from 'react-bootstrap'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label,
   Form, FormGroup } from 'reactstrap';
 import { InfoWindow } from 'react-google-maps'
-import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
+import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox'
 import NodeGeocoder from 'node-geocoder'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup, MapMarker, CloseIcon, ActionButton } from './components'
@@ -15,6 +15,10 @@ import FaPhone from 'react-icons/lib/fa/phone'
 import FaInfoCircle from 'react-icons/lib/fa/info-circle'
 import dog from '../../shared/assets/images/dog.png'
 import home from '../../shared/assets/images/home.png'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+
+import 'react-datepicker/dist/react-datepicker.css'
 import './SearchPage.scss'
 
 
@@ -38,7 +42,8 @@ export class SearchPage extends Component {
       infoWindow: null,
       isPopup: false,
       infoPopup: null,
-      isAddPopupOpen: false
+      isAddPopupOpen: false,
+      date: moment()
     }
 
     this.geocoder = NodeGeocoder({
@@ -425,54 +430,49 @@ export class SearchPage extends Component {
       latitude,
       longitude,
       number,
-      streetName
+      streetName,
+      date
     } = this.state
 
     const {
       user
     } = this.props
 
-    debugger;
-
-    // const body = {
-    //   "Latitude": latitude,
-    //   "Longitude": longitude,
-    //   "PhoneNumber": number,
-    //   "PetName": null,
-    //   "Breed": {
-    //     "ID": 1,
-    //     "BreedName": "Affenpinscher",
-    //     "BreedLink": null,
-    //     "BreedResourceCode": null,
-    //     "TypeId": 1,
-    //     "TypeName": null
-    //   },
-    //   "breedId": 1,
-    //   "AdditionalInformation": "",
-    //   "Created": "0001-01-01T00:00:00",
-    //   "Found": "2017-11-23T13:49:41.89077Z",
-    //   "FoundBy": null,
-    //   "FoundByPerson": null,
-    //   "FoundByPersonId": user.id,
-    //   "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
-    //   "Owner": null,
-    //   "OwnerID": null,
-    //   "PetId": null,
-    //   "IsFound": false,
-    //   "City": city,
-    //   "Country": country,
-    //   "LocalityName": "Tarasa Shevchenka Street",
-    //   "IsoCountryCode": isoCountryCode,
-    //   "SharedPhoneNumber": true,
-    //   "PetBreedAppearence": 1,
-    //   "PetBreedAppearenceSize": null,
-    //   "TypeId": 105,
-    //   "ID": 0
-    // }
-
-    console.log(user.id)
-
-    const body = { "Latitude": latitude, "Longitude": longitude, "PhoneNumber": number, "PetName": null, "Breed": { "ID": 1, "BreedName": "Affenpinscher", "BreedLink": null, "BreedResourceCode": null, "TypeId": 1, "TypeName": null }, "breedId": 1, "AdditionalInformation": "", "Created": "0001-01-01T00:00:00", "Found": "2017-11-23T13:49:41.89077Z", "FoundBy": null, "FoundByPerson": null, "FoundByPersonId": 7, "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"], "Owner": null, "OwnerID": null, "PetId": null, "IsFound": false, "City": city, "Country": country, "LocalityName": streetName, "IsoCountryCode": isoCountryCode, "SharedPhoneNumber": true, "PetBreedAppearence": 1, "PetBreedAppearenceSize": null, "TypeId": 105, "ID": 0 }
+    const body = { 
+      "Latitude": latitude,
+      "Longitude": longitude,
+      "PhoneNumber": number,
+      "PetName": null,
+      "Breed": { 
+        "ID": 1,
+        "BreedName": "Affenpinscher",
+        "BreedLink": null,
+        "BreedResourceCode": null,
+        "TypeId": 1,
+        "TypeName": null 
+      },
+      "breedId": 1,
+      "AdditionalInformation": "",
+      // "Created": "0001-01-01T00:00:00",
+      "Found": date.format(),
+      // "FoundBy": null,
+      // "FoundByPerson": null,
+      "FoundByPersonId": 7,
+      "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
+      // "Owner": null,
+      // "OwnerID": null,
+      // "PetId": null,
+      "IsFound": false,
+      "City": city,
+      "Country": country,
+      "LocalityName": streetName,
+      "IsoCountryCode": isoCountryCode,
+      "SharedPhoneNumber": true,
+      "PetBreedAppearence": 1,
+      "PetBreedAppearenceSize": null,
+      // "TypeId": 105,
+      // "ID": 0
+    }
 
     agent
       .Search
@@ -528,6 +528,12 @@ export class SearchPage extends Component {
     this._searchbox = ref
   }
 
+  changeDate(date) {
+    this.setState({
+      date
+    });
+  }
+
   renderAddModal() {
     return (
       <Modal isOpen={this.state.isAddPopupOpen}>
@@ -556,6 +562,12 @@ export class SearchPage extends Component {
                 id='phone'
                 value={this.state.phoneNumber}
                 onChange={this.changeNumber} />
+            </FormGroup>
+            <FormGroup>
+              <DatePicker
+                selected={this.state.date}
+                onChange={this.changeDate}
+              />;
             </FormGroup>
           </Form>
         </ModalBody>
