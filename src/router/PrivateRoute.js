@@ -29,6 +29,7 @@ export class PrivateRoute extends Component {
       isAuthenticated
     } = this.props
 
+
     if (isAuthenticated && isAdditionalInfoNeeded) {
       return (
         <Redirect to={{ pathname: '/user' }} />
@@ -41,7 +42,7 @@ export class PrivateRoute extends Component {
       )
     }
 
-    return this.props.isAuthenticated ?
+    const component = this.props.isAuthenticated ?
       (
         <RouteComponent {...this.props} />
       ) :
@@ -49,6 +50,8 @@ export class PrivateRoute extends Component {
         <Redirect
           to={{ pathname: '/login', state: { from: this.props.location } }} />
       )
+
+    return component
   }
 
   render() {

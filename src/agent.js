@@ -92,7 +92,10 @@ const Likes = {
 const Search = {
   searchLost: (range, latitude, longitude, token) =>
     requests
-      .getAuthenticated(`/api/LostPet/GetLostPet/${range}/${latitude}/${longitude}/`, token)
+      .getAuthenticated(`/api/LostPet/GetLostPet/${range}/${latitude}/${longitude}/`, token),
+  addPet: (body, token) =>
+    requests
+      .postAuthenticated(`/api/LostPet`, body, token)
 }
 
 const User = {

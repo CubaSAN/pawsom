@@ -2,6 +2,10 @@
 @import '../../shared/scss/mixins.scss';
 
 .search-page {
+  &__add-button {
+    margin-bottom: 20px;
+  }
+
   .thumbnail {
     border: none;
     position: relative;

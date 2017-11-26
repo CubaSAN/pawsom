@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col, Thumbnail, FormControl } from 'react-bootstrap'
-import { Label, Button } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label,
+  Form, FormGroup } from 'reactstrap';
 import { InfoWindow } from 'react-google-maps'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup, MapMarker, CloseIcon, ActionButton } from './components'
@@ -34,7 +35,8 @@ export class SearchPage extends Component {
       filter: [],
       infoWindow: null,
       isPopup: false,
-      infoPopup: null
+      infoPopup: null,
+      isAddPopupOpen: false
     }
 
     autoBind(this)
@@ -59,7 +61,7 @@ export class SearchPage extends Component {
   }
 
   setFindings(data) {
-    const findings = data.map(finding => {
+    const findings = _.reverse(data.map(finding => {
       const { breedName } = finding.breed
 
       return {
@@ -73,7 +75,7 @@ export class SearchPage extends Component {
         petName: finding.petName,
         additionalInformation: finding.additionalInformation
       }
-    })
+    }))
 
     this.setState({ findings })
   }
@@ -396,6 +398,156 @@ export class SearchPage extends Component {
     })
   }
 
+  addLostPet() {
+    this.setState({
+      isAddPopupOpen: true
+    })
+  }
+
+  closeAddPopup() {
+    this.setState({
+      isAddPopupOpen: false
+    })
+  }
+
+
+  sendAddData() {
+    const { 
+      user,
+      lat,
+      lng
+    } = this.props
+
+    const {
+      number
+    } = this.state
+
+    // const body =
+    //   { 
+    //     "Latitude": 49.844268993379217,
+    //     "Longitude": 24.011251007635945,
+    //     "PhoneNumber": '777-777-771',
+        // "PetName": null,
+        // "Breed": { 
+        //   "ID": 1,
+        //   "BreedName": "Affenpinscher",
+        //   "BreedLink": null,
+        //   "BreedResourceCode": null,
+        //   "TypeId": 1,
+        //   "TypeName": null
+        // },
+        // "breedId": 1,
+        // "AdditionalInformation": "",
+        // "Created": "0001-01-01T00:00:00",
+        // "Found": "2017-11-23T13:49:41.89077Z",
+        // "FoundBy": null,
+        // "FoundByPerson": null,
+        // "FoundByPersonId": 7,
+        // "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
+        // "Owner": null,
+        // "OwnerID": null,
+        // "PetId": null,
+        // "IsFound": false,
+        // "City": "Lviv",
+        // "Country": "Ukraine",
+        // "LocalityName": "Tarasa Shevchenkas Street",
+        // "IsoCountryCode": "UA",
+        // "SharedPhoneNumber": true,
+        // "PetBreedAppearence": 1,
+        // "PetBreedAppearenceSize": null,
+        // "TypeId": 105,
+        // "ID": 0
+    //   }
+
+    const body = {
+      latitude: lat,
+      longitude: lng,
+      phoneNumber: number, // Phone is not added
+      "PetName": null,
+      "Breed": {
+        "ID": 1,
+        "BreedName": "Affenpinscher",
+        "BreedLink": null,
+        "BreedResourceCode": null,
+        "TypeId": 1,
+        "TypeName": null
+      },
+      "breedId": 1,
+      "AdditionalInformation": "",
+      "Found": "2017-11-23T13:49:41.89077Z",
+      "FoundBy": null,
+      "FoundByPerson": null,
+      "FoundByPersonId": 7,
+      "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
+      "Owner": null,
+      "OwnerID": null,
+      "PetId": null,
+      "IsFound": false,
+      "City": "Lviv",
+      "Country": "Ukraine",
+      "LocalityName": "Tarasa Shevchenkas Street",
+      "IsoCountryCode": "UA",
+      "SharedPhoneNumber": true,
+      "PetBreedAppearence": 1,
+      "PetBreedAppearenceSize": null,
+      "TypeId": 105,
+      "ID": 0
+    }
+
+    debugger;
+
+    agent
+      .Search
+      .addPet(body, user.token)
+      .then(() => {
+        this.setState({
+          isAddPopupOpen: false
+        })
+      })
+      .catch((err) => {
+        new Error(err)
+        this.setState({
+          isAddPopupOpen: false
+        })
+      })
+  }
+
+  changeNumber(e) {
+    const value = e.target.value
+
+    this.setState({
+      number: value
+    })
+  }
+
+  renderAddModal() {
+    return (
+      <Modal isOpen={this.state.isAddPopupOpen}>
+        <ModalHeader>Add Lost or Found Pet</ModalHeader>
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label for='phone'>Phone</Label>
+              <FormControl type='phone'
+                name='phone'
+                id='phone'
+                value={this.state.phoneNumber}
+                onChange={this.changeNumber} />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success"
+            onClick={this.closeAddPopup}
+          >Close</Button>
+          <Button color="success"
+            onClick={this.sendAddData}
+          >Submit</Button>
+        </ModalFooter>
+      </Modal>
+    )
+  }
+
   render() {
     const { changeSearchRadius, radius, lat, lng } = this.props
     const { findings } = this.state
@@ -427,6 +579,15 @@ export class SearchPage extends Component {
           md={3}
           xs={12}
         >
+          <div>
+            <Button
+              className={`${CN}__add-button`}
+              color="success"
+              onClick={this.addLostPet}
+            >
+              Add Lost or Found Pet
+            </Button>
+          </div>
           <div className={`${CN}__sidebar-header`}>Filters</div>
           <div className={`${CN}__sidebar-item`}>
             <div className={`${CN}__sidebar-heading`}>Distance from your location</div>
@@ -437,6 +598,7 @@ export class SearchPage extends Component {
 
           {!!findings.length && this.renderBreedFilter()}
         </Col>
+        {this.renderAddModal()}
       </PageLayout>
     )
   }

@@ -37,6 +37,8 @@ export class AppRouter extends Component {
     const isAdditionalInfoNeeded =
       user !== null && user.isAdditionalInfoNeeded
 
+    const skipAuthentication = true
+
     return (
       <ConnectedRouter history={history}>
         <Switch>
@@ -51,6 +53,7 @@ export class AppRouter extends Component {
 
           <MainRoute
             path='/home'
+            exact
             component={HomePage}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
@@ -59,6 +62,7 @@ export class AppRouter extends Component {
 
           <PrivateRoute
             path='/search'
+            exact
             component={SearchPageContainer}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
@@ -67,6 +71,7 @@ export class AppRouter extends Component {
 
           <PrivateRoute
             path='/accommodation'
+            exact
             component={Accommodation}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
@@ -75,6 +80,7 @@ export class AppRouter extends Component {
 
           <PrivateRoute
             path='/feed/:id'
+            exact
             component={FeedPageContainer}
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
