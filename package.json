@@ -28,6 +28,7 @@
     "react-images": "^0.5.11",
     "react-intl": "^2.4.0",
     "react-photo-gallery": "^6.0.17",
+    "react-places-autocomplete": "^5.4.3",
     "react-rangeslider": "^2.2.0",
     "react-redux": "^5.0.6",
     "react-router-bootstrap": "^0.24.4",

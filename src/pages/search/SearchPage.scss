@@ -1,6 +1,10 @@
 @import '../../shared/scss/variables.scss';
 @import '../../shared/scss/mixins.scss';
 
+.pac-container {
+  z-index: 9999;
+}
+
 .search-page {
   &__add-button {
     margin-bottom: 20px;

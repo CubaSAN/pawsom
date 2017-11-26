@@ -62,8 +62,8 @@ export class UserPage extends Component {
             longitude: nextProps.lng
           })
         })
-        .catch(() => {
-
+        .catch((e) => {
+          console.log(e)
         })
     }
   }

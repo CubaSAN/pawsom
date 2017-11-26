@@ -4,6 +4,8 @@ import { Row, Col, Thumbnail, FormControl } from 'react-bootstrap'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label,
   Form, FormGroup } from 'reactstrap';
 import { InfoWindow } from 'react-google-maps'
+import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
+import NodeGeocoder from 'node-geocoder'
 import { PageLayout } from '../../shared/components/PageLayout'
 import { Map, RangeSlider, ModalPopup, MapMarker, CloseIcon, ActionButton } from './components'
 import autoBind from 'react-autobind'
@@ -38,6 +40,10 @@ export class SearchPage extends Component {
       infoPopup: null,
       isAddPopupOpen: false
     }
+
+    this.geocoder = NodeGeocoder({
+      provider: 'google'
+    })
 
     autoBind(this)
   }
@@ -412,89 +418,61 @@ export class SearchPage extends Component {
 
 
   sendAddData() {
-    const { 
-      user,
-      lat,
-      lng
-    } = this.props
-
     const {
-      number
+      city,
+      country,
+      isoCountryCode,
+      latitude,
+      longitude,
+      number,
+      streetName
     } = this.state
 
-    // const body =
-    //   { 
-    //     "Latitude": 49.844268993379217,
-    //     "Longitude": 24.011251007635945,
-    //     "PhoneNumber": '777-777-771',
-        // "PetName": null,
-        // "Breed": { 
-        //   "ID": 1,
-        //   "BreedName": "Affenpinscher",
-        //   "BreedLink": null,
-        //   "BreedResourceCode": null,
-        //   "TypeId": 1,
-        //   "TypeName": null
-        // },
-        // "breedId": 1,
-        // "AdditionalInformation": "",
-        // "Created": "0001-01-01T00:00:00",
-        // "Found": "2017-11-23T13:49:41.89077Z",
-        // "FoundBy": null,
-        // "FoundByPerson": null,
-        // "FoundByPersonId": 7,
-        // "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
-        // "Owner": null,
-        // "OwnerID": null,
-        // "PetId": null,
-        // "IsFound": false,
-        // "City": "Lviv",
-        // "Country": "Ukraine",
-        // "LocalityName": "Tarasa Shevchenkas Street",
-        // "IsoCountryCode": "UA",
-        // "SharedPhoneNumber": true,
-        // "PetBreedAppearence": 1,
-        // "PetBreedAppearenceSize": null,
-        // "TypeId": 105,
-        // "ID": 0
-    //   }
-
-    const body = {
-      latitude: lat,
-      longitude: lng,
-      phoneNumber: number, // Phone is not added
-      "PetName": null,
-      "Breed": {
-        "ID": 1,
-        "BreedName": "Affenpinscher",
-        "BreedLink": null,
-        "BreedResourceCode": null,
-        "TypeId": 1,
-        "TypeName": null
-      },
-      "breedId": 1,
-      "AdditionalInformation": "",
-      "Found": "2017-11-23T13:49:41.89077Z",
-      "FoundBy": null,
-      "FoundByPerson": null,
-      "FoundByPersonId": 7,
-      "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
-      "Owner": null,
-      "OwnerID": null,
-      "PetId": null,
-      "IsFound": false,
-      "City": "Lviv",
-      "Country": "Ukraine",
-      "LocalityName": "Tarasa Shevchenkas Street",
-      "IsoCountryCode": "UA",
-      "SharedPhoneNumber": true,
-      "PetBreedAppearence": 1,
-      "PetBreedAppearenceSize": null,
-      "TypeId": 105,
-      "ID": 0
-    }
+    const {
+      user
+    } = this.props
 
     debugger;
+
+    // const body = {
+    //   "Latitude": latitude,
+    //   "Longitude": longitude,
+    //   "PhoneNumber": number,
+    //   "PetName": null,
+    //   "Breed": {
+    //     "ID": 1,
+    //     "BreedName": "Affenpinscher",
+    //     "BreedLink": null,
+    //     "BreedResourceCode": null,
+    //     "TypeId": 1,
+    //     "TypeName": null
+    //   },
+    //   "breedId": 1,
+    //   "AdditionalInformation": "",
+    //   "Created": "0001-01-01T00:00:00",
+    //   "Found": "2017-11-23T13:49:41.89077Z",
+    //   "FoundBy": null,
+    //   "FoundByPerson": null,
+    //   "FoundByPersonId": user.id,
+    //   "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
+    //   "Owner": null,
+    //   "OwnerID": null,
+    //   "PetId": null,
+    //   "IsFound": false,
+    //   "City": city,
+    //   "Country": country,
+    //   "LocalityName": "Tarasa Shevchenka Street",
+    //   "IsoCountryCode": isoCountryCode,
+    //   "SharedPhoneNumber": true,
+    //   "PetBreedAppearence": 1,
+    //   "PetBreedAppearenceSize": null,
+    //   "TypeId": 105,
+    //   "ID": 0
+    // }
+
+    console.log(user.id)
+
+    const body = { "Latitude": latitude, "Longitude": longitude, "PhoneNumber": number, "PetName": null, "Breed": { "ID": 1, "BreedName": "Affenpinscher", "BreedLink": null, "BreedResourceCode": null, "TypeId": 1, "TypeName": null }, "breedId": 1, "AdditionalInformation": "", "Created": "0001-01-01T00:00:00", "Found": "2017-11-23T13:49:41.89077Z", "FoundBy": null, "FoundByPerson": null, "FoundByPersonId": 7, "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"], "Owner": null, "OwnerID": null, "PetId": null, "IsFound": false, "City": city, "Country": country, "LocalityName": streetName, "IsoCountryCode": isoCountryCode, "SharedPhoneNumber": true, "PetBreedAppearence": 1, "PetBreedAppearenceSize": null, "TypeId": 105, "ID": 0 }
 
     agent
       .Search
@@ -520,6 +498,36 @@ export class SearchPage extends Component {
     })
   }
 
+  onPlacesChanged() {
+    const place = this._searchbox.getPlaces()[0]
+
+    const geoAddress = {
+      latitude: place.geometry.location.lat(),
+      longitude: place.geometry.location.lng()
+    }
+
+    this.geocoder.reverse({ lat: geoAddress.latitude, lon: geoAddress.longitude })
+      .then((res) => {
+        const resData = res[0]
+
+        this.setState({
+          city: resData.city,
+          country: resData.country,
+          isoCountryCode: resData.countryCode,
+          latitude: geoAddress.latitude,
+          longitude: geoAddress.longitude,
+          streetName: resData.streetName
+        })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
+  onSearchBoxMounted(ref) {
+    this._searchbox = ref
+  }
+
   renderAddModal() {
     return (
       <Modal isOpen={this.state.isAddPopupOpen}>
@@ -527,8 +535,23 @@ export class SearchPage extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
+              <Label for='address'>Address</Label>
+              <StandaloneSearchBox
+                type='street_address'
+                ref={this.onSearchBoxMounted}
+                onPlacesChanged={this.onPlacesChanged}
+              >
+                <FormControl
+                  type='text'
+                  name='address'
+                  id='address'
+                />
+              </StandaloneSearchBox>
+            </FormGroup>
+            <FormGroup>
               <Label for='phone'>Phone</Label>
-              <FormControl type='phone'
+              <FormControl
+                type='text'
                 name='phone'
                 id='phone'
                 value={this.state.phoneNumber}
