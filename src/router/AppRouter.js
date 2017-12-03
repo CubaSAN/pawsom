@@ -37,8 +37,6 @@ export class AppRouter extends Component {
     const isAdditionalInfoNeeded =
       user !== null && user.isAdditionalInfoNeeded
 
-    const skipAuthentication = true
-
     return (
       <ConnectedRouter history={history}>
         <Switch>
