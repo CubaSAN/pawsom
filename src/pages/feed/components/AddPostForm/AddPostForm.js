@@ -95,7 +95,6 @@ export class AddPostForm extends Component {
         <form onSubmit={this.submitNewPost}>
           <FormGroup 
             className={`${CN}__formgroup`}
-            controlId='newPost'
           >
             <FormControl
               className={`${CN}__textarea`}
@@ -125,7 +124,7 @@ export class AddPostForm extends Component {
             </div>
           </FormGroup>
         </form>
-        <FileUploaderContainer onUpload={this.onUpload}/>
+        <FileUploaderContainer onUpload={this.onUpload} />
       </div>
     )
   }

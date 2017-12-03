@@ -61,29 +61,28 @@ class AddCommentForm extends Component {
   render() {
     return (
       <div className={`${CN}`}>
-      <form onSubmit={this.submitNewPost}>
-        <FormGroup
-          className={`${CN}__formgroup`}
-          controlId='newPost'
-        >
-          <FormControl
-            className={`${CN}__textarea`}
-            componentClass='textarea'
-            placeholder='Add new comment...'
-            onChange={this.onCommentContantChange}
-            value={this.state.text} />
-        </FormGroup>
+        <form onSubmit={this.submitNewPost}>
+          <FormGroup
+            className={`${CN}__formgroup`}
+          >
+            <FormControl
+              className={`${CN}__textarea`}
+              componentClass='textarea'
+              placeholder='Add new comment...'
+              onChange={this.onCommentContantChange}
+              value={this.state.text} />
+          </FormGroup>
 
-        <FormGroup className={`${CN}__formgroup ${CN}__formgroup--controls`}>
-          <div>
-            <Button
-              className={`${CN}__submit`}
-              type="submit">
-              Submit
-            </Button>
-          </div>
-        </FormGroup>
-      </form>
+          <FormGroup className={`${CN}__formgroup ${CN}__formgroup--controls`}>
+            <div>
+              <Button
+                className={`${CN}__submit`}
+                type="submit">
+                Submit
+              </Button>
+            </div>
+          </FormGroup>
+        </form>
       </div>
     )
   }

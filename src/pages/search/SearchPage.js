@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col, Thumbnail, FormControl } from 'react-bootstrap'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label,
-  Form, FormGroup } from 'reactstrap';
+  Form, FormGroup, Input } from 'reactstrap';
 import { InfoWindow } from 'react-google-maps'
 import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox'
 import NodeGeocoder from 'node-geocoder'
@@ -17,6 +17,7 @@ import dog from '../../shared/assets/images/dog.png'
 import home from '../../shared/assets/images/home.png'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import { FileUploaderContainer } from '../../shared/components/FileUploader'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './SearchPage.scss'
@@ -43,7 +44,11 @@ export class SearchPage extends Component {
       isPopup: false,
       infoPopup: null,
       isAddPopupOpen: false,
-      date: moment()
+      date: moment(),
+      isFound: false,
+      breed: 0,
+      petType: 1,
+      petList: []
     }
 
     this.geocoder = NodeGeocoder({
@@ -431,7 +436,8 @@ export class SearchPage extends Component {
       longitude,
       number,
       streetName,
-      date
+      date,
+      isFound
     } = this.state
 
     const {
@@ -452,17 +458,17 @@ export class SearchPage extends Component {
         "TypeName": null 
       },
       "breedId": 1,
-      "AdditionalInformation": "",
+      //"AdditionalInformation": "",
       // "Created": "0001-01-01T00:00:00",
       "Found": date.format(),
       // "FoundBy": null,
       // "FoundByPerson": null,
-      "FoundByPersonId": 7,
+      "FoundByPersonId": user.id,
       "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
       // "Owner": null,
       // "OwnerID": null,
       // "PetId": null,
-      "IsFound": false,
+      "IsFound": isFound,
       "City": city,
       "Country": country,
       "LocalityName": streetName,
@@ -534,12 +540,114 @@ export class SearchPage extends Component {
     });
   }
 
+  setFound() {
+    this.setState({
+      isFound: true
+    })
+  }
+
+  setLost() {
+    this.setState({
+      isFound: true
+    })
+  }
+
+  loadBreeds() {
+    const { user } = this.props
+
+    agent
+      .Pet
+      .getBreeds(user.token)
+      .then(data => {
+        let breedList = []
+
+        if (data.length) {
+          breedList = data.map(breed => {
+            return {
+              breedName: breed.breedName,
+              id: breed.id,
+              typeId: breed.typeId
+            }
+          })
+        }
+
+        this.setState({
+          petList: breedList
+        })
+      })
+      .catch((err) => {
+        new Error(err)
+      })
+  }
+
+  setBreed() {
+    this.loadBreeds()
+
+    this.setState({
+      breed: 1
+    })
+  }
+
+  setPossibleBreed() {
+    this.loadBreeds()
+
+    this.setState({
+      breed: 2
+    })
+  }
+
+  setNotBreed() {
+    this.setState({
+      breed: 0
+    })
+  }
+
+  setDog() {
+    this.setState({
+      petType: 1
+    })
+  }
+
+  setCat() {
+    this.setState({
+      petType: 2
+    })
+  }
+
+  onUpload(urls) {
+    this.setState({ url: urls })
+  }
+
   renderAddModal() {
+    const { isFound, breed, petList, petType } = this.state
+
     return (
-      <Modal isOpen={this.state.isAddPopupOpen}>
+      <Modal isOpen={this.state.isAddPopupOpen}
+        className={`${CN}__add-modal`}>
         <ModalHeader>Add Lost or Found Pet</ModalHeader>
         <ModalBody>
           <Form>
+            <FormGroup>
+              <FormGroup>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="isFound"
+                    defaultChecked={isFound}
+                    onChange={this.setFound}
+                  />{` Pet was found `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="isFound"
+                    defaultChecked={!isFound}
+                    onChange={this.setLost}
+                  />
+                  {` Pet was lost `}
+                </Label>
+              </FormGroup>
+            </FormGroup>
             <FormGroup>
               <Label for='address'>Address</Label>
               <StandaloneSearchBox
@@ -564,10 +672,86 @@ export class SearchPage extends Component {
                 onChange={this.changeNumber} />
             </FormGroup>
             <FormGroup>
+              <Label for='date'>Date</Label>
               <DatePicker
+                id='date'
                 selected={this.state.date}
                 onChange={this.changeDate}
-              />;
+              />
+            </FormGroup>
+            <FormGroup>
+              <FormGroup>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="pet"
+                    defaultChecked
+                    onChange={this.setDog}
+                  />{` Dog `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="pet"
+                    onChange={this.setCat}
+                  />
+                  {` Cat `}
+                </Label>
+              </FormGroup>
+            </FormGroup>
+            <FormGroup>
+              <legend>Pets breed</legend>
+              <Label>
+                <Input
+                  type="radio"
+                  name="breed"
+                  onChange={this.setBreed}
+                />{` I know the breed `}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="breed"
+                  onChange={this.setPossibleBreed}
+                />
+                {` It seems that I probably know the breed `}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="breed"
+                  defaultChecked
+                  onChange={this.setNotBreed}
+                />
+                {` I don't know the breed `}
+              </Label>
+            </FormGroup>
+            {
+              ((breed === 1 || breed === 2) && petList.length > 0) &&
+              <FormGroup>
+                <label>Select breed</label>
+                <Input
+                  type="select"
+                  name="breed"
+                >
+                  {
+                    petList
+                      .filter(breed => breed.typeId === petType)
+                      .map(breed => {
+                        return (
+                          <option
+                            key={breed.id}
+                            value={breed.id}>
+                            {breed.breedName}
+                          </option>
+                        )
+                      })
+                  }
+                </Input>
+              </FormGroup>
+            }
+            <FormGroup>
+              <FileUploaderContainer onUpload={this.onUpload} />
             </FormGroup>
           </Form>
         </ModalBody>
