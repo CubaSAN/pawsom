@@ -12,13 +12,16 @@ import { Accommodation } from '../pages/accommodation'
 import { LoginPageContainer } from '../pages/login'
 import { FeedPageContainer } from '../pages/feed'
 import { PostPageContainer } from '../pages/post'
+import { PublicPostPageContainer } from '../pages/post'
 import { NoGeoPage } from '../pages/nogeo'
 import { history } from '../store'
 import { ConnectedRouter } from 'react-router-redux'
+import { UserPageContainer } from '../pages/user'
+// routes
 import { MainRoute } from './MainRoute'
 import { PrivateRoute } from './PrivateRoute'
 import { NoGeoRoute } from './NoGeoRoute'
-import { UserPageContainer } from '../pages/user'
+import { PublicPostRoute } from './PublicPostRoute'
 
 export class AppRouter extends Component {
   static propTypes = {
@@ -93,6 +96,12 @@ export class AppRouter extends Component {
             isAuthenticated={isAuthenticated}
             withGeolocation={err}
             isAdditionalInfoNeeded={isAdditionalInfoNeeded}
+          />
+
+          <PublicPostRoute
+            path='/public/post/:id'
+            component={PublicPostPageContainer}
+            isAuthenticated={isAuthenticated}
           />
 
           <PrivateRoute

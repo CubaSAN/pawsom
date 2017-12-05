@@ -1,2 +1,2 @@
-export { Post } from './PostPage'
 export { PostPageContainer } from './PostPageContainer'
+export { PublicPostPageContainer } from './PublicPostPageContainer'
