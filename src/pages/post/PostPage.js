@@ -45,11 +45,16 @@ export class PostPage extends Component {
   }
 
   renderComments() {
-    return this.state.comments.map(comment =>
-      <Comment
-        key={comment.id}
-        comment={comment}
-      />
+    return (
+      <div>
+        <h3 className={`${CN}__comment-header`}>Коментарі</h3>
+        { this.state.comments.map(comment =>
+          <Comment
+            key={comment.id}
+            comment={comment}
+          />
+        )}
+      </div>
     )
   }
 

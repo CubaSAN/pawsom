@@ -4,12 +4,18 @@
   &__background {
     background: $grey-back;
     padding: 20px;
+    min-height: 100vh;
   }
 
   &__post-wrapper {
     background: $white;
     border: 1px solid $light-grey;
     padding: 15px;
+  }
+
+  &__comment-header {
+    padding: 20px 25px 10px;
+    color: #398228;
   }
 
   &__user {
@@ -85,6 +91,10 @@
     font-size: 12px;
     text-decoration: none;
     cursor: pointer;
+    &.unauthorized {
+      cursor: no-drop;
+    }
+
     &-icon {
       margin-left: 5px;
       margin-bottom: 2px;
@@ -99,6 +109,7 @@
     background: #f6f7f9;
     .comment {
       padding: 8px 25px;
+      border-top: 1px solid #edefef;
       &__user {
         display: flex;
         margin-bottom: 10px;
@@ -150,10 +161,14 @@
 
     .add-comment {
       padding: 8px 25px;
+      .form-group {
+        display: flex;
+        justify-content: flex-end;
+      }
+
       &__submit {
         background: #398228;
         color: #ffffff;
-        float: right;
       }
     }
   }
