@@ -15,7 +15,7 @@ import FaPhone from 'react-icons/lib/fa/phone'
 import FaInfoCircle from 'react-icons/lib/fa/info-circle'
 import dog from '../../shared/assets/images/dog.png'
 import home from '../../shared/assets/images/home.png'
-import DatePicker from 'react-datepicker'
+// import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { FileUploaderContainer } from '../../shared/components/FileUploader'
 
@@ -48,7 +48,12 @@ export class SearchPage extends Component {
       isFound: false,
       breed: 0,
       petType: 1,
-      petList: []
+      petList: [],
+      breedId: null,
+      petBreedAppearence: 0,
+      petBreedAppearenceSize: 0,
+      urls: [],
+      additionalInformation: ''
     }
 
     this.geocoder = NodeGeocoder({
@@ -64,12 +69,29 @@ export class SearchPage extends Component {
     if (lat && lng) {
       this.getFindings(this.props)
     }
+
+    this
+      .setDafaultBreeds();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.lat && nextProps.lng) {
       this.getFindings(nextProps)
     }
+  }
+
+  setDafaultBreeds() {
+    this.loadBreeds(this.setStateBreedId);
+  }
+
+  setStateBreedId(data) {
+    const breeds = data.filter(breed => {
+      return breed.typeId === this.state.petType 
+    })
+
+    this.setState({
+      breedId: breeds[breeds.ength - 1].id
+    })
   }
 
   changeGeoFormat(value) {
@@ -251,6 +273,10 @@ export class SearchPage extends Component {
   }
 
   parseImageUrl(url) {
+    if(!url) {
+      return 'https://thumbs.dreamstime.com/t/dog-paw-print-bone-ball-seamless-pattern-vector-illustration-70572888.jpg'
+    }
+
     const parts = url.split('/')
 
     return parts.slice(0, 5).concat(['resized'], parts.slice(-1)).join('/')
@@ -277,36 +303,34 @@ export class SearchPage extends Component {
           <Col key={i}
             xs={12}
           >
-            {finding.urls[0] &&
-              <Thumbnail
-                alt={finding.breedName}
-                src={this.parseImageUrl(finding.urls[0])}
-              >
-                <div className={`${CN}__search-item-holder`}>
-                  <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
-                  <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
-                  <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
-                  <div className={`${CN}__search-item-phone`}>
-                    <FaPhone />
-                    <a className={`${CN}__search-item-phone-link`}
-                      href={`tel:${finding.phoneNumber}`}
-                    >
-                      {` ${finding.phoneNumber}`}
-                    </a>
-                    <span></span>
-                  </div>
-                </div>
-                <div className={`${CN}__search-item-actions`}>
-                  <ActionButton
-                    color={'success'}
-                    onClick={this.onCardDetails}
-                    finding={finding}
+            <Thumbnail
+              alt={finding.breedName}
+              src={this.parseImageUrl(finding.urls[0])}
+            >
+              <div className={`${CN}__search-item-holder`}>
+                <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
+                <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
+                <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
+                <div className={`${CN}__search-item-phone`}>
+                  <FaPhone />
+                  <a className={`${CN}__search-item-phone-link`}
+                    href={`tel:${finding.phoneNumber}`}
                   >
-                    Details
-                  </ActionButton>
+                    {` ${finding.phoneNumber}`}
+                  </a>
+                  <span></span>
                 </div>
-              </Thumbnail>
-            }
+              </div>
+              <div className={`${CN}__search-item-actions`}>
+                <ActionButton
+                  color={'success'}
+                  onClick={this.onCardDetails}
+                  finding={finding}
+                >
+                  Details
+                </ActionButton>
+              </div>
+            </Thumbnail>
           </Col>
         )
       })
@@ -434,50 +458,34 @@ export class SearchPage extends Component {
       isoCountryCode,
       latitude,
       longitude,
-      number,
       streetName,
-      date,
-      isFound
+      breedId,
+      petBreedAppearence,
+      petBreedAppearenceSize,
+      urls,
+      additionalInformation
     } = this.state
 
     const {
       user
     } = this.props
 
-    const body = { 
+    const body = {
+      "AdditionalInformation": additionalInformation,
       "Latitude": latitude,
       "Longitude": longitude,
-      "PhoneNumber": number,
-      "PetName": null,
-      "Breed": { 
-        "ID": 1,
-        "BreedName": "Affenpinscher",
-        "BreedLink": null,
-        "BreedResourceCode": null,
-        "TypeId": 1,
-        "TypeName": null 
-      },
-      "breedId": 1,
-      //"AdditionalInformation": "",
-      // "Created": "0001-01-01T00:00:00",
-      "Found": date.format(),
-      // "FoundBy": null,
-      // "FoundByPerson": null,
+      "breedId": breedId,
+      "Id": 0,
       "FoundByPersonId": user.id,
-      "Urls": ["https://pawcdn.azureedge.net/images/isiarube@gmail.com/3ed8e97148aa417e8231c2bddb1fe82d-.jpg"],
-      // "Owner": null,
-      // "OwnerID": null,
-      // "PetId": null,
-      "IsFound": isFound,
+      "Urls": urls,
+      "IsFound": false,
       "City": city,
       "Country": country,
       "LocalityName": streetName,
       "IsoCountryCode": isoCountryCode,
       "SharedPhoneNumber": true,
-      "PetBreedAppearence": 1,
-      "PetBreedAppearenceSize": null,
-      // "TypeId": 105,
-      // "ID": 0
+      "PetBreedAppearence": petBreedAppearence, // 0, 1, 2
+      "PetBreedAppearenceSize": petBreedAppearenceSize // 0, 1, 2, 3
     }
 
     agent
@@ -552,7 +560,7 @@ export class SearchPage extends Component {
     })
   }
 
-  loadBreeds() {
+  loadBreeds(cb) {
     const { user } = this.props
 
     agent
@@ -573,6 +581,8 @@ export class SearchPage extends Component {
 
         this.setState({
           petList: breedList
+        }, () => {
+          cb && cb(breedList)
         })
       })
       .catch((err) => {
@@ -581,24 +591,23 @@ export class SearchPage extends Component {
   }
 
   setBreed() {
-    this.loadBreeds()
-
     this.setState({
-      breed: 1
+      petBreedAppearence: 2,
+      petBreedAppearenceSize: null
     })
   }
 
   setPossibleBreed() {
-    this.loadBreeds()
-
     this.setState({
-      breed: 2
+      petBreedAppearence: 1,
+      petBreedAppearenceSize: null
     })
   }
 
   setNotBreed() {
     this.setState({
-      breed: 0
+      petBreedAppearence: 0,
+      petBreedAppearenceSize: 0
     })
   }
 
@@ -615,11 +624,43 @@ export class SearchPage extends Component {
   }
 
   onUpload(urls) {
-    this.setState({ url: urls })
+    this.setState({ urls })
+  }
+
+  setBreedId(e) {
+    const breedId = e.currentTarget.value
+
+    this.setState({
+      breedId
+    })
+  }
+
+  setSmall() {
+    this.setState({
+      petBreedAppearenceSize: 0
+    })
+  }
+
+  setMedium() {
+    this.setState({
+      petBreedAppearenceSize: 1
+    })
+  }
+
+  setLarge() {
+    this.setState({
+      petBreedAppearenceSize: 2
+    })
+  }
+
+  setExtraLarge() {
+    this.setState({
+      petBreedAppearenceSize: 3
+    })
   }
 
   renderAddModal() {
-    const { isFound, breed, petList, petType } = this.state
+    const { petBreedAppearence, petList, petType, additionalInformation } = this.state
 
     return (
       <Modal isOpen={this.state.isAddPopupOpen}
@@ -627,7 +668,7 @@ export class SearchPage extends Component {
         <ModalHeader>Add Lost or Found Pet</ModalHeader>
         <ModalBody>
           <Form>
-            <FormGroup>
+            {/* <FormGroup>
               <FormGroup>
                 <Label>
                   <Input
@@ -647,7 +688,7 @@ export class SearchPage extends Component {
                   {` Pet was lost `}
                 </Label>
               </FormGroup>
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup>
               <Label for='address'>Address</Label>
               <StandaloneSearchBox
@@ -662,7 +703,7 @@ export class SearchPage extends Component {
                 />
               </StandaloneSearchBox>
             </FormGroup>
-            <FormGroup>
+            {/* <FormGroup>
               <Label for='phone'>Phone</Label>
               <FormControl
                 type='text'
@@ -670,16 +711,17 @@ export class SearchPage extends Component {
                 id='phone'
                 value={this.state.phoneNumber}
                 onChange={this.changeNumber} />
-            </FormGroup>
-            <FormGroup>
+            </FormGroup> */}
+            {/* <FormGroup>
               <Label for='date'>Date</Label>
               <DatePicker
                 id='date'
                 selected={this.state.date}
                 onChange={this.changeDate}
               />
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup>
+              <legend>Pets breed</legend>
               <FormGroup>
                 <Label>
                   <Input
@@ -698,41 +740,41 @@ export class SearchPage extends Component {
                   {` Cat `}
                 </Label>
               </FormGroup>
-            </FormGroup>
-            <FormGroup>
-              <legend>Pets breed</legend>
-              <Label>
-                <Input
-                  type="radio"
-                  name="breed"
-                  onChange={this.setBreed}
-                />{` I know the breed `}
-              </Label>
-              <Label>
-                <Input
-                  type="radio"
-                  name="breed"
-                  onChange={this.setPossibleBreed}
-                />
-                {` It seems that I probably know the breed `}
-              </Label>
-              <Label>
-                <Input
-                  type="radio"
-                  name="breed"
-                  defaultChecked
-                  onChange={this.setNotBreed}
-                />
-                {` I don't know the breed `}
-              </Label>
+              <FormGroup>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="breed"
+                    onChange={this.setBreed}
+                  />{` I know the breed `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="breed"
+                    onChange={this.setPossibleBreed}
+                  />
+                  {` It seems that I probably know the breed `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="breed"
+                    defaultChecked
+                    onChange={this.setNotBreed}
+                  />
+                  {` I don't know the breed `}
+                </Label>
+              </FormGroup>
             </FormGroup>
             {
-              ((breed === 1 || breed === 2) && petList.length > 0) &&
+              ((petBreedAppearence === 1 || petBreedAppearence === 2) && petList.length > 0) &&
               <FormGroup>
                 <label>Select breed</label>
                 <Input
                   type="select"
                   name="breed"
+                  onChange={this.setBreedId}
                 >
                   {
                     petList
@@ -750,6 +792,50 @@ export class SearchPage extends Component {
                 </Input>
               </FormGroup>
             }
+            {
+              (petBreedAppearence === 0) &&
+              <FormGroup>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="size"
+                    defaultChecked
+                    onChange={this.setSmall}
+                  />{` Small `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="size"
+                    onChange={this.setMedium}
+                  />{` Medium `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="size"
+                    onChange={this.setLarge}
+                  />{` Large `}
+                </Label>
+                <Label>
+                  <Input
+                    type="radio"
+                    name="size"
+                    onChange={this.setExtraLarge}
+                  />{` Extra Large `}
+                </Label>
+              </FormGroup>
+            }
+            <FormGroup>
+              <Label for="additional">Additional Info</Label>
+              <Input
+                type="textarea"
+                name="text"
+                id="additional"
+                value={additionalInformation}
+                onChange={this.setAdditionalInfo}
+              />
+            </FormGroup>
             <FormGroup>
               <FileUploaderContainer onUpload={this.onUpload} />
             </FormGroup>
@@ -765,6 +851,12 @@ export class SearchPage extends Component {
         </ModalFooter>
       </Modal>
     )
+  }
+
+  setAdditionalInfo(e) {
+    this.setState({
+      additionalInformation: e.currentTarget.value
+    })
   }
 
   render() {

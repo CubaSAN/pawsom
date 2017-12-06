@@ -7,8 +7,8 @@ const superagent = superagentPromise(_superagent, global.Promise)
 // const API_ROOT = 'http://pawsom.azurewebsites.net'
 // const API_ROOT_SOCIAL = 'http://pawsomsocial.azurewebsites.net'
 
-const API_ROOT = 'http://pawappapi.azurewebsites.net/'
-const API_ROOT_SOCIAL = 'http://pawappsoc.azurewebsites.net/'
+const API_ROOT = 'http://pawappapi.azurewebsites.net'
+const API_ROOT_SOCIAL = 'http://pawappsoc.azurewebsites.net'
 
 const responseBody = res => res.body
 
@@ -110,7 +110,7 @@ const User = {
 const Pet = {
   getBreeds: (token) =>
     requests
-      .getAuthenticated(`api/Pet/Breed/`, token)
+      .getAuthenticated(`/api/Pet/Breed`, token)
 }
 
 export default {

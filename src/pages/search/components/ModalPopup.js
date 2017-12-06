@@ -65,7 +65,8 @@ export class ModalPopup extends React.Component {
         <div>{finding.breedName} was found around:</div>
         <div>{finding.localityName}</div>
         <div>Found by: {finding.foundBy},</div>
-        <div>more information, phone: {finding.phoneNumber}</div>
+        <div>{finding.additionalInformation}</div>
+        <div>phone: {finding.phoneNumber}</div>
         <div>{finding.additionalInformation}</div>
       </div>
     )
