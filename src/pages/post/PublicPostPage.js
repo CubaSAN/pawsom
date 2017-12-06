@@ -71,23 +71,23 @@ export class PublicPostPage extends Component {
     )
   }
 
-  renderLikes(number) {
-    return (
-      <div>
-        {number > 0 && number} Like{number > 1 && 's'}
-        <FaThumbsOUp className={`${CN}__social-icon`} />
-      </div>
-    )
-  }
+  // renderLikes(number) {
+  //   return (
+  //     <div>
+  //       {number > 0 && number} Like{number > 1 && 's'}
+  //       <FaThumbsOUp className={`${CN}__social-icon`} />
+  //     </div>
+  //   )
+  // }
 
-  renderCommentCount(number) {
-    return (
-      <div>
-        {number > 0 && number} Comment{number > 1 && 's'}
-        <FaCommentO className={`${CN}__social-icon`} />
-      </div>
-    )
-  }
+  // renderCommentCount(number) {
+  //   return (
+  //     <div>
+  //       {number > 0 && number} Comment{number > 1 && 's'}
+  //       <FaCommentO className={`${CN}__social-icon`} />
+  //     </div>
+  //   )
+  // }
 
   renderPost() {
     const { postedPersonString, postedPersonName, created, text, commentCount } = this.state.post
@@ -111,18 +111,6 @@ export class PublicPostPage extends Component {
         <div className={`${CN}__content`}>
           <p className={`${CN}__content-text`}>{text}</p>
           {this.renderImages(imagesUrl)}
-        </div>
-
-        <div className={`${CN}__social unauthorized`}>
-          <span className={`${CN}__social-text`}>
-            { this.renderLikes(likes) }
-          </span>
-          <span> | </span>
-          <span className={`${CN}__social-text`}>Share</span>
-          <span> | </span>
-          <span className={`${CN}__social-text`}>
-            { this.renderCommentCount(commentCount) }
-          </span>
         </div>
       </div>
     )
