@@ -7,6 +7,7 @@ import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { Gallery } from '../../../shared/components/Gallery'
 import agent from '../../../agent'
+import { FormattedMessage } from 'react-intl' 
 
 const CN = 'feed-page__post-wrapper'
 
@@ -28,7 +29,7 @@ export class Post extends Component {
     return (
       <p>
         {processedText}
-        <span className={`${CN}-content-text-read-more`}>read more</span>
+        <span className={`${CN}-content-text-read-more`}><FormattedMessage id="feed.readmore"/></span>
       </p>
     )
   }
@@ -54,7 +55,7 @@ export class Post extends Component {
   renderLikes(number) {
     return (
       <div onClick={this.setReaction}>
-        {number > 0 && number} Like{number > 1 && 's'}
+        {number > 0 && number} <FormattedMessage id="feed.like"/>
         <FaThumbsOUp className={`${CN}-content-social-icon`} />
       </div>
     )
@@ -77,7 +78,7 @@ export class Post extends Component {
   renderCommentCount(number) {
     return (
       <div>
-        {number > 0 && number} Comment{number > 1 && 's'}
+        {number > 0 && number} <FormattedMessage id="feed.comments"/>
         <FaCommentO className={`${CN}-content-social-icon`} />
       </div>
     )
@@ -123,8 +124,8 @@ export class Post extends Component {
               {this.renderLikes(reactions)}
             </span>
             <span> | </span>
-            <span className={`${CN}-content-social-text`}>Share</span>
-            <span> | </span>
+            {/* <span className={`${CN}-content-social-text`}>Share</span>
+            <span> | </span> */}
             <Link
               to={`/post/${id}`}
               className={`${CN}-content-social-text`}

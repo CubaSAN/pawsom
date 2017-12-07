@@ -7,6 +7,23 @@ export const messages = {
       }
     },
 
+    login:{
+      socialNetwork: 'Login with:'
+    },
+
+    feed:{
+      add:{
+        comAllowed: 'Comments allowed',
+        textPlaceholder: 'Share your thoughts...',
+        commentsHeader: "Comments"
+      },
+      readmore: 'Read more',
+      like: 'Like',
+      share: 'Share',
+      comments: 'Comment'
+      
+    },
+
     feedback: {
       title: 'Meet the animal lovers who will treat your pet like family',        
       first: 'Join the largest pet owner community in Ukraine. Our mission is to build a community of people that share attitude and devotion each of us have to our little fourpawed friends. The community that provides helping hand in need, shares our brightest moments, friends with the same sphere of interests.',
@@ -44,13 +61,17 @@ export const messages = {
 
     header: {
       links: {
-        search: 'Lost & Found',
+        search: 'Lost Pets',
         accommodation: 'Accommodation',
-        login: 'Login'
+        login: 'Login',
+        logout: 'Log Out'
       }
     },
   
-    download: 'Download app'
+    download: 'Download app',
+    submit: 'Submit',
+    next: 'Next',
+    previous: 'Previous'
   },
   
 
@@ -60,6 +81,25 @@ export const messages = {
         main: 'Четыре лапы, одно любящее сердце',
         sub: 'У каждого животного должно быть место, где она может чувствовать себя в безопасности.',
       }
+    },
+
+    feed:{
+      add:{
+        comAllowed: 'Разрешить комментировать',
+        textPlaceholder: 'Поделитесь Вашими мыслями',
+        commentsHeader: "Комментарии"
+      },
+      readmore: 'Читать все',
+      like: 'Нравиться',
+      share: 'Поделиться',
+      comments: 'Комментировать'
+    },
+    submit: 'Поделиться',
+    next: 'Дальше',
+    previous: 'Назад',
+
+    login:{
+      socialNetwork: 'Войти с помощью:'
     },
 
     feedback: {
@@ -72,9 +112,10 @@ export const messages = {
 
     header: {
       links: {
-        search: 'Потерянные и найденные',
+        search: 'Потерянные питомцы',
         accommodation: 'Приютить',
-        login: 'Войти'
+        login: 'Войти',
+        logout: 'Выйти'
       }
     },
 
@@ -117,6 +158,26 @@ export const messages = {
       }
     },
 
+    feed:{
+      add:{
+        comAllowed: 'Дозволити коментувати',
+        textPlaceholder: 'Поділіться Вашими думками',
+        commentsHeader: "Коментарі"
+      },
+      readmore: 'Читати все',
+      like: 'Подобається',
+      share: 'Поділитись',
+      comments: 'Коментувати'
+    },
+
+    submit: 'Поділитись',
+    next: 'Далі',
+    previous: 'Назад',
+
+    login:{
+      socialNetwork: 'Зайти з допомогою:'
+    },
+
     feedback: {
       title: 'Знайомтесь з любителями тварин, які будуть поводитися з вашим улюбленцем як сім\'я',        
       first: 'Приєднуйтесь до найбільшої спільноти власників домашніх тварин в Україні. Наша мета створити дружну команду любителів чотирилапих, професіоналів у сфері зоопослуг та всіх охочих людей, яких об’єднує турбота про братів наших менших.',
@@ -126,9 +187,10 @@ export const messages = {
 
     header: {
       links: {
-        search: 'Загублені та знайдені',
+        search: 'Загублені',
         accommodation: 'Надати притулок',
-        login: 'Ввійти'
+        login: 'Ввійти',
+        logout: 'Вийти'
       }
     },
 

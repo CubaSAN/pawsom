@@ -9,6 +9,8 @@ import Comment from './components/Comment'
 import AddCommentForm from './components/AddCommentForm'
 import agent from '../../agent'
 import './PostPage.scss'
+import { FormattedMessage } from 'react-intl' 
+
 
 const CN = 'post-page'
 
@@ -47,7 +49,7 @@ export class PostPage extends Component {
   renderComments() {
     return (
       <div>
-        <h3 className={`${CN}__comment-header`}>Коментарі</h3>
+        <h3 className={`${CN}__comment-header`}><FormattedMessage id='feed.add.commentsHeader'/></h3>
         { this.state.comments.map(comment =>
           <Comment
             key={comment.id}
@@ -122,7 +124,7 @@ export class PostPage extends Component {
   renderLikes(number) {
     return (
       <div onClick={ () => this.setReaction() }>
-        {number > 0 && number} Like{number > 1 && 's'}
+        {number > 0 && number} <FormattedMessage id="feed.like"/>
         <FaThumbsOUp className={`${CN}__social-icon`} />
       </div>
     )
@@ -131,7 +133,7 @@ export class PostPage extends Component {
   renderCommentCount(number) {
     return (
       <div>
-        {number > 0 && number} Comment{number > 1 && 's'}
+        {number > 0 && number} <FormattedMessage id="feed.comments"/>
         <FaCommentO className={`${CN}__social-icon`} />
       </div>
     )
@@ -166,8 +168,8 @@ export class PostPage extends Component {
             { this.renderLikes(likes) }
           </span>
           <span> | </span>
-          <span className={`${CN}__social-text`}>Share</span>
-          <span> | </span>
+          {/* <span className={`${CN}__social-text`}>Share</span>
+          <span> | </span> */}
           <span className={`${CN}__social-text`}>
             { this.renderCommentCount(commentCount) }
           </span>
