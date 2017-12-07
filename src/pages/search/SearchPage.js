@@ -18,6 +18,7 @@ import home from '../../shared/assets/images/home.png'
 // import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { FileUploaderContainer } from '../../shared/components/FileUploader'
+import { FormattedMessage } from 'react-intl' 
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './SearchPage.scss'
@@ -208,7 +209,7 @@ export class SearchPage extends Component {
                   { 
                     infoWindow.finding.petName ?
                       (<span>Lost: {infoWindow.finding.petName}</span>) :
-                      (<span>Found</span>)
+                      (<span><FormattedMessage id='lost.foundsing'/> </span>)
                   }
                 </div>
                 <div
@@ -220,7 +221,7 @@ export class SearchPage extends Component {
                   className={`${CN}__map-marker-info`}
                   onClick={this.onOpenPopup}
                 >
-                  <FaInfoCircle /> info
+                  <FaInfoCircle /> <FormattedMessage id='lost.details'/> 
                 </div>
               </div>
             </InfoWindow>
@@ -247,7 +248,7 @@ export class SearchPage extends Component {
   renderFoundBy(name) {
     if (name) {
       return (
-        <div>Found by {name}</div>
+        <div><FormattedMessage id='lost.foundby'/> {name}</div>
       )
     } else {
       return (
@@ -310,7 +311,7 @@ export class SearchPage extends Component {
               <div className={`${CN}__search-item-holder`}>
                 <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
                 <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
-                <div className={`${CN}__search-item-address`}>on {finding.localityName}</div>
+                <div className={`${CN}__search-item-address`}> {finding.localityName}</div>
                 <div className={`${CN}__search-item-phone`}>
                   <FaPhone />
                   <a className={`${CN}__search-item-phone-link`}
@@ -327,7 +328,7 @@ export class SearchPage extends Component {
                   onClick={this.onCardDetails}
                   finding={finding}
                 >
-                  Details
+                  <FormattedMessage id='lost.details'/>
                 </ActionButton>
               </div>
             </Thumbnail>
@@ -339,8 +340,8 @@ export class SearchPage extends Component {
         <div>
           <Row>
             <Col className={`${CN}__search-header`}>
-              Found - <span className={`${CN}__search-header-secondary`}>
-                {filteredFindings.length} pets
+            <FormattedMessage id='lost.found'/> - <span className={`${CN}__search-header-secondary`}>
+                {filteredFindings.length} <FormattedMessage id='pets'/>
               </span>
             </Col>
           </Row>
@@ -665,7 +666,7 @@ export class SearchPage extends Component {
     return (
       <Modal isOpen={this.state.isAddPopupOpen}
         className={`${CN}__add-modal`}>
-        <ModalHeader>Add Lost or Found Pet</ModalHeader>
+        <ModalHeader><FormattedMessage id='lost.addlost'/></ModalHeader>
         <ModalBody>
           <Form>
             {/* <FormGroup>
@@ -690,7 +691,7 @@ export class SearchPage extends Component {
               </FormGroup>
             </FormGroup> */}
             <FormGroup>
-              <Label for='address'>Address</Label>
+              <Label for='address'><FormattedMessage id='lost.address'/> </Label>
               <StandaloneSearchBox
                 type='street_address'
                 ref={this.onSearchBoxMounted}
@@ -721,7 +722,7 @@ export class SearchPage extends Component {
               />
             </FormGroup> */}
             <FormGroup>
-              <legend>Pets breed</legend>
+              <legend><FormattedMessage id='lost.information'/> </legend>
               <FormGroup>
                 <Label>
                   <Input
@@ -729,7 +730,7 @@ export class SearchPage extends Component {
                     name="pet"
                     defaultChecked
                     onChange={this.setDog}
-                  />{` Dog `}
+                  />{<FormattedMessage id='dog'/>}
                 </Label>
                 <Label>
                   <Input
@@ -737,7 +738,7 @@ export class SearchPage extends Component {
                     name="pet"
                     onChange={this.setCat}
                   />
-                  {` Cat `}
+                  {<FormattedMessage id='cat'/>}
                 </Label>
               </FormGroup>
               <FormGroup>
@@ -746,7 +747,7 @@ export class SearchPage extends Component {
                     type="radio"
                     name="breed"
                     onChange={this.setBreed}
-                  />{` I know the breed `}
+                  />{<FormattedMessage id='breed.purebred'/>}
                 </Label>
                 <Label>
                   <Input
@@ -754,7 +755,7 @@ export class SearchPage extends Component {
                     name="breed"
                     onChange={this.setPossibleBreed}
                   />
-                  {` It seems that I probably know the breed `}
+                  {<FormattedMessage id='breed.mutt'/>}
                 </Label>
                 <Label>
                   <Input
@@ -763,14 +764,13 @@ export class SearchPage extends Component {
                     defaultChecked
                     onChange={this.setNotBreed}
                   />
-                  {` I don't know the breed `}
+                  {<FormattedMessage id='breed.unknownbreed'/>}
                 </Label>
               </FormGroup>
             </FormGroup>
             {
               ((petBreedAppearence === 1 || petBreedAppearence === 2) && petList.length > 0) &&
               <FormGroup>
-                <label>Select breed</label>
                 <Input
                   type="select"
                   name="breed"
@@ -801,33 +801,33 @@ export class SearchPage extends Component {
                     name="size"
                     defaultChecked
                     onChange={this.setSmall}
-                  />{` Small `}
+                  />{<FormattedMessage id='breed.small'/>}
                 </Label>
                 <Label>
                   <Input
                     type="radio"
                     name="size"
                     onChange={this.setMedium}
-                  />{` Medium `}
+                  />{<FormattedMessage id='breed.medium'/>}
                 </Label>
                 <Label>
                   <Input
                     type="radio"
                     name="size"
                     onChange={this.setLarge}
-                  />{` Large `}
+                  />{<FormattedMessage id='breed.large'/>}
                 </Label>
                 <Label>
                   <Input
                     type="radio"
                     name="size"
                     onChange={this.setExtraLarge}
-                  />{` Extra Large `}
+                  />{<FormattedMessage id='breed.varylarge'/>}
                 </Label>
               </FormGroup>
             }
             <FormGroup>
-              <Label for="additional">Additional Info</Label>
+              <Label for="additional"><FormattedMessage id='lost.addinfo'/></Label>
               <Input
                 type="textarea"
                 name="text"
@@ -844,10 +844,10 @@ export class SearchPage extends Component {
         <ModalFooter>
           <Button color="success"
             onClick={this.closeAddPopup}
-          >Close</Button>
+          ><FormattedMessage id='btnclose'/></Button>
           <Button color="success"
             onClick={this.sendAddData}
-          >Submit</Button>
+          ><FormattedMessage id='btnsave'/></Button>
         </ModalFooter>
       </Modal>
     )
@@ -896,12 +896,12 @@ export class SearchPage extends Component {
               color="success"
               onClick={this.addLostPet}
             >
-              Add Lost or Found Pet
+              <FormattedMessage id='lost.addlost'/>
             </Button>
           </div>
-          <div className={`${CN}__sidebar-header`}>Filters</div>
+          <div className={`${CN}__sidebar-header`}><FormattedMessage id='lost.filter'/></div>
           <div className={`${CN}__sidebar-item`}>
-            <div className={`${CN}__sidebar-heading`}>Distance from your location</div>
+            <div className={`${CN}__sidebar-heading`}><FormattedMessage id='lost.distance'/></div>
             <RangeSlider onRadiusChange={changeSearchRadius}
               value={radius}
             />

@@ -7,6 +7,40 @@ export const messages = {
       }
     },
 
+    lost:{
+      foundby:'Found by',
+      details: 'Details',
+      found: 'Found',      
+      address: 'Address',
+      information: 'Describe your pet',
+      addinfo:'Please provide any additional information'  ,      
+      addlost: 'Lost pet found',
+      foundsing: 'Found',
+      filter: 'Filter',
+      distance: 'Show pets in radius'    
+    },
+
+    pet:'Pet',
+    pets:'Pets',
+    download: 'Download app',
+    submit: 'Submit',
+    next: 'Next',
+    previous: 'Previous',
+    dog: ' Dog ',
+    cat: ' Cat ',
+    btnclose: 'Save',
+    btnsave: 'Close',
+
+    breed:{
+      purebred: ' Purebred ',
+      mutt: ' Mutt that looks like: ',
+      unknownbreed: ' I don\'t know ',
+      small:' Small ',
+      medium:' Medium ',
+      large:' Large ',
+      varylarge:' Very large '
+    },
+
     login:{
       socialNetwork: 'Login with:'
     },
@@ -66,12 +100,7 @@ export const messages = {
         login: 'Login',
         logout: 'Log Out'
       }
-    },
-  
-    download: 'Download app',
-    submit: 'Submit',
-    next: 'Next',
-    previous: 'Previous'
+    }
   },
   
 
@@ -94,9 +123,40 @@ export const messages = {
       share: 'Поделиться',
       comments: 'Комментировать'
     },
+
+    lost:{
+      foundby:'Нашел',
+      details: 'Детали',
+      found: 'Найдены',
+      foundsing: 'Найден',
+      address: 'Адрес',
+      information: 'Опишите питомца',
+      addinfo:'Любая дополнительная информация может быть очень полезна' ,      
+      addlost: 'Найдено животное',
+      filter: 'Фильтр',
+      distance: 'Показать потеряшек в радиусе'      
+      
+    },
+
+    breed:{
+      purebred: ' Породистий ',
+      mutt: ' Метис похожий на: ',
+      unknownbreed: ' Я не знаю ',
+      small:' Маленький ',
+      medium:' Средний ',
+      large:' Большой ',
+      varylarge:' Очень Большой '
+    },
+
+    pet:'питомец',
+    pets:'питомцы',
     submit: 'Поделиться',
     next: 'Дальше',
     previous: 'Назад',
+    dog: ' Собака',
+    cat: ' Кот ',
+    btnclose: 'Закрыть',
+    btnsave: 'Сохранить',
 
     login:{
       socialNetwork: 'Войти с помощью:'
@@ -170,9 +230,39 @@ export const messages = {
       comments: 'Коментувати'
     },
 
+    lost:{
+      foundby:'Знайшов',
+      details: 'Деталі',
+      found: 'Знайдено',
+      address: 'Адреса',
+      foundsing: 'Знайдено',
+      information: 'Опишіть тваринку',
+      addinfo:'Будь-яка додаткова інформація буде дуже корисна',      
+      addlost: 'Знайдено тваринку',
+      filter: 'Фільтр',
+      distance: 'Показати загублених в радіусі' 
+    },
+
+    breed:{
+      purebred: ' Породистий ',
+      mutt: ' Метис схожий на: ',
+      unknownbreed: ' Я не знаю ',
+      small:' Маленький ',
+      medium:' Середній ',
+      large:' Великий ',
+      varylarge:' Дуже Великий '
+    },
+
+    pet:'тваринка',
+    pets:'тваринок',
     submit: 'Поділитись',
     next: 'Далі',
     previous: 'Назад',
+    dog: ' Собака ',
+    cat: ' Кіт ',
+    btnclose: 'Закрити',
+    btnsave: 'Зберегти',
+
 
     login:{
       socialNetwork: 'Зайти з допомогою:'
