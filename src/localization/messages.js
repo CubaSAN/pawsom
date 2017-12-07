@@ -3,7 +3,7 @@ export const messages = {
     landing: {
       banner: {
         main: 'Four paws, one loving heart',
-        sub: 'Every dog should have a place where it can feel safe.'
+        sub: 'Every pet should have a place where it can feel safe.'
       }
     },
 
@@ -58,7 +58,7 @@ export const messages = {
     landing: {
       banner: {
         main: 'Четыре лапы, одно любящее сердце',
-        sub: 'У каждой собаки должно быть место, где она может чувствовать себя в безопасности.',
+        sub: 'У каждого животного должно быть место, где она может чувствовать себя в безопасности.',
       }
     },
 
@@ -113,7 +113,7 @@ export const messages = {
     landing: {
       banner: {
         main: 'Чотири лапи, одне любляче серце',
-        sub: 'У кожної собаки повинно бути місце, де вона може відчувати себе в безпеці.',
+        sub: 'У кожної тварини повинно бути місце, де вона може відчувати себе в безпеці.',
       }
     },
 

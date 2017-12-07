@@ -126,23 +126,24 @@ export class HomePage extends Component {
                       <FormattedMessage id='download' />
                     </div>
                     <div className={`${CN}__ad1-buttons`}>
+                       
                       <a
                         className={`btn ${CN}__ad1-cta`}
-                        href='https://www.appstore.com/'
+                        href='https://itunes.apple.com/us/app/apple-store/id1296340728'
                         target='_blank'
                         rel='noopener noreferrer'
                       >
-                        App Store
+                        <img src="https://pwcdn.azureedge.net/images/general/appstore_pawsom_ios.png" width="200" height="200"/>
                       </a>
 
-                      <a
+                      {/* <a
                         className={`btn ${CN}__ad1-cta`}
                         href='https://play.google.com/store'
                         target='_blank'
                         rel='noopener noreferrer'
                       >
                         Play Market
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </Grid>
