@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import { Gallery } from '../../../shared/components/Gallery'
 import Gallery from 'react-photo-gallery';
 import Lightbox from 'react-images';
+import { FormattedMessage } from 'react-intl' 
 
 export class ModalPopup extends React.Component {
   static propTypes = {
@@ -54,7 +55,7 @@ export class ModalPopup extends React.Component {
 
     return finding.petName ? 
       (<span>Lost pet - {finding.breedName}, pet name {finding.petName}</span>) :
-      (<span>Found pet - {finding.breedName}</span>)
+      (<span><FormattedMessage id='lost.found'/>  - {finding.breedName}</span>)
   }
 
   renderMainContent() {
@@ -62,11 +63,11 @@ export class ModalPopup extends React.Component {
 
     return (
       <div>
-        <div>{finding.breedName} was found around:</div>
+        <div>{finding.breedName} <FormattedMessage id='lost.foundaround'/> :</div>
         <div>{finding.localityName}</div>
-        <div>Found by: {finding.foundBy},</div>
+        <div><FormattedMessage id='lost.foundby'/>: {finding.foundBy},</div>
         <div>{finding.additionalInformation}</div>
-        <div>phone: {finding.phoneNumber}</div>
+        <div><FormattedMessage id='phonenum'/>: {finding.phoneNumber}</div>
         <div>{finding.additionalInformation}</div>
       </div>
     )

@@ -17,7 +17,9 @@ export const messages = {
       addlost: 'Lost pet found',
       foundsing: 'Found',
       filter: 'Filter',
-      distance: 'Show pets in radius'    
+      distance: 'Show pets in radius',
+      foundaround:'was found near'
+      
     },
 
     pet:'Pet',
@@ -30,6 +32,7 @@ export const messages = {
     cat: ' Cat ',
     btnclose: 'Save',
     btnsave: 'Close',
+    phonenum: 'Phone',
 
     breed:{
       purebred: ' Purebred ',
@@ -134,8 +137,8 @@ export const messages = {
       addinfo:'Любая дополнительная информация может быть очень полезна' ,      
       addlost: 'Найдено животное',
       filter: 'Фильтр',
-      distance: 'Показать потеряшек в радиусе'      
-      
+      distance: 'Показать потеряшек в радиусе' ,     
+      foundaround:'был найден в районе'
     },
 
     breed:{
@@ -157,6 +160,7 @@ export const messages = {
     cat: ' Кот ',
     btnclose: 'Закрыть',
     btnsave: 'Сохранить',
+    phonenum: 'Телефон',
 
     login:{
       socialNetwork: 'Войти с помощью:'
@@ -240,7 +244,8 @@ export const messages = {
       addinfo:'Будь-яка додаткова інформація буде дуже корисна',      
       addlost: 'Знайдено тваринку',
       filter: 'Фільтр',
-      distance: 'Показати загублених в радіусі' 
+      distance: 'Показати загублених в радіусі' ,
+      foundaround:'був знайдений в районі'
     },
 
     breed:{
@@ -262,7 +267,7 @@ export const messages = {
     cat: ' Кіт ',
     btnclose: 'Закрити',
     btnsave: 'Зберегти',
-
+    phonenum: 'Телефон',
 
     login:{
       socialNetwork: 'Зайти з допомогою:'

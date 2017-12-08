@@ -260,10 +260,12 @@
     }
 
     .modal-content {
-      width: 100vw;
-      height: 100vh;
+      width: 50vw;
+      height: 50vh;
       border: none;
       border-radius: 0;
+      top: 10vw;
+      left: 40vh;
       display: flex;
       flex-direction: column;
     }

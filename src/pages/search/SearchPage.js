@@ -665,7 +665,8 @@ export class SearchPage extends Component {
 
     return (
       <Modal isOpen={this.state.isAddPopupOpen}
-        className={`${CN}__add-modal`}>
+        className={`${CN}__add-modal`}
+         >
         <ModalHeader><FormattedMessage id='lost.addlost'/></ModalHeader>
         <ModalBody>
           <Form>
