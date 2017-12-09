@@ -7,6 +7,7 @@ import FaCamera from 'react-icons/lib/fa/camera'
 import agent from '../../../../agent'
 import { FileUploaderContainer } from '../../../../shared/components/FileUploader'
 import './AddPostForm.scss'
+import { FormattedMessage } from 'react-intl'
 
 const CN = 'add-post-form'
 
@@ -99,7 +100,7 @@ export class AddPostForm extends Component {
             <FormControl
               className={`${CN}__textarea`}
               componentClass='textarea' 
-              placeholder='Add new post...'
+              placeholder='feed.add.textPlaceholder'
               onChange={this.onPostContantChange} 
               value={this.state.text} />
           </FormGroup>
@@ -109,7 +110,7 @@ export class AddPostForm extends Component {
               className={`${CN}__checkbox`}
               inline
               onChange={this.onAllowCommentsChange}>
-              Comments Allowed
+              <FormattedMessage id='feed.add.comAllowed' />
             </Checkbox>
 
             <div>
@@ -119,7 +120,7 @@ export class AddPostForm extends Component {
               <Button
                 className={`${CN}__submit`}
                 type="submit">
-                Submit
+                <FormattedMessage id='submit' />
               </Button>
             </div>
           </FormGroup>

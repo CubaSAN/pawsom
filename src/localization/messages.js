@@ -3,8 +3,62 @@ export const messages = {
     landing: {
       banner: {
         main: 'Four paws, one loving heart',
-        sub: 'Every dog should have a place where it can feel safe.'
+        sub: 'Every pet should have a place where it can feel safe.'
       }
+    },
+
+    lost:{
+      foundby:'Found by',
+      details: 'Details',
+      found: 'Found',      
+      address: 'Address',
+      information: 'Describe your pet',
+      addinfo:'Please provide any additional information'  ,      
+      addlost: 'Lost pet found',
+      foundsing: 'Found',
+      filter: 'Filter',
+      distance: 'Show pets in radius',
+      foundaround:'was found near'
+      
+    },
+
+    pet:'Pet',
+    pets:'Pets',
+    download: 'Download app',
+    submit: 'Submit',
+    next: 'Next',
+    previous: 'Previous',
+    dog: ' Dog ',
+    cat: ' Cat ',
+    btnclose: 'Save',
+    btnsave: 'Close',
+    phonenum: 'Phone',
+
+    breed:{
+      purebred: ' Purebred ',
+      mutt: ' Mutt that looks like: ',
+      unknownbreed: ' I don\'t know ',
+      small:' Small ',
+      medium:' Medium ',
+      large:' Large ',
+      varylarge:' Very large '
+    },
+
+    login:{
+      socialNetwork: 'Login with:'
+    },
+
+    feed:{
+      add:{
+        comAllowed: 'Comments allowed',
+        textPlaceholder: 'Share your thoughts...',
+        commentsHeader: "Comments"
+      },
+      readmore: 'Read more',
+      like: 'Like',
+      share: 'Share',
+      comments: 'Comment'
+      
     },
 
     feedback: {
@@ -44,13 +98,12 @@ export const messages = {
 
     header: {
       links: {
-        search: 'Lost & Found',
+        search: 'Lost Pets',
         accommodation: 'Accommodation',
-        login: 'Login'
+        login: 'Login',
+        logout: 'Log Out'
       }
-    },
-  
-    download: 'Download app'
+    }
   },
   
 
@@ -58,8 +111,59 @@ export const messages = {
     landing: {
       banner: {
         main: 'Четыре лапы, одно любящее сердце',
-        sub: 'У каждой собаки должно быть место, где она может чувствовать себя в безопасности.',
+        sub: 'У каждого животного должно быть место, где она может чувствовать себя в безопасности.',
       }
+    },
+
+    feed:{
+      add:{
+        comAllowed: 'Разрешить комментировать',
+        textPlaceholder: 'Поделитесь Вашими мыслями',
+        commentsHeader: "Комментарии"
+      },
+      readmore: 'Читать все',
+      like: 'Нравиться',
+      share: 'Поделиться',
+      comments: 'Комментировать'
+    },
+
+    lost:{
+      foundby:'Нашел',
+      details: 'Детали',
+      found: 'Найдены',
+      foundsing: 'Найден',
+      address: 'Адрес',
+      information: 'Опишите питомца',
+      addinfo:'Любая дополнительная информация может быть очень полезна' ,      
+      addlost: 'Найдено животное',
+      filter: 'Фильтр',
+      distance: 'Показать потеряшек в радиусе' ,     
+      foundaround:'был найден в районе'
+    },
+
+    breed:{
+      purebred: ' Породистий ',
+      mutt: ' Метис похожий на: ',
+      unknownbreed: ' Я не знаю ',
+      small:' Маленький ',
+      medium:' Средний ',
+      large:' Большой ',
+      varylarge:' Очень Большой '
+    },
+
+    pet:'питомец',
+    pets:'питомцы',
+    submit: 'Поделиться',
+    next: 'Дальше',
+    previous: 'Назад',
+    dog: ' Собака',
+    cat: ' Кот ',
+    btnclose: 'Закрыть',
+    btnsave: 'Сохранить',
+    phonenum: 'Телефон',
+
+    login:{
+      socialNetwork: 'Войти с помощью:'
     },
 
     feedback: {
@@ -72,9 +176,10 @@ export const messages = {
 
     header: {
       links: {
-        search: 'Потерянные и найденные',
+        search: 'Потерянные питомцы',
         accommodation: 'Приютить',
-        login: 'Войти'
+        login: 'Войти',
+        logout: 'Выйти'
       }
     },
 
@@ -113,8 +218,59 @@ export const messages = {
     landing: {
       banner: {
         main: 'Чотири лапи, одне любляче серце',
-        sub: 'У кожної собаки повинно бути місце, де вона може відчувати себе в безпеці.',
+        sub: 'У кожної тварини повинно бути місце, де вона може відчувати себе в безпеці.',
       }
+    },
+
+    feed:{
+      add:{
+        comAllowed: 'Дозволити коментувати',
+        textPlaceholder: 'Поділіться Вашими думками',
+        commentsHeader: "Коментарі"
+      },
+      readmore: 'Читати все',
+      like: 'Подобається',
+      share: 'Поділитись',
+      comments: 'Коментувати'
+    },
+
+    lost:{
+      foundby:'Знайшов',
+      details: 'Деталі',
+      found: 'Знайдено',
+      address: 'Адреса',
+      foundsing: 'Знайдено',
+      information: 'Опишіть тваринку',
+      addinfo:'Будь-яка додаткова інформація буде дуже корисна',      
+      addlost: 'Знайдено тваринку',
+      filter: 'Фільтр',
+      distance: 'Показати загублених в радіусі' ,
+      foundaround:'був знайдений в районі'
+    },
+
+    breed:{
+      purebred: ' Породистий ',
+      mutt: ' Метис схожий на: ',
+      unknownbreed: ' Я не знаю ',
+      small:' Маленький ',
+      medium:' Середній ',
+      large:' Великий ',
+      varylarge:' Дуже Великий '
+    },
+
+    pet:'тваринка',
+    pets:'тваринок',
+    submit: 'Поділитись',
+    next: 'Далі',
+    previous: 'Назад',
+    dog: ' Собака ',
+    cat: ' Кіт ',
+    btnclose: 'Закрити',
+    btnsave: 'Зберегти',
+    phonenum: 'Телефон',
+
+    login:{
+      socialNetwork: 'Зайти з допомогою:'
     },
 
     feedback: {
@@ -126,9 +282,10 @@ export const messages = {
 
     header: {
       links: {
-        search: 'Загублені та знайдені',
+        search: 'Загублені',
         accommodation: 'Надати притулок',
-        login: 'Ввійти'
+        login: 'Ввійти',
+        logout: 'Вийти'
       }
     },
 

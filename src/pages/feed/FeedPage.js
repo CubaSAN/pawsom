@@ -10,6 +10,8 @@ import agent from '../../agent'
 import './FeedPage.scss'
 import { Post } from './components/Post'
 import { AddPostForm } from './components/AddPostForm'
+import { FormattedMessage } from 'react-intl' 
+
 
 const CN = 'feed-page'
 
@@ -138,7 +140,7 @@ export class FeedPage extends Component {
           onClick={(e) => this.changePosts(e, -1)}
         >
           <FaAngleDoubleLeft className={`${CN}__pagination-icon`} />
-          <span>Previous</span>
+          <span><FormattedMessage id='previous'/></span>
         </Link>
         <span> | </span>
         <span className={`${CN}__pagination-number`}>{this.state.postsPage + 1}</span>
@@ -148,7 +150,7 @@ export class FeedPage extends Component {
           className={`${CN}__pagination-item ${this.state.nextDisabled}`}
           onClick={(e) => this.changePosts(e, 1)}
         >
-          <span>Next</span>
+          <span><FormattedMessage id='next'/></span>
           <FaAngleDoubleRight className={`${CN}__pagination-icon`} />
         </Link>
       </div>

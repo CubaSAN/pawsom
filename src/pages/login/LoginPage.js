@@ -11,6 +11,7 @@ import { USER } from '../../utils'
 import store from '../../store'
 import { push } from 'react-router-redux'
 import './LoginPage.scss'
+import { FormattedMessage } from 'react-intl'
 
 const CN = 'login-page'
 
@@ -102,7 +103,7 @@ export class LoginPage extends Component {
             <Grid>
               <Col className={`${CN}__social-block`}>
                 <div className={`${CN}__social-block-title`}>
-                  Log in with one of social neetwork
+                <FormattedMessage id='login.socialNetwork' />
                 </div>
 
                 <FacebookLogin

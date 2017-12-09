@@ -3,6 +3,7 @@ import autoBind from 'react-autobind'
 import { FormControl } from 'react-bootstrap'
 import { FormGroup, Button } from 'reactstrap'
 import agent from '../../../agent'
+import { FormattedMessage } from 'react-intl' 
 
 const CN = 'add-comment'
 
@@ -68,7 +69,7 @@ class AddCommentForm extends Component {
             <FormControl
               className={`${CN}__textarea`}
               componentClass='textarea'
-              placeholder='Add new comment...'
+              placeholder='feed.add.textPlaceholder'
               onChange={this.onCommentContantChange}
               value={this.state.text} />
           </FormGroup>
@@ -78,7 +79,7 @@ class AddCommentForm extends Component {
               <Button
                 className={`${CN}__submit`}
                 type="submit">
-                Submit
+                <FormattedMessage id='submit' />
               </Button>
             </div>
           </FormGroup>

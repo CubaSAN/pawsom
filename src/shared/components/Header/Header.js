@@ -168,7 +168,7 @@ export class Header extends Component {
                   </span>
                   <span className={`${CN}__links ${CN}__links--user-name`}>{`${user.name} | `}</span>
                   <span onClick={this.logOut}
-                    className={`${CN}__links ${CN}__links--log-out`}>Log out</span>
+                    className={`${CN}__links ${CN}__links--log-out`}><FormattedMessage id='header.links.logout'/></span>
                 </Navbar.Text>
               }
             </Navbar.Collapse>
