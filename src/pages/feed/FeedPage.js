@@ -17,7 +17,8 @@ export class FeedPage extends Component {
   static propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
-    user: PropTypes.object
+    user: PropTypes.object,
+    locale: PropTypes.string.isRequired
   }
 
   constructor(props) {

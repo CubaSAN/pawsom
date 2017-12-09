@@ -4,12 +4,13 @@ import { SearchPage } from './SearchPage'
 import { changeSearchRadius } from '../../actions'
 
 const mapStateToProps = state => {
-  const { navigator: { lat, lng }, search, auth} = state || {}
+  const { navigator: { lat, lng }, search, auth, locales} = state || {}
   return {
     lat,
     lng,
     radius: search.radius,
-    user: auth.user
+    user: auth.user,
+    locale: locales.locale
   }
 }
 

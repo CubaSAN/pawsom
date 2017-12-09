@@ -32,6 +32,7 @@ export class SearchPage extends Component {
     radius: PropTypes.number.isRequired,
     changeSearchRadius: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
+    locale: PropTypes.string.isRequired
   }
 
   constructor(props) {
