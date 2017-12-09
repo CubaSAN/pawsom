@@ -23,13 +23,18 @@ export class Post extends Component {
   }
 
   renderText() {
-    const { text } = this.props.post
+    const { text, id } = this.props.post
     const processedText = text.length > 200 ? `${text.slice(0, 200)}...` : text
 
     return (
       <p>
         {processedText}
-        <span className={`${CN}-content-text-read-more`}><FormattedMessage id="feed.readmore"/></span>
+        <Link
+          to={`/post/${id}`}
+          className={`${CN}-content-text-read-more`}
+        >
+          <FormattedMessage id="feed.readmore" />
+        </Link>
       </p>
     )
   }

@@ -96,9 +96,7 @@ export class ModalPopup extends React.Component {
             {
               finding.urls.length ?
                 (
-                  <Col lg={8}
-                    xs={12}
-                  >
+                  <Col xs={12}>
                     {/* <Gallery photos={this.prepareImages(finding.urls)} /> */}
                     <Gallery photos={this.prepareImages(finding.urls)} onClick={this.openLightbox} />
                     <Lightbox images={this.prepareImages(finding.urls)}
