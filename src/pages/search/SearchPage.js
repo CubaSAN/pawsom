@@ -882,7 +882,44 @@ export class SearchPage extends Component {
       >
         <ModalHeader>Загублено тваринку</ModalHeader>
         <ModalBody>
-
+          <FormGroup>
+            <Label for='address'><FormattedMessage id='lost.address' /> </Label>
+            <StandaloneSearchBox
+              type='street_address'
+              ref={this.onSearchBoxMounted}
+              onPlacesChanged={this.onPlacesChanged}
+            >
+              <FormControl
+                type='text'
+                name='address'
+                id='address'
+              />
+            </StandaloneSearchBox>
+          </FormGroup>
+          
+          <FormGroup>
+            <legend><FormattedMessage id='lost.information' /> </legend>
+            <FormGroup>
+              <Label>
+                <Input
+                  className="pet-radio"
+                  type="radio"
+                  name="pet"
+                  defaultChecked
+                  onChange={this.setDog}
+                /><span className="pet-icon dog-icon">{<FormattedMessage id='dog' />}</span>
+              </Label>
+              <Label>
+                <Input
+                  className="pet-radio"
+                  type="radio"
+                  name="pet"
+                  onChange={this.setCat}
+                />
+                <span className="pet-icon cat-icon">{<FormattedMessage id='cat' />}</span>
+              </Label>
+            </FormGroup>
+          </FormGroup>
         </ModalBody>
         <ModalFooter>
           <Button color="success"
