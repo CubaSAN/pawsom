@@ -466,7 +466,58 @@ export class SearchPage extends Component {
   }
 
   sendAddFoundData() {
+    const {
+      city,
+      country,
+      isoCountryCode,
+      latitude,
+      longitude,
+      streetName,
+      breedId,
+      petBreedAppearence,
+      petBreedAppearenceSize,
+      urls,
+      additionalInformation,
+      name
+    } = this.state
 
+    const {
+      user
+    } = this.props
+
+    const body = {
+      "AdditionalInformation": additionalInformation,
+      "Latitude": latitude,
+      "Longitude": longitude,
+      "breedId": breedId,
+      "Id": 0,
+      "OwnerID": user.id,
+      "Urls": urls,
+      "IsFound": false,
+      "City": city,
+      "Country": country,
+      "LocalityName": streetName,
+      "IsoCountryCode": isoCountryCode,
+      "SharedPhoneNumber": true,
+      "PetBreedAppearence": petBreedAppearence, // 0, 1, 2
+      "PetBreedAppearenceSize": petBreedAppearenceSize, // 0, 1, 2, 3
+      "Name": name
+    }
+
+    agent
+      .Search
+      .addPet(body, user.token)
+      .then(() => {
+        this.setState({
+          isAddFoundPopupOpen: false
+        })
+      })
+      .catch((err) => {
+        new Error(err)
+        this.setState({
+          isAddFoundPopupOpen: false
+        })
+      })
   }
 
   sendAddData() {
@@ -527,6 +578,14 @@ export class SearchPage extends Component {
 
     this.setState({
       number: value
+    })
+  }
+
+  changePetName(e) {
+    const value = e.target.value
+
+    this.setState({
+      name: value
     })
   }
 
@@ -722,7 +781,7 @@ export class SearchPage extends Component {
                 />
               </StandaloneSearchBox>
             </FormGroup>
-            {/* <FormGroup>
+            <FormGroup>
               <Label for='phone'>Phone</Label>
               <FormControl
                 type='text'
@@ -730,7 +789,7 @@ export class SearchPage extends Component {
                 id='phone'
                 value={this.state.phoneNumber}
                 onChange={this.changeNumber} />
-            </FormGroup> */}
+            </FormGroup>
             {/* <FormGroup>
               <Label for='date'>Date</Label>
               <DatePicker
@@ -874,7 +933,7 @@ export class SearchPage extends Component {
   }
 
   renderAddFoundModal() {
-    //const { petBreedAppearence, petList, petType, additionalInformation } = this.state
+    const { petList, petType, additionalInformation, petBreedAppearence } = this.state
 
     return (
       <Modal isOpen={this.state.isAddFoundPopupOpen}
@@ -896,7 +955,24 @@ export class SearchPage extends Component {
               />
             </StandaloneSearchBox>
           </FormGroup>
-          
+          <FormGroup>
+            <Label for='phone'>Phone</Label>
+            <FormControl
+              type='text'
+              name='phone'
+              id='phone'
+              value={this.state.phoneNumber}
+              onChange={this.changeNumber} />
+          </FormGroup>
+          <FormGroup>
+            <Label for='petname'>Pet's name</Label>
+            <FormControl
+              type='text'
+              name='petname'
+              id='petname'
+              value={this.state.petname}
+              onChange={this.changePetName} />
+          </FormGroup>
           <FormGroup>
             <legend><FormattedMessage id='lost.information' /> </legend>
             <FormGroup>
@@ -919,6 +995,103 @@ export class SearchPage extends Component {
                 <span className="pet-icon cat-icon">{<FormattedMessage id='cat' />}</span>
               </Label>
             </FormGroup>
+            <FormGroup>
+              <Label>
+                <Input
+                  type="radio"
+                  name="breed"
+                  onChange={this.setBreed}
+                />{<FormattedMessage id='breed.purebred' />}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="breed"
+                  onChange={this.setPossibleBreed}
+                />
+                {<FormattedMessage id='breed.mutt' />}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="breed"
+                  defaultChecked
+                  onChange={this.setNotBreed}
+                />
+                {<FormattedMessage id='breed.unknownbreed' />}
+              </Label>
+            </FormGroup>
+          </FormGroup>
+          {
+            ((petBreedAppearence === 1 || petBreedAppearence === 2) && petList.length > 0) &&
+            <FormGroup>
+              <Input
+                type="select"
+                name="breed"
+                onChange={this.setBreedId}
+              >
+                {
+                  petList
+                    .filter(breed => breed.typeId === petType)
+                    .map(breed => {
+                      return (
+                        <option
+                          key={breed.id}
+                          value={breed.id}>
+                          {breed.breedName}
+                        </option>
+                      )
+                    })
+                }
+              </Input>
+            </FormGroup>
+          }
+          {
+            (petBreedAppearence === 0) &&
+            <FormGroup>
+              <Label>
+                <Input
+                  type="radio"
+                  name="size"
+                  defaultChecked
+                  onChange={this.setSmall}
+                />{<FormattedMessage id='breed.small' />}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="size"
+                  onChange={this.setMedium}
+                />{<FormattedMessage id='breed.medium' />}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="size"
+                  onChange={this.setLarge}
+                />{<FormattedMessage id='breed.large' />}
+              </Label>
+              <Label>
+                <Input
+                  type="radio"
+                  name="size"
+                  onChange={this.setExtraLarge}
+                />{<FormattedMessage id='breed.varylarge' />}
+              </Label>
+            </FormGroup>
+          }
+          <FormGroup>
+            <Label for="additional"><FormattedMessage id='lost.addinfo' /></Label>
+            <Input
+              type="textarea"
+              name="text"
+              id="additional"
+              value={additionalInformation}
+              onChange={this.setAdditionalInfo}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FileUploaderContainer onUpload={this.onUpload} />
           </FormGroup>
         </ModalBody>
         <ModalFooter>
@@ -927,7 +1100,7 @@ export class SearchPage extends Component {
           ><FormattedMessage id='btnclose' /></Button>
           <Button color="success"
             onClick={this.sendAddFoundData}
-          ><FormattedMessage id='btnsave' /></Button>
+          ><FormattedMessage id='btnsave' />2</Button>
         </ModalFooter>
       </Modal>
     )
