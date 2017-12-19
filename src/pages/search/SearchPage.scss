@@ -296,3 +296,33 @@
     }
   }
 }
+
+.pet-icon {
+  position: relative;
+  height: 0;
+  width: 60px;
+  display: block;
+  padding-top: 60px;
+  overflow: hidden;
+  padding-left: 5px;
+  padding-right: 5px;
+  top: -15px;
+  cursor: pointer;
+
+  &.dog-icon {
+    background: url('../../shared/assets/images/dog-icon.png') no-repeat center top;
+  }
+
+  &.cat-icon {
+    background: url('../../shared/assets/images/cat-icon.png') no-repeat center top;
+  }
+}
+
+.pet-radio {
+  opacity: 0;
+
+  &:checked + .pet-icon {
+    border: 2px solid green;
+    border-radius: 4px;
+  }
+}

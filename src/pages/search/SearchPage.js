@@ -341,7 +341,7 @@ export class SearchPage extends Component {
         <div>
           <Row>
             <Col className={`${CN}__search-header`}>
-            <FormattedMessage id='lost.found'/> - <span className={`${CN}__search-header-secondary`}>
+              <FormattedMessage id='lost.found'/> - <span className={`${CN}__search-header-secondary`}>
                 {filteredFindings.length} <FormattedMessage id='pets'/>
               </span>
             </Col>
@@ -667,7 +667,7 @@ export class SearchPage extends Component {
     return (
       <Modal isOpen={this.state.isAddPopupOpen}
         className={`${CN}__add-modal`}
-         >
+      >
         <ModalHeader><FormattedMessage id='lost.addlost'/></ModalHeader>
         <ModalBody>
           <Form>
@@ -728,19 +728,21 @@ export class SearchPage extends Component {
               <FormGroup>
                 <Label>
                   <Input
+                    className="pet-radio"
                     type="radio"
                     name="pet"
                     defaultChecked
                     onChange={this.setDog}
-                  />{<FormattedMessage id='dog'/>}
+                  /><span className="pet-icon dog-icon">{<FormattedMessage id='dog'/>}</span>
                 </Label>
                 <Label>
                   <Input
+                    className="pet-radio"
                     type="radio"
                     name="pet"
                     onChange={this.setCat}
                   />
-                  {<FormattedMessage id='cat'/>}
+                  <span className="pet-icon cat-icon">{<FormattedMessage id='cat'/>}</span>
                 </Label>
               </FormGroup>
               <FormGroup>
