@@ -46,6 +46,7 @@ export class SearchPage extends Component {
       isPopup: false,
       infoPopup: null,
       isAddPopupOpen: false,
+      isAddFoundPopupOpen: false,
       date: moment(),
       isFound: false,
       breed: 0,
@@ -446,12 +447,27 @@ export class SearchPage extends Component {
     })
   }
 
+  addFoundPet() {
+    this.setState({
+      isAddFoundPopupOpen: true
+    })
+  }
+
   closeAddPopup() {
     this.setState({
       isAddPopupOpen: false
     })
   }
 
+  closeAddFoundPopup() {
+    this.setState({
+      isAddFoundPopupOpen: false
+    })
+  }
+
+  sendAddFoundData() {
+
+  }
 
   sendAddData() {
     const {
@@ -857,6 +873,29 @@ export class SearchPage extends Component {
     )
   }
 
+  renderAddFoundModal() {
+    //const { petBreedAppearence, petList, petType, additionalInformation } = this.state
+
+    return (
+      <Modal isOpen={this.state.isAddFoundPopupOpen}
+        className={`${CN}__add-modal`}
+      >
+        <ModalHeader>Загублено тваринку</ModalHeader>
+        <ModalBody>
+
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success"
+            onClick={this.closeAddFoundPopup}
+          ><FormattedMessage id='btnclose' /></Button>
+          <Button color="success"
+            onClick={this.sendAddFoundData}
+          ><FormattedMessage id='btnsave' /></Button>
+        </ModalFooter>
+      </Modal>
+    )
+  }
+
   setAdditionalInfo(e) {
     this.setState({
       additionalInformation: e.currentTarget.value
@@ -894,13 +933,22 @@ export class SearchPage extends Component {
           md={3}
           xs={12}
         >
-          <div>
+          <div className="action-holder">
             <Button
               className={`${CN}__add-button`}
               color="success"
               onClick={this.addLostPet}
             >
               <FormattedMessage id='lost.addlost'/>
+            </Button>
+          </div>
+          <div className="action-holder">
+            <Button
+              className={`${CN}__add-button`}
+              color="success"
+              onClick={this.addFoundPet}
+            >
+              Pet was found
             </Button>
           </div>
           <div className={`${CN}__sidebar-header`}><FormattedMessage id='lost.filter'/></div>
@@ -914,6 +962,7 @@ export class SearchPage extends Component {
           {!!findings.length && this.renderBreedFilter()}
         </Col>
         {this.renderAddModal()}
+        {this.renderAddFoundModal()}
       </PageLayout>
     )
   }
