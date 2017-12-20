@@ -153,6 +153,7 @@
       background-position: left -275px bottom -180px;
 
       @include media-breakpoint-up(md) {
+        display: block !important;
         background-size: auto;
         background-position: left -600px top 45px;
       }
@@ -163,7 +164,7 @@
       display: none;
 
       @include media-breakpoint-up(md) {
-        display: block;
+        display: block !important;
         background-position: right -275px top 105px;
       }
     }
