@@ -187,7 +187,7 @@
 
     .btn {
       background: $green;
-      
+
       &:hover {
         cursor: pointer;
       }
@@ -200,7 +200,7 @@
 
   &__search-item-phone-link {
     color: $green;
-      
+
     &:hover {
       cursor: pointer;
       color: $green;
@@ -329,4 +329,16 @@
 
 .action-holder {
   margin-bottom: 15px;
+}
+
+// modal styles
+.modal-content {
+  padding-top: 65px;
+  .modal-header {
+    position: fixed;
+    width: 50vw;
+    margin-top: -65px;
+    background: white;
+    z-index: 1000;
+  }
 }

@@ -18,7 +18,7 @@ import home from '../../shared/assets/images/home.png'
 // import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { FileUploaderContainer } from '../../shared/components/FileUploader'
-import { FormattedMessage } from 'react-intl' 
+import { FormattedMessage } from 'react-intl'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './SearchPage.scss'
@@ -89,7 +89,7 @@ export class SearchPage extends Component {
 
   setStateBreedId(data) {
     const breeds = data.filter(breed => {
-      return breed.typeId === this.state.petType 
+      return breed.typeId === this.state.petType
     })
 
     this.setState({
@@ -197,7 +197,7 @@ export class SearchPage extends Component {
 
         {
           !!infoWindow &&
-            <InfoWindow 
+            <InfoWindow
               position={{
                 lat: infoWindow.finding.latitude,
                 lng: infoWindow.finding.longitude,
@@ -208,7 +208,7 @@ export class SearchPage extends Component {
                 <div
                   className={`${CN}__map-marker-header`}
                 >
-                  { 
+                  {
                     infoWindow.finding.petName ?
                       (<span>Lost: {infoWindow.finding.petName}</span>) :
                       (<span><FormattedMessage id='lost.foundsing'/> </span>)
@@ -223,7 +223,7 @@ export class SearchPage extends Component {
                   className={`${CN}__map-marker-info`}
                   onClick={this.onOpenPopup}
                 >
-                  <FaInfoCircle /> <FormattedMessage id='lost.details'/> 
+                  <FaInfoCircle /> <FormattedMessage id='lost.details'/>
                 </div>
               </div>
             </InfoWindow>
@@ -266,7 +266,7 @@ export class SearchPage extends Component {
       return (
         <img alt={breedName}
           src={imgSrc}
-        /> 
+        />
       )
     } else {
       return (
@@ -286,7 +286,7 @@ export class SearchPage extends Component {
   }
 
   onCardDetails(finding) {
-    
+
     this.setState({
       infoWindow: {
         finding
@@ -351,9 +351,9 @@ export class SearchPage extends Component {
             {results}
           </Row>
           {
-            isPopup && 
-              <ModalPopup 
-                className={`${CN}__search-modal`} 
+            isPopup &&
+              <ModalPopup
+                className={`${CN}__search-modal`}
                 toggle={this.onPopupToggle}
                 isOpen={isPopup}
                 data={infoWindow}
@@ -395,9 +395,9 @@ export class SearchPage extends Component {
           key={i}
         >
           <Label>
-            <input 
-              type="checkbox" 
-              onChange={this.setFilter} 
+            <input
+              type="checkbox"
+              onChange={this.setFilter}
               value={finding.breedName}
               checked={filter.includes(finding.breedName)}
             />
@@ -418,7 +418,7 @@ export class SearchPage extends Component {
               >
                 <span className={`${CN}__selected-item-text`}>{filterItem}</span>
                 <span className={`${CN}__selected-item-icon`}>
-                  <CloseIcon 
+                  <CloseIcon
                     onClick={this.removeFilterItem}
                     item={filterItem}
                   />
@@ -1100,7 +1100,7 @@ export class SearchPage extends Component {
           ><FormattedMessage id='btnclose' /></Button>
           <Button color="success"
             onClick={this.sendAddFoundData}
-          ><FormattedMessage id='btnsave' />2</Button>
+          ><FormattedMessage id='btnsave' /></Button>
         </ModalFooter>
       </Modal>
     )
