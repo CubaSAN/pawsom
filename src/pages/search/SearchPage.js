@@ -22,6 +22,7 @@ import { FormattedMessage } from 'react-intl'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './SearchPage.scss'
+import { messages } from '../../localization'
 
 
 const CN = 'search-page'
@@ -123,9 +124,10 @@ export class SearchPage extends Component {
 
   getFilteresFindings(findings) {
     const { filter } = this.state
-
+    const {locale} = this.props
+    
     return filter.length ?
-      findings.filter(finding => filter.includes(finding.breedName)) :
+      findings.filter(finding => filter.includes(messages[locale].breeds[finding.breedName])) :
       findings
   }
 
@@ -164,6 +166,8 @@ export class SearchPage extends Component {
     const { lat, lng } = this.props
     const center = { lat, lng }
     const { findings, infoWindow } = this.state
+    const {locale} = this.props
+    
 
     return (
       <Map
@@ -217,7 +221,7 @@ export class SearchPage extends Component {
                 <div
                   className={`${CN}__map-marker-desc`}
                 >
-                  {infoWindow.finding.breedName}
+                  {messages[locale].breeds[infoWindow.finding.breedName]}
                 </div>
                 <div
                   className={`${CN}__map-marker-info`}
@@ -260,11 +264,14 @@ export class SearchPage extends Component {
   }
 
   renderFindingImage(urls, breedName) {
+    const {locale} = this.props
+    
+
     if (urls.length) {
       const imgSrc = this.parseImageUrl(urls[0])
 
       return (
-        <img alt={breedName}
+        <img alt={messages[locale].breeds[breedName]}
           src={imgSrc}
         />
       )
@@ -298,7 +305,7 @@ export class SearchPage extends Component {
 
   renderFindings() {
     const { findings, isPopup, infoWindow } = this.state
-
+    const {locale} = this.props
     if (findings.length) {
       const filteredFindings = this.getFilteresFindings(findings)
       const results = filteredFindings.map((finding, i) => {
@@ -307,11 +314,11 @@ export class SearchPage extends Component {
             xs={12}
           >
             <Thumbnail
-              alt={finding.breedName}
+              alt={messages[locale].breeds[finding.breedName] }
               src={this.parseImageUrl(finding.urls[0])}
             >
               <div className={`${CN}__search-item-holder`}>
-                <div className={`${CN}__search-item-breed`}>{finding.breedName}</div>
+                <div className={`${CN}__search-item-breed`}>{messages[locale].breeds[finding.breedName]}</div>
                 <div className={`${CN}__search-item-name`}>{this.renderFoundBy(finding.foundBy)}</div>
                 <div className={`${CN}__search-item-address`}> {finding.localityName}</div>
                 <div className={`${CN}__search-item-phone`}>
@@ -388,6 +395,8 @@ export class SearchPage extends Component {
 
   renderBreedFilter() {
     const { findings, filter } = this.state
+    const {locale} = this.props
+    
 
     const results = _.uniqBy(findings, 'breedName').map((finding, i) => {
       return (
@@ -398,10 +407,10 @@ export class SearchPage extends Component {
             <input
               type="checkbox"
               onChange={this.setFilter}
-              value={finding.breedName}
+              value={messages[locale].breeds[finding.breedName]}
               checked={filter.includes(finding.breedName)}
             />
-            {` ${finding.breedName}`}
+            {` ${messages[locale].breeds[finding.breedName]}`}
           </Label>
         </div>
       )
@@ -409,7 +418,7 @@ export class SearchPage extends Component {
 
     return (
       <div className={`${CN}__sidebar-item`}>
-        <div className={`${CN}__sidebar-heading`}>Breed</div>
+        <div className={`${CN}__sidebar-heading`}><FormattedMessage id='breed.breed'/></div>
         <ul className={`${CN}__selected-filters`}>
           {filter.map((filterItem, i) => {
             return (
@@ -738,7 +747,8 @@ export class SearchPage extends Component {
 
   renderAddModal() {
     const { petBreedAppearence, petList, petType, additionalInformation } = this.state
-
+    const {locale} = this.props
+    
     return (
       <Modal isOpen={this.state.isAddPopupOpen}
         className={`${CN}__add-modal`}
@@ -863,7 +873,7 @@ export class SearchPage extends Component {
                           <option
                             key={breed.id}
                             value={breed.id}>
-                            {breed.breedName}
+                            {messages[locale].breeds[breed.breedName]}
                           </option>
                         )
                       })
@@ -934,7 +944,8 @@ export class SearchPage extends Component {
 
   renderAddFoundModal() {
     const { petList, petType, additionalInformation, petBreedAppearence } = this.state
-
+    const {locale} = this.props
+    
     return (
       <Modal isOpen={this.state.isAddFoundPopupOpen}
         className={`${CN}__add-modal`}
@@ -1038,7 +1049,7 @@ export class SearchPage extends Component {
                         <option
                           key={breed.id}
                           value={breed.id}>
-                          {breed.breedName}
+                          {messages[locale].breeds[breed.breedName]}
                         </option>
                       )
                     })

@@ -17,7 +17,8 @@ const CN = 'post-page'
 export class PostPage extends Component {
   static propTypes = {
     lat: PropTypes.number,
-    lng: PropTypes.number
+    lng: PropTypes.number,
+    locale: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -185,7 +186,7 @@ export class PostPage extends Component {
   }
 
   render () {
-    const { lat, lng } = this.props
+    const { lat, lng, locale } = this.props
 
     return (
       <div className={`${CN}__background`}>
@@ -200,6 +201,7 @@ export class PostPage extends Component {
                 userId={this.props.id}
                 postId={this.props.computedMatch.params.id}
                 addComment={this.addComment.bind(this)}
+                locale = {locale}
               />
             </div>
           </Col>
