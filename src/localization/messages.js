@@ -15,11 +15,14 @@ export const messages = {
       information: 'Describe your pet',
       addinfo:'Please provide any additional information'  ,      
       addlost: 'Lost pet found',
+      addlostpet: 'I have lost my Pet',
       foundsing: 'Found',
       filter: 'Filter',
       distance: 'Show pets in radius',
-      foundaround:'was found near'
-      
+      foundaround:'was found near',
+      petlost: 'Pet Lost',
+      petname: 'Pet Name ',
+      lostpetfound: 'Lost: '
     },
 
     pet:'Pet',
@@ -136,9 +139,13 @@ export const messages = {
       information: 'Опишите питомца',
       addinfo:'Любая дополнительная информация может быть очень полезна' ,      
       addlost: 'Найдено животное',
+      addlostpet: 'Пропал любимец',
       filter: 'Фильтр',
       distance: 'Показать потеряшек в радиусе' ,     
-      foundaround:'был найден в районе'
+      foundaround:'был найден в районе',
+      petlost: 'Потеряный питомец',
+      petname: 'Отзиваеться на имя ',
+      lostpetfound: 'Потерялся: '
     },
 
     breed:{
@@ -243,9 +250,13 @@ export const messages = {
       information: 'Опишіть тваринку',
       addinfo:'Будь-яка додаткова інформація буде дуже корисна',      
       addlost: 'Знайдено тваринку',
+      addlostpet: 'Загублено тваринку',      
       filter: 'Фільтр',
       distance: 'Показати загублених в радіусі' ,
-      foundaround:'був знайдений в районі'
+      foundaround:'був знайдений в районі',
+      petlost: 'Загублений улюбленець',
+      petname: 'Відзиваеться на ім\'я',
+      lostpetfound: 'Загубився: '
     },
 
     breed:{

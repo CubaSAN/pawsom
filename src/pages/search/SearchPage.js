@@ -210,7 +210,7 @@ export class SearchPage extends Component {
                 >
                   {
                     infoWindow.finding.petName ?
-                      (<span>Lost: {infoWindow.finding.petName}</span>) :
+                      (<span><FormattedMessage id='lost.lostpetfound'/> {infoWindow.finding.petName}</span>) :
                       (<span><FormattedMessage id='lost.foundsing'/> </span>)
                   }
                 </div>
@@ -782,7 +782,7 @@ export class SearchPage extends Component {
               </StandaloneSearchBox>
             </FormGroup>
             <FormGroup>
-              <Label for='phone'>Phone</Label>
+              <Label for='phone'><FormattedMessage id='phonenum'/></Label>
               <FormControl
                 type='text'
                 name='phone'
@@ -939,7 +939,7 @@ export class SearchPage extends Component {
       <Modal isOpen={this.state.isAddFoundPopupOpen}
         className={`${CN}__add-modal`}
       >
-        <ModalHeader>Загублено тваринку</ModalHeader>
+        <ModalHeader><FormattedMessage id='lost.addlostpet' /> </ModalHeader>
         <ModalBody>
           <FormGroup>
             <Label for='address'><FormattedMessage id='lost.address' /> </Label>
@@ -956,7 +956,7 @@ export class SearchPage extends Component {
             </StandaloneSearchBox>
           </FormGroup>
           <FormGroup>
-            <Label for='phone'>Phone</Label>
+            <Label for='phone'><FormattedMessage id='phonenum' /></Label>
             <FormControl
               type='text'
               name='phone'
@@ -965,7 +965,7 @@ export class SearchPage extends Component {
               onChange={this.changeNumber} />
           </FormGroup>
           <FormGroup>
-            <Label for='petname'>Pet's name</Label>
+            <Label for='petname'><FormattedMessage id='lost.petname' /></Label>
             <FormControl
               type='text'
               name='petname'
@@ -1136,7 +1136,7 @@ export class SearchPage extends Component {
               <div className={`${CN}__no-results`}>
                 No results yet, please use filters
               </div>
-          }
+          } 
         </Col>
         <Col
           className={`${CN}__sidebar`}
@@ -1151,6 +1151,7 @@ export class SearchPage extends Component {
             >
               <FormattedMessage id='lost.addlost'/>
             </Button>
+            
           </div>
           <div className="action-holder">
             <Button
@@ -1158,7 +1159,7 @@ export class SearchPage extends Component {
               color="success"
               onClick={this.addFoundPet}
             >
-              Pet was found
+            <FormattedMessage id='lost.addlostpet'/>
             </Button>
           </div>
           <div className={`${CN}__sidebar-header`}><FormattedMessage id='lost.filter'/></div>
