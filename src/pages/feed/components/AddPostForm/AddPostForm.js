@@ -9,12 +9,15 @@ import { FileUploaderContainer } from '../../../../shared/components/FileUploade
 import './AddPostForm.scss'
 import { FormattedMessage } from 'react-intl'
 
+import { messages } from '../../../../localization'
+
 const CN = 'add-post-form'
 
 export class AddPostForm extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    onSuccess: PropTypes.func.isRequired
+    onSuccess: PropTypes.func.isRequired,
+    locale: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -91,6 +94,9 @@ export class AddPostForm extends Component {
   }
 
   render () {
+    const {locale} = this.props
+    debugger;
+
     return (
       <div className={CN}>
         <form onSubmit={this.submitNewPost}>
@@ -100,7 +106,7 @@ export class AddPostForm extends Component {
             <FormControl
               className={`${CN}__textarea`}
               componentClass='textarea' 
-              placeholder='feed.add.textPlaceholder'
+              placeholder={messages[locale].feed.add.textPlaceholder}
               onChange={this.onPostContantChange} 
               value={this.state.text} />
           </FormGroup>
@@ -110,7 +116,7 @@ export class AddPostForm extends Component {
               className={`${CN}__checkbox`}
               inline
               onChange={this.onAllowCommentsChange}>
-              <FormattedMessage id='feed.add.comAllowed' />
+              <FormattedMessage id={'feed.add.comAllowed'} />
             </Checkbox>
 
             <div>

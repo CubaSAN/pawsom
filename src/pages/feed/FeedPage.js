@@ -98,12 +98,13 @@ export class FeedPage extends Component {
   }
 
   renderAddPostForm() {
-    const { user } = this.props
+    const { user, locale } = this.props
 
     return (
       <AddPostForm
         user={user}
         onSuccess={this.onPostAddSuccess}
+        locale={locale}
       />
     )
   }

@@ -55,7 +55,7 @@ export class ModalPopup extends React.Component {
     const { data: { finding } } = this.props
 
     return finding.petName ?
-      (<span>Lost pet - {finding.breedName}, pet name {finding.petName}</span>) :
+      (<span><FormattedMessage id='lost.petlost'/> - {finding.breedName}, <FormattedMessage id='lost.petname'/> {finding.petName}</span>) :
       (<span><FormattedMessage id='lost.found'/>  - {finding.breedName}</span>)
   }
 

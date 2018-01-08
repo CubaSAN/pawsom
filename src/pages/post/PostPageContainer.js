@@ -2,14 +2,15 @@ import { connect } from 'react-redux'
 import { PostPage } from './PostPage'
 
 const mapStateToProps = state => {
-  const { navigator: { lat, lng }} = state || {}
+  const { navigator: { lat, lng }, locales} = state || {}
   const { id, token } = state.auth.user
 
   return {
     lat,
     lng,
     id,
-    token
+    token,
+    locale: locales.locale
   }
 }
 

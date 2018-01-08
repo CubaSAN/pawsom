@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import autoBind from 'react-autobind'
+import PropTypes from 'prop-types'
 import { FormControl } from 'react-bootstrap'
 import { FormGroup, Button } from 'reactstrap'
 import agent from '../../../agent'
 import { FormattedMessage } from 'react-intl' 
+import { messages } from '../../../localization'
+
 
 const CN = 'add-comment'
 
 class AddCommentForm extends Component {
+
+  static propTypes = {
+    locale: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props)
 
@@ -60,6 +68,9 @@ class AddCommentForm extends Component {
   }
 
   render() {
+    const {locale} = this.props
+    
+
     return (
       <div className={`${CN}`}>
         <form onSubmit={this.submitNewPost}>
@@ -69,7 +80,7 @@ class AddCommentForm extends Component {
             <FormControl
               className={`${CN}__textarea`}
               componentClass='textarea'
-              placeholder='feed.add.textPlaceholder'
+              placeholder={messages[locale].feed.add.textPlaceholder}
               onChange={this.onCommentContantChange}
               value={this.state.text} />
           </FormGroup>
