@@ -5,7 +5,7 @@ import autoBind from 'react-autobind'
 import TimeAgo from 'react-timeago'
 import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
-import { Gallery } from '../../../shared/components/Gallery'
+import { ImageGallery } from '../../../shared/components/ImageGallery'
 import agent from '../../../agent'
 import { FormattedMessage } from 'react-intl' 
 
@@ -46,14 +46,8 @@ export class Post extends Component {
   renderImages(imagesUrl) {
     if (!imagesUrl.length) return null
 
-    const images = imagesUrl.map(image => {
-      return {
-        src: image
-      }
-    })
-
     return (
-      <Gallery images={images} />
+      <ImageGallery images={imagesUrl} />
     )
   }
 

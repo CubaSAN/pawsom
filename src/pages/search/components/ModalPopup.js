@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import { Gallery } from '../../../shared/components/Gallery'
-import Gallery from 'react-photo-gallery';
-import Lightbox from 'react-images';
+import { ImageGallery } from '../../../shared/components/ImageGallery'
+//import Gallery from 'react-photo-gallery';
+// import Lightbox from 'react-images';
 import { FormattedMessage } from 'react-intl'
 
 export class ModalPopup extends React.Component {
@@ -15,40 +16,40 @@ export class ModalPopup extends React.Component {
     data: PropTypes.object.isRequired
   }
 
-  constructor() {
-    super();
-    this.state = { currentImage: 0 };
-    this.closeLightbox = this.closeLightbox.bind(this);
-    this.openLightbox = this.openLightbox.bind(this);
-    this.gotoNext = this.gotoNext.bind(this);
-    this.gotoPrevious = this.gotoPrevious.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = { currentImage: 0 };
+  //   this.closeLightbox = this.closeLightbox.bind(this);
+  //   this.openLightbox = this.openLightbox.bind(this);
+  //   this.gotoNext = this.gotoNext.bind(this);
+  //   this.gotoPrevious = this.gotoPrevious.bind(this);
+  // }
 
-  openLightbox(event, obj) {
-    this.setState({
-      currentImage: obj.index,
-      lightboxIsOpen: true,
-    });
-  }
+  // openLightbox(event, obj) {
+  //   this.setState({
+  //     currentImage: obj.index,
+  //     lightboxIsOpen: true,
+  //   });
+  // }
 
-  closeLightbox() {
-    this.setState({
-      currentImage: 0,
-      lightboxIsOpen: false,
-    });
-  }
+  // closeLightbox() {
+  //   this.setState({
+  //     currentImage: 0,
+  //     lightboxIsOpen: false,
+  //   });
+  // }
 
-  gotoPrevious() {
-    this.setState({
-      currentImage: this.state.currentImage - 1,
-    });
-  }
+  // gotoPrevious() {
+  //   this.setState({
+  //     currentImage: this.state.currentImage - 1,
+  //   });
+  // }
 
-  gotoNext() {
-    this.setState({
-      currentImage: this.state.currentImage + 1,
-    });
-  }
+  // gotoNext() {
+  //   this.setState({
+  //     currentImage: this.state.currentImage + 1,
+  //   });
+  // }
 
   renderHeader() {
     const { data: { finding } } = this.props
@@ -72,15 +73,15 @@ export class ModalPopup extends React.Component {
     )
   }
 
-  prepareImages(images) {
-    return images.map((image) => {
-      return {
-        src: image,
-        width: 4,
-        height: 3
-      }
-    })
-  }
+  // prepareImages(images) {
+  //   return images.map((image) => {
+  //     return {
+  //       src: image,
+  //       width: 4,
+  //       height: 3
+  //     }
+  //   })
+  // }
 
   render() {
     const { data: { finding } } = this.props
@@ -97,14 +98,16 @@ export class ModalPopup extends React.Component {
                 (
                   <Col xs={12}>
                     {/* <Gallery photos={this.prepareImages(finding.urls)} /> */}
-                    <Gallery photos={this.prepareImages(finding.urls)} onClick={this.openLightbox} />
-                    <Lightbox images={this.prepareImages(finding.urls)}
+                    {/* <Gallery photos={this.prepareImages(finding.urls)} onClick={this.openLightbox} /> */}
+
+                    <ImageGallery images={finding.urls} />
+                    {/* <Lightbox images={this.prepareImages(finding.urls)}
                       onClose={this.closeLightbox}
                       onClickPrev={this.gotoPrevious}
                       onClickNext={this.gotoNext}
                       currentImage={this.state.currentImage}
                       isOpen={this.state.lightboxIsOpen}
-                    />
+                    /> */}
                   </Col>
                 ) :
                 (

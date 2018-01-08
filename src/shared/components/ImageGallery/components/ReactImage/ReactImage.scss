@@ -1,0 +1,69 @@
+.react-image {
+  position: relative;
+
+  &--error {
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    height: 100%;
+    background: rgba(234, 234, 234, 0.7);
+
+    &::after {
+      content: 'No Image';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #b1b1b1;
+    }
+  }
+
+  &--loading {
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    height: 100%;
+    background: rgba(234, 234, 234, 0.7);
+
+    &::after {
+      content: 'Image is loading';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #b1b1b1;
+      animation-duration: 4s;
+      animation-name: shake;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+@keyframes shake {
+  0% {
+    margin-left: -10px;
+    margin-top: 0;
+  }
+
+  25% {
+    margin-top: -10px;
+    margin-left: 0;
+  }
+
+  50% {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+
+  75% {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+
+  100% {
+    margin-left: -10px;
+    margin-top: 0;
+  }
+}
