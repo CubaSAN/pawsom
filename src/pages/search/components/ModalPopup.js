@@ -7,13 +7,20 @@ import { ImageGallery } from '../../../shared/components/ImageGallery'
 //import Gallery from 'react-photo-gallery';
 // import Lightbox from 'react-images';
 import { FormattedMessage } from 'react-intl'
+import FaPhone from 'react-icons/lib/fa/phone'
+
+import { messages } from '../../../localization'
+
+const CN = 'search-page'
+
 
 export class ModalPopup extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     className: PropTypes.string,
     toggle: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    locale: PropTypes.string.isRequired    
   }
 
   // constructor() {
@@ -61,14 +68,25 @@ export class ModalPopup extends React.Component {
 
   renderMainContent() {
     const { data: { finding } } = this.props
-
+    const {locale} = this.props
+    
     return (
       <div>
-        <div>{finding.breedName} <FormattedMessage id='lost.foundaround'/> :</div>
-        <div>{finding.localityName}</div>
-        <div><FormattedMessage id='lost.foundby'/>: {finding.foundBy},</div>
+        <div><b>{finding.breedName}</b> <FormattedMessage id='lost.foundaround'/> :</div>
+        <div className={`${CN}__search-item-address`}> {finding.localityName}</div>
+        <div className={`${CN}__search-item-name`}><FormattedMessage id='lost.foundby'/>: {finding.foundBy},</div>
+        <div className={`${CN}__search-item-phone`}>
+          <FaPhone />
+          <a className={`${CN}__search-item-phone-link`}
+            href={`tel:${finding.phoneNumber}`}
+          >
+            {` ${finding.phoneNumber}`}
+          </a>
+          <span></span>
+        </div> 
         <div>{finding.additionalInformation}</div>
-        <div><FormattedMessage id='phonenum'/>: {finding.phoneNumber}</div>
+
+
       </div>
     )
   }
