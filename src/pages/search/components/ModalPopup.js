@@ -129,7 +129,7 @@ export class ModalPopup extends React.Component {
                   </Col>
                 ) :
                 (
-                  <Col lg={4}
+                  <Col lg={8}
                     xs={12}
                   >
                     {this.renderMainContent()}
@@ -140,7 +140,7 @@ export class ModalPopup extends React.Component {
             {
               !!finding.urls.length &&
                 (
-                  <Col lg={4}
+                  <Col lg={8}
                     xs={12}
                   >
                     {this.renderMainContent()}
