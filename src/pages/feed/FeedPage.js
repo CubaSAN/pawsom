@@ -10,7 +10,7 @@ import agent from '../../agent'
 import './FeedPage.scss'
 import { Post } from './components/Post'
 import { AddPostForm } from './components/AddPostForm'
-import { FormattedMessage } from 'react-intl' 
+import { FormattedMessage } from 'react-intl'
 
 
 const CN = 'feed-page'
@@ -29,6 +29,7 @@ export class FeedPage extends Component {
     this.state = {
       postsPage: 0,
       posts: [],
+      postsReady: false,
       prevDisabled: '',
       nextDisabled: ''
     }
@@ -52,6 +53,7 @@ export class FeedPage extends Component {
       agent.Posts.all(user.id, this.state.postsPage , user.token).then((posts) => {
         this.setState({
           posts,
+          postsReady: true,
           nextDisabled: posts.length < 20 ? 'disabled' : ''
         })
       })
@@ -160,11 +162,11 @@ export class FeedPage extends Component {
 
   render () {
     const { lat, lng } = this.props
-
+    const postsReady = this.state.postsReady
     return (
       <div className={`${CN}__background`}>
         <PageLayout className={CN}
-          isPageAvailable={lat && lng}>
+          isPageAvailable={lat && lng && postsReady}>
           <Row>
             <Col xs={12}
               md={8}
