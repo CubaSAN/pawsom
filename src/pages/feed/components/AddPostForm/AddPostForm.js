@@ -17,7 +17,7 @@ export class AddPostForm extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     onSuccess: PropTypes.func.isRequired,
-    locale: PropTypes.object.isRequired
+    locale: PropTypes.string.isRequired
   }
 
   constructor(props) {
@@ -95,19 +95,18 @@ export class AddPostForm extends Component {
 
   render () {
     const {locale} = this.props
-    debugger;
 
     return (
       <div className={CN}>
         <form onSubmit={this.submitNewPost}>
-          <FormGroup 
+          <FormGroup
             className={`${CN}__formgroup`}
           >
             <FormControl
               className={`${CN}__textarea`}
-              componentClass='textarea' 
+              componentClass='textarea'
               placeholder={messages[locale].feed.add.textPlaceholder}
-              onChange={this.onPostContantChange} 
+              onChange={this.onPostContantChange}
               value={this.state.text} />
           </FormGroup>
 
@@ -120,7 +119,7 @@ export class AddPostForm extends Component {
             </Checkbox>
 
             <div>
-              <FaCamera 
+              <FaCamera
                 className={`${CN}__upload-icon`}
               />
               <Button

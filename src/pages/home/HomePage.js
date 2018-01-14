@@ -126,14 +126,14 @@ export class HomePage extends Component {
                       <FormattedMessage id='download' />
                     </div>
                     <div className={`${CN}__ad1-buttons`}>
-                       
+
                       <a
                         className={`btn ${CN}__ad1-cta`}
                         href='https://itunes.apple.com/us/app/apple-store/id1296340728'
                         target='_blank'
                         rel='noopener noreferrer'
                       >
-                        <img src="https://pwcdn.azureedge.net/images/general/appstore_pawsom_ios.png" width="200" height="200"/>
+                        <img src="https://pwcdn.azureedge.net/images/general/appstore_pawsom_ios.png" width="200" height="200" alt="QR-code"/>
                       </a>
 
                       {/* <a
