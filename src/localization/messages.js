@@ -16,7 +16,6 @@ export const messages = {
     "Anatolian Shepherd Dog": 'Anatolian Shepherd Dog',
     "Appenzell Cattle Dog": 'Appenzell Cattle Dog',
     "Appenzeller Sennenhunde": 'Appenzeller Sennenhund',
-    "Airedale Terrier": 'Airedale Terrier',
     "Atlas Mountain Dog - Aidi": 'Atlas Mountain Dog - Aidi',
     "Australian Cattle Dog": 'Australian Cattle Dog',
     "Australian Kelpie": 'Australian Kelpie',
@@ -102,7 +101,6 @@ export const messages = {
     "Danish–Swedish Farmdog": 'Danish–Swedish Farmdog',
     "Dachshund": 'Dachshund',
     "Dalmatian": 'Dalmatian',
-    "Dandie Dinmont Terrier": 'Dandie Dinmont Terrier',
     "Deerhound": 'Deerhound',
     "Doberman": 'Doberman',
     "Doberman Pinscher": 'Doberman Pinscher',
@@ -269,7 +267,6 @@ export const messages = {
     "Shih Tzu": 'Shih Tzu',
     "Siberian Husky": 'Siberian Husky',
     "Silky Terrier": 'Silky Terrier',
-    "Skye Terrier": 'Skye Terrier',
     "Sloughi": 'Sloughi',
     "Slovakian Chuvach": 'Slovakian Chuvach',
     "Small Munsterlander Pointer": 'Small Munsterlander Pointer',
@@ -412,10 +409,10 @@ export const messages = {
     lost:{
       foundby:'Found by',
       details: 'Details',
-      found: 'Found',      
+      found: 'Found',
       address: 'Address',
       information: 'Describe your pet',
-      addinfo:'Please provide any additional information'  ,      
+      addinfo:'Please provide any additional information'  ,
       addlost: 'Lost pet found',
       addlostpet: 'I have lost my Pet',
       foundsing: 'Found',
@@ -464,16 +461,16 @@ export const messages = {
       like: 'Like',
       share: 'Share',
       comments: 'Comment'
-      
+
     },
 
     feedback: {
-      title: 'Meet the animal lovers who will treat your pet like family',        
+      title: 'Meet the animal lovers who will treat your pet like family',
       first: 'Join the largest pet owner community in Ukraine. Our mission is to build a community of people that share attitude and devotion each of us have to our little fourpawed friends. The community that provides helping hand in need, shares our brightest moments, friends with the same sphere of interests.',
       second: 'All our efforts are targeted to make pet\'s and owner\'s life easier and better. Our goal is to build a network of professional pet services around pet owners, providing good quality and quick services in your neighborhood. Looking for a groomer, trainer or day care for your puppy? Pawsom is the place where pet owners get connected to pet lovers.',
       third: 'You are the difference! Reveal your tallents to the group, provide help to pet owners, show love pets deserve. Offer your services to the largest community of pet owners, get love and profits'
     },
-      
+
     benefit:{
       title :'We unite pet owners',
       first: {
@@ -511,10 +508,10 @@ export const messages = {
       }
     }
   },
-  
+
 
   'ru': {
-    
+
   breeds:{
     "Affenpinscher": 'Аффенпинчер',
     "Afghan Hound": 'Афганская борзая',
@@ -530,7 +527,6 @@ export const messages = {
     "Anatolian Shepherd Dog": 'Анатолийская овчарка',
     "Appenzell Cattle Dog": 'Аппенцеллер-зенненхунд',
     "Appenzeller Sennenhunde": 'Аппенцеллер-зенненхунд',
-    "Airedale Terrier": 'Эрдельтерьер',
     "Atlas Mountain Dog - Aidi": 'Айди (Атласская пастушья собака)',
     "Australian Cattle Dog": 'Австралийская пастушья собака',
     "Australian Kelpie": 'Австралийский Келпи (Кельпи)',
@@ -616,7 +612,6 @@ export const messages = {
     "Danish–Swedish Farmdog": 'Датско-шведская фермерская собака',
     "Dachshund": 'Такса',
     "Dalmatian": 'Далматин',
-    "Dandie Dinmont Terrier": 'Денди-динмонт-терьер',
     "Deerhound": 'Дирхаунд',
     "Doberman": 'Доберман',
     "Doberman Pinscher": 'Доберман пинчер',
@@ -783,7 +778,6 @@ export const messages = {
     "Shih Tzu": 'Ши-тцу',
     "Siberian Husky": 'Сибирский хаски',
     "Silky Terrier": 'Австралийский шелковистый терьер',
-    "Skye Terrier": 'Скайтерьер',
     "Sloughi": 'Слюги',
     "Slovakian Chuvach": 'Словацкий чувач',
     "Small Munsterlander Pointer": 'Мюнстерлендер малый',
@@ -942,11 +936,11 @@ export const messages = {
       foundsing: 'Найден',
       address: 'Адрес',
       information: 'Опишите питомца',
-      addinfo:'Любая дополнительная информация может быть очень полезна' ,      
+      addinfo:'Любая дополнительная информация может быть очень полезна' ,
       addlost: 'Найдено животное',
       addlostpet: 'Пропал любимец',
       filter: 'Фильтр',
-      distance: 'Показать потеряшек в радиусе' ,     
+      distance: 'Показать потеряшек в радиусе' ,
       foundaround:'был найден в районе',
       petlost: 'Потеряный питомец',
       petname: 'Отзиваеться на имя ',
@@ -980,11 +974,11 @@ export const messages = {
     },
 
     feedback: {
-      title: 'Познакомьтесь с любителями животных, которые будут относиться к вашему питомцу, как к семье',        
+      title: 'Познакомьтесь с любителями животных, которые будут относиться к вашему питомцу, как к семье',
       first: 'Присоединяйтесь к самому большому сообществу владельцев домашних животных в Украине. Наша цель создать дружную команду любителей четырехлапых, профессионалов  в сфере зооуслуг и всех людей, которых объединит забота о братьях наших меньших.',
       second: 'Главная задача – помощь в воспитании, уходе, предоставлении ветеринарных услуг, разведении и организационных вопросах по улучшению качества ухода за домашними любимцами. Pawsom дает возможность найти много единомышленников и друзей.  Объединение за интересами позволит каждому получить достойный совет и практическую помощь в решении любых вопросов.',
       third: 'Наша цель построить сеть поиска и предоставления профессиональных зооуслуг: помощь больным животным, профилактика; груминг-услуги: стрижки собак и котов – гигиенические, выставочные, породные; услуги зооотелей, домашняя передержка, пансион на время отсутствия хозяина; дрессировки, выгул и многое другое.  Все наши усилия направлены на улучшение жизни четырехлапых друзей и их хозяев.'
-      
+
     },
 
     header: {
@@ -1044,7 +1038,6 @@ export const messages = {
       "Anatolian Shepherd Dog": 'Анатолійський вівчар',
       "Appenzell Cattle Dog": 'Аппенцельський скотар',
       "Appenzeller Sennenhunde": 'Аппенцельський скотар',
-      "Airedale Terrier": 'Ердель-тер\'єр',
       "Atlas Mountain Dog - Aidi": 'Атласний гірський собака (Аіді)',
       "Australian Cattle Dog": 'Австралійський скотар',
       "Australian Kelpie": 'Австралійський келпі',
@@ -1130,7 +1123,6 @@ export const messages = {
       "Danish–Swedish Farmdog": 'Дансько-шведський фермерський собака',
       "Dachshund": 'Такса',
       "Dalmatian": 'Далматин',
-      "Dandie Dinmont Terrier": 'Денді динмонт тер\'єр',
       "Deerhound": 'Діргаунд',
       "Doberman": 'Доберман',
       "Doberman Pinscher": 'Доберман пінчер',
@@ -1297,7 +1289,6 @@ export const messages = {
       "Shih Tzu": 'Ши-цу',
       "Siberian Husky": 'Сибірський хаскі',
       "Silky Terrier": 'Австралійський шовковистий тер\'єр',
-      "Skye Terrier": 'Скай-тер\'єр',
       "Sloughi": 'Слюгі',
       "Slovakian Chuvach": 'Словацький чувач',
       "Small Munsterlander Pointer": 'Мюнстерлендер малий',
@@ -1457,9 +1448,9 @@ export const messages = {
       address: 'Адреса',
       foundsing: 'Знайдено',
       information: 'Опишіть тваринку',
-      addinfo:'Будь-яка додаткова інформація буде дуже корисна',      
+      addinfo:'Будь-яка додаткова інформація буде дуже корисна',
       addlost: 'Знайдено тваринку',
-      addlostpet: 'Загублено тваринку',      
+      addlostpet: 'Загублено тваринку',
       filter: 'Фільтр',
       distance: 'Показати загублених в радіусі' ,
       foundaround:'був знайдений в районі',
@@ -1495,10 +1486,10 @@ export const messages = {
     },
 
     feedback: {
-      title: 'Знайомтесь з любителями тварин, які будуть поводитися з вашим улюбленцем як сім\'я',        
+      title: 'Знайомтесь з любителями тварин, які будуть поводитися з вашим улюбленцем як сім\'я',
       first: 'Приєднуйтесь до найбільшої спільноти власників домашніх тварин в Україні. Наша мета створити дружну команду любителів чотирилапих, професіоналів у сфері зоопослуг та всіх охочих людей, яких об’єднує турбота про братів наших менших.',
       second: 'Головне завдання – допомога у вихованні, догляді, наданні ветеринарних послуг, розведенні та організаційних питаннях щодо покращення якості догляду за домашніми улюбленцями. Pawsom дає можливість знайти багато однодумців та друзів. Об’єднання за інтересами дозволить кожному отримати гідну пораду та практичну допомогу у вирішенні будь-яких питань.',
-      third: 'Наша мета побудувати мережу пошуку та надання професійних зоопослуг: допомога хворим тваринам, профілактика; грумінг-послуги: стрижки собак та котів – гігієнічні, виставкові, породні; послуги зооготелів, домашня перетримка, пансіон на час відсутності господаря, дресирування та вигул собак та інші. Усі наші  зусилля направлені на покращення життя чотирилапих друзів та їх господарів.'        
+      third: 'Наша мета побудувати мережу пошуку та надання професійних зоопослуг: допомога хворим тваринам, профілактика; грумінг-послуги: стрижки собак та котів – гігієнічні, виставкові, породні; послуги зооготелів, домашня перетримка, пансіон на час відсутності господаря, дресирування та вигул собак та інші. Усі наші  зусилля направлені на покращення життя чотирилапих друзів та їх господарів.'
     },
 
     header: {
