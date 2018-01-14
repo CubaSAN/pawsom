@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Col } from 'react-bootstrap'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
-import FaCommentO from 'react-icons/lib/fa/comments-o'
-import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
+// import FaCommentO from 'react-icons/lib/fa/comments-o'
+// import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { PageLayout } from '../../shared/components/PageLayout'
-import Comment from './components/Comment'
-import AddCommentForm from './components/AddCommentForm'
+// import Comment from './components/Comment'
+// import AddCommentForm from './components/AddCommentForm'
 import agent from '../../agent'
 import './PostPage.scss'
 
@@ -90,9 +90,9 @@ export class PublicPostPage extends Component {
   // }
 
   renderPost() {
-    const { postedPersonString, postedPersonName, created, text, commentCount } = this.state.post
+    const { postedPersonString, postedPersonName, created, text } = this.state.post
     const imagesUrl = this.state.post.url
-    const likes = this.state.post.reactions
+    // const likes = this.state.post.reactions
 
     return (
       <div className={`${CN}__post-wrapper`}>

@@ -42,6 +42,7 @@ export class SearchPage extends Component {
 
     this.state = {
       findings: [],
+      findingsReady: false,
       filter: [],
       infoWindow: null,
       isPopup: false,
@@ -74,8 +75,7 @@ export class SearchPage extends Component {
       this.getFindings(this.props)
     }
 
-    this
-      .setDafaultBreeds();
+    this.setDafaultBreeds()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -119,13 +119,16 @@ export class SearchPage extends Component {
       }
     }))
 
-    this.setState({ findings })
+    this.setState({
+      findings,
+      findingsReady: true
+    })
   }
 
   getFilteresFindings(findings) {
     const { filter } = this.state
     const {locale} = this.props
-    
+
     return filter.length ?
       findings.filter(finding => filter.includes(messages[locale].breeds[finding.breedName])) :
       findings
@@ -167,7 +170,6 @@ export class SearchPage extends Component {
     const center = { lat, lng }
     const { findings, infoWindow } = this.state
     const {locale} = this.props
-    
 
     return (
       <Map
@@ -265,7 +267,6 @@ export class SearchPage extends Component {
 
   renderFindingImage(urls, breedName) {
     const {locale} = this.props
-    
 
     if (urls.length) {
       const imgSrc = this.parseImageUrl(urls[0])
@@ -396,7 +397,6 @@ export class SearchPage extends Component {
   renderBreedFilter() {
     const { findings, filter } = this.state
     const {locale} = this.props
-    
 
     const results = _.uniqBy(findings, 'breedName').map((finding, i) => {
       return (
@@ -748,7 +748,7 @@ export class SearchPage extends Component {
   renderAddModal() {
     const { petBreedAppearence, petList, petType, additionalInformation } = this.state
     const {locale} = this.props
-    
+
     return (
       <Modal isOpen={this.state.isAddPopupOpen}
         className={`${CN}__add-modal`}
@@ -945,7 +945,7 @@ export class SearchPage extends Component {
   renderAddFoundModal() {
     const { petList, petType, additionalInformation, petBreedAppearence } = this.state
     const {locale} = this.props
-    
+
     return (
       <Modal isOpen={this.state.isAddFoundPopupOpen}
         className={`${CN}__add-modal`}
@@ -1125,11 +1125,11 @@ export class SearchPage extends Component {
 
   render() {
     const { changeSearchRadius, radius, lat, lng } = this.props
-    const { findings } = this.state
+    const { findings, findingsReady } = this.state
 
     return (
       <PageLayout
-        isPageAvailable={lat && lng}
+        isPageAvailable={lat && lng && findingsReady}
       >
         <Col
           md={9}
@@ -1147,7 +1147,7 @@ export class SearchPage extends Component {
               <div className={`${CN}__no-results`}>
                 No results yet, please use filters
               </div>
-          } 
+          }
         </Col>
         <Col
           className={`${CN}__sidebar`}
@@ -1162,7 +1162,7 @@ export class SearchPage extends Component {
             >
               <FormattedMessage id='lost.addlost'/>
             </Button>
-            
+
           </div>
           <div className="action-holder">
             <Button

@@ -9,7 +9,7 @@ import { ImageGallery } from '../../../shared/components/ImageGallery'
 import { FormattedMessage } from 'react-intl'
 import FaPhone from 'react-icons/lib/fa/phone'
 
-import { messages } from '../../../localization'
+// import { messages } from '../../../localization'
 
 const CN = 'search-page'
 
@@ -20,7 +20,7 @@ export class ModalPopup extends React.Component {
     className: PropTypes.string,
     toggle: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
-    locale: PropTypes.string.isRequired    
+    locale: PropTypes.string.isRequired
   }
 
   // constructor() {
@@ -68,8 +68,8 @@ export class ModalPopup extends React.Component {
 
   renderMainContent() {
     const { data: { finding } } = this.props
-    const {locale} = this.props
-    
+    // const {locale} = this.props
+
     return (
       <div>
         <div><b>{finding.breedName}</b> <FormattedMessage id='lost.foundaround'/> :</div>
@@ -83,7 +83,7 @@ export class ModalPopup extends React.Component {
             {` ${finding.phoneNumber}`}
           </a>
           <span></span>
-        </div> 
+        </div>
         <div>{finding.additionalInformation}</div>
 
 
