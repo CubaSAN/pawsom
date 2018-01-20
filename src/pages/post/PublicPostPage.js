@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Col } from 'react-bootstrap'
 // import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
+import moment from 'moment'
 // import FaCommentO from 'react-icons/lib/fa/comments-o'
 // import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { PageLayout } from '../../shared/components/PageLayout'
@@ -93,6 +94,7 @@ export class PublicPostPage extends Component {
     const { postedPersonString, postedPersonName, created, text } = this.state.post
     const imagesUrl = this.state.post.url
     // const likes = this.state.post.reactions
+    const local = moment.utc(created).local().toDate()
 
     return (
       <div className={`${CN}__post-wrapper`}>
@@ -103,7 +105,7 @@ export class PublicPostPage extends Component {
           <div className={`${CN}__user-info`}>
             <div className={`${CN}__user-info-name`}>{postedPersonName}</div>
             <div className={`${CN}__user-info-created`}>
-              <TimeAgo date={created} />
+              <TimeAgo date={local} />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
+import moment from 'moment'
 
 const CN = 'comment'
 
@@ -11,6 +12,7 @@ const Comment = (props) => {
     posterName,
     posterPick
   } = props.comment
+  const local = moment.utc(created).local().toDate()
 
   return (
     <div className={`${CN}`}>
@@ -21,7 +23,7 @@ const Comment = (props) => {
         <div className={`${CN}__user-info`}>
           <div className={`${CN}__user-name`}>{posterName}</div>
           <div className={`${CN}__created`}>
-            <TimeAgo date={created} />
+            <TimeAgo date={local} />
           </div>
         </div>
       </div>

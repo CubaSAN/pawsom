@@ -7,7 +7,8 @@ import FaCommentO from 'react-icons/lib/fa/comments-o'
 import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up'
 import { ImageGallery } from '../../../shared/components/ImageGallery'
 import agent from '../../../agent'
-import { FormattedMessage } from 'react-intl' 
+import { FormattedMessage } from 'react-intl'
+import moment from 'moment'
 
 const CN = 'feed-page__post-wrapper'
 
@@ -24,18 +25,20 @@ export class Post extends Component {
 
   renderText() {
     const { text, id } = this.props.post
-    const processedText = text.length > 200 ? `${text.slice(0, 200)}...` : text
 
     return (
-      <p>
-        {processedText}
-        <Link
-          to={`/post/${id}`}
-          className={`${CN}-content-text-read-more`}
-        >
-          <FormattedMessage id="feed.readmore" />
-        </Link>
-      </p>
+      (text.length > 200) ?
+        <p>
+          {`${text.slice(0, 200)}...`}
+          <Link
+            to={`/post/${id}`}
+            className={`${CN}-content-text-read-more`}
+          >
+            <FormattedMessage id="feed.readmore" />
+          </Link>
+        </p>
+        :
+        <p>{text}</p>
     )
   }
 
@@ -94,6 +97,7 @@ export class Post extends Component {
       url,
       reactions
     } = this.props.post
+    const local = moment.utc(created).local().toDate()
 
     return (
       <div className={`${CN}`}>
@@ -101,13 +105,13 @@ export class Post extends Component {
           <div className={`${CN}-user-image`}>
             <img
               src={postedPersonString}
-              alt={postedPersonName} 
+              alt={postedPersonName}
             />
           </div>
           <div className={`${CN}-user-info`}>
             <div className={`${CN}-user-info-name`}>{postedPersonName}</div>
             <div className={`${CN}-user-info-created`}>
-              <TimeAgo date={created} />
+              <TimeAgo date={local} />
             </div>
           </div>
         </div>
