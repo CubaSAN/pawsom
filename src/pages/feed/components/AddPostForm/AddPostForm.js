@@ -26,7 +26,7 @@ export class AddPostForm extends Component {
     this.state = {
       text: '',
       images: null,
-      сommentsAllowed: false,
+      commentsAllowed: false,
       isValid: false
     }
 
@@ -37,7 +37,7 @@ export class AddPostForm extends Component {
     this.setState({
       text: '',
       images: null,
-      сommentsAllowed: false,
+      commentsAllowed: false,
       isValid: false,
       url: []
     })
@@ -57,14 +57,14 @@ export class AddPostForm extends Component {
     evt.preventDefault()
 
     const { user } = this.props
-    const { text, сommentsAllowed, url } = this.state
+    const { text, commentsAllowed, url } = this.state
 
-    if (text === '') return
+    if (text === '' && !url) return
 
     const post = {
       postedBy: user.id,
       text,
-      сommentsAllowed,
+      commentsAllowed,
       url
     }
 
@@ -85,7 +85,7 @@ export class AddPostForm extends Component {
     const { checked } = evt.target
 
     this.setState({
-      сommentsAllowed: checked,
+      commentsAllowed: checked,
     })
   }
 
