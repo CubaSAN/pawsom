@@ -10,6 +10,10 @@
     margin-bottom: 20px;
   }
 
+  &__close_button {
+    float: right;
+  }
+
   .thumbnail {
     border: none;
     position: relative;
@@ -283,7 +287,7 @@
       width: 50vw;
       height: auto;
       max-height: 80vh;
-      overflow: auto;
+      overflow: hidden;
       border: none;
       border-radius: 0;
       display: flex;
@@ -335,14 +339,28 @@
   margin-bottom: 15px;
 }
 
-// modal styles
+// all modal windows
 .modal-content {
   padding-top: 65px;
+  padding-bottom: 65px;
+  position: relative;
+  overflow: hidden;
   .modal-header {
     position: fixed;
     width: 50vw;
     margin-top: -65px;
     background: white;
     z-index: 1000;
+  }
+
+  .modal-body {
+    overflow: scroll;
+  }
+
+  .modal-footer {
+    position: absolute;
+    bottom: 0;
+    background: white;
+    width: 100%;
   }
 }

@@ -753,7 +753,13 @@ export class SearchPage extends Component {
       <Modal isOpen={this.state.isAddPopupOpen}
         className={`${CN}__add-modal`}
       >
-        <ModalHeader><FormattedMessage id='lost.addlost'/></ModalHeader>
+        <ModalHeader>
+          <FormattedMessage id='lost.addlost'/>
+
+          <button onClick={this.closeAddPopup} className={`${CN}__close_button`}>
+            <span>&times;</span>
+          </button>
+        </ModalHeader>
         <ModalBody>
           <Form>
             {/* <FormGroup>
@@ -950,7 +956,13 @@ export class SearchPage extends Component {
       <Modal isOpen={this.state.isAddFoundPopupOpen}
         className={`${CN}__add-modal`}
       >
-        <ModalHeader><FormattedMessage id='lost.addlostpet' /> </ModalHeader>
+        <ModalHeader>
+          <FormattedMessage id='lost.addlostpet' />
+
+          <button onClick={this.closeAddFoundPopup} className={`${CN}__close_button`}>
+            <span>&times;</span>
+          </button>
+        </ModalHeader>
         <ModalBody>
           <FormGroup>
             <Label for='address'><FormattedMessage id='lost.address' /> </Label>

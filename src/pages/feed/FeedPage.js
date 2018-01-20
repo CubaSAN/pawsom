@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Col, Row } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import autoBind from 'react-autobind'
-import FaAngleDoubleLeft from 'react-icons/lib/fa/angle-double-left'
-import FaAngleDoubleRight from 'react-icons/lib/fa/angle-double-right'
+// import FaAngleDoubleLeft from 'react-icons/lib/fa/angle-double-left'
+// import FaAngleDoubleRight from 'react-icons/lib/fa/angle-double-right'
 import { PageLayout } from '../../shared/components/PageLayout'
 import agent from '../../agent'
 import './FeedPage.scss'
@@ -142,7 +142,6 @@ export class FeedPage extends Component {
           className={`${CN}__pagination-item ${this.state.prevDisabled}`}
           onClick={(e) => this.changePosts(e, -1)}
         >
-          <FaAngleDoubleLeft className={`${CN}__pagination-icon`} />
           <span><FormattedMessage id='previous'/></span>
         </Link>
         <span> | </span>
@@ -154,7 +153,6 @@ export class FeedPage extends Component {
           onClick={(e) => this.changePosts(e, 1)}
         >
           <span><FormattedMessage id='next'/></span>
-          <FaAngleDoubleRight className={`${CN}__pagination-icon`} />
         </Link>
       </div>
     )

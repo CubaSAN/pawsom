@@ -108,7 +108,13 @@ export class ModalPopup extends React.Component {
       <Modal className={this.props.className}
         isOpen={this.props.isOpen}
       >
-        <ModalHeader>{this.renderHeader()}</ModalHeader>
+        <ModalHeader>
+          {this.renderHeader()}
+
+          <button onClick={this.props.toggle} className={`${CN}__close_button`}>
+            <span>&times;</span>
+          </button>
+        </ModalHeader>
         <ModalBody>
           <Row>
             {
