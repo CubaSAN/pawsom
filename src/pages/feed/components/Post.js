@@ -26,19 +26,19 @@ export class Post extends Component {
   renderText() {
     const { text, id } = this.props.post
 
+    const formattedText = text.length > 200 ?
+      `${text.slice(0, 200)}...` : text
+
     return (
-      (text.length > 200) ?
-        <p>
-          {`${text.slice(0, 200)}...`}
-          <Link
-            to={`/post/${id}`}
-            className={`${CN}-content-text-read-more`}
-          >
-            <FormattedMessage id="feed.readmore" />
-          </Link>
-        </p>
-        :
-        <p>{text}</p>
+      <div>
+        <p dangerouslySetInnerHTML={{ __html: formattedText }} />
+        <Link
+          to={`/post/${id}`}
+          className={`${CN}-content-text-read-more`}
+        >
+          <FormattedMessage id="feed.readmore" />
+        </Link>
+      </div>
     )
   }
 

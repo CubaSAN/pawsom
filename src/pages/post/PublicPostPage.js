@@ -111,7 +111,10 @@ export class PublicPostPage extends Component {
         </div>
 
         <div className={`${CN}__content`}>
-          <p className={`${CN}__content-text`}>{text}</p>
+          <p
+            className={`${CN}__content-text`}
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
           {this.renderImages(imagesUrl)}
         </div>
       </div>

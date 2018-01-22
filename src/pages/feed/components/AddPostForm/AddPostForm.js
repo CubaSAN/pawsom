@@ -63,7 +63,7 @@ export class AddPostForm extends Component {
 
     const post = {
       postedBy: user.id,
-      text,
+      text: text.replace(/\n/g, '<br>'),
       commentsAllowed,
       url
     }

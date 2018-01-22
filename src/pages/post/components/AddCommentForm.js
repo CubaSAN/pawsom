@@ -48,7 +48,7 @@ class AddCommentForm extends Component {
     const body = {
       postId: id,
       postedBy: this.props.userId,
-      message: text,
+      message: text.replace(/\n/g, '<br>'),
       url: []
     }
 

@@ -28,7 +28,10 @@ const Comment = (props) => {
         </div>
       </div>
       <div className={`${CN}__content`}>
-        <p className={`${CN}__ccontent-text`}>{message}</p>
+        <p
+          className={`${CN}__content-text`}
+          dangerouslySetInnerHTML={{ __html: message }}
+        />
       </div>
     </div>
   )
