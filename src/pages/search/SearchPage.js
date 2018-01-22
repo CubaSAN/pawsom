@@ -398,23 +398,32 @@ export class SearchPage extends Component {
     const { findings, filter } = this.state
     const {locale} = this.props
 
-    const results = _.uniqBy(findings, 'breedName').map((finding, i) => {
-      return (
-        <div className={`${CN}__sidebar-filter-string`}
-          key={i}
-        >
-          <Label>
-            <input
-              type="checkbox"
-              onChange={this.setFilter}
-              value={messages[locale].breeds[finding.breedName]}
-              checked={filter.includes(finding.breedName)}
-            />
-            {` ${messages[locale].breeds[finding.breedName]}`}
-          </Label>
-        </div>
-      )
+    const uniqFindings = _.uniqBy(findings, 'breedName').map(finding => {
+      return {
+        ...finding,
+        breedName: messages[locale].breeds[finding.breedName]
+      }
     })
+
+    const results = 
+      _.sortBy(uniqFindings, 'breedName')
+        .map((finding, i) => {
+          return (
+            <div className={`${CN}__sidebar-filter-string`}
+              key={i}
+            >
+              <Label>
+                <input
+                  type="checkbox"
+                  onChange={this.setFilter}
+                  value={finding.breedName}
+                  checked={filter.includes(finding.breedName)}
+                />
+                {` ${finding.breedName}`}
+              </Label>
+            </div>
+          )
+        })
 
     return (
       <div className={`${CN}__sidebar-item`}>
