@@ -68,6 +68,29 @@ export class SearchPage extends Component {
     autoBind(this)
   }
 
+  resetState() {
+    this.setState({
+      findings: [],
+      findingsReady: false,
+      filter: [],
+      infoWindow: null,
+      isPopup: false,
+      infoPopup: null,
+      isAddPopupOpen: false,
+      isAddFoundPopupOpen: false,
+      date: moment(),
+      isFound: false,
+      breed: 0,
+      petType: 1,
+      petList: [],
+      breedId: null,
+      petBreedAppearence: 0,
+      petBreedAppearenceSize: 0,
+      urls: [],
+      additionalInformation: ''
+    });
+  }
+
   componentDidMount() {
     const {lat, lng} = this.props
 
@@ -529,12 +552,16 @@ export class SearchPage extends Component {
         this.setState({
           isAddFoundPopupOpen: false
         })
+
+        this.resetState()
       })
       .catch((err) => {
         new Error(err)
         this.setState({
           isAddFoundPopupOpen: false
         })
+
+        this.resetState()
       })
   }
 
@@ -582,12 +609,16 @@ export class SearchPage extends Component {
         this.setState({
           isAddPopupOpen: false
         })
+
+        this.resetState()
       })
       .catch((err) => {
         new Error(err)
         this.setState({
           isAddPopupOpen: false
         })
+
+        this.resetState()
       })
   }
 
