@@ -52,7 +52,8 @@ export function getLocalizedMessages(requestedLocale) {
 export function getLocale() {
   const locale = getBrowserLocale()
 
-  return Object.keys(SUPPORTED_LOCALES).includes(locale) ? locale : 'en-US'
+  return Object.keys(SUPPORTED_LOCALES).includes(locale) ?
+    SUPPORTED_LOCALES[locale] : 'en'
 }
 
 export function getLanguages() {

@@ -3,6 +3,10 @@ export const GET_GEOLOCATION = 'GET_GEOLOCATION'
 export const getLocation = () => {
   const geolocation = navigator.geolocation
 
+  const options = {
+    enableHighAccuracy: false,
+  }
+
   const location = new Promise((resolve) => {
     if (!geolocation) {
       resolve({
@@ -30,7 +34,9 @@ export const getLocation = () => {
         },
         err: new Error(errMsg[err.code - 1])
       })
-    })
+
+    }),
+    options
   })
 
   return {

@@ -855,6 +855,7 @@ export class SearchPage extends Component {
               />
             </FormGroup> */}
             <FormGroup>
+              111
               <legend><FormattedMessage id='lost.information'/> </legend>
               <FormGroup>
                 <Label>

@@ -73,7 +73,6 @@ export class ImageGallery extends Component {
     return (
       <div
         className={`${CN}__horizontal-holder`}
-        index={1}
       >
         {this.renderImage(images[0])}
       </div>
@@ -86,10 +85,10 @@ export class ImageGallery extends Component {
 
     return (
       <div className={`${CN}__wrapper`}>
-        <div className={`${CN}__vertical-holder half-width-wrapper`} index={1}>
+        <div className={`${CN}__vertical-holder half-width-wrapper`}>
           {this.renderImage(images[0])}
         </div>
-        <div className={`${CN}__vertical-holder half-width-wrapper`} index={2}>
+        <div className={`${CN}__vertical-holder half-width-wrapper`}>
           {this.renderImage(images[1])}
         </div>
       </div>
@@ -102,14 +101,14 @@ export class ImageGallery extends Component {
 
     return (
       <div className={`${CN}__wrapper`}>
-        <div className={`${CN}__vertical-holder half-width-wrapper`} index={1}>
+        <div className={`${CN}__vertical-holder half-width-wrapper`}>
           {this.renderImage(images[0])}
         </div>
         <div className={`${CN}__vertical-holder half-width-wrapper`}>
-          <div className={`${CN}__horizontal-holder half-heigth-wrapper`} index={2}>
+          <div className={`${CN}__horizontal-holder half-heigth-wrapper`}>
             {this.renderImage(images[1])}
           </div>
-          <div className={`${CN}__horizontal-holder half-heigth-wrapper`} index={3}>
+          <div className={`${CN}__horizontal-holder half-heigth-wrapper`}>
             {this.renderImage(images[2])}
           </div>
         </div>
@@ -123,19 +122,19 @@ export class ImageGallery extends Component {
 
     return (
       <div className={`${CN}__wrapper`}>
-        <div className={`${CN}__vertical-holder half-width-wrapper`} index={1}>
+        <div className={`${CN}__vertical-holder half-width-wrapper`}>
           {this.renderImage(images[0])}
         </div>
         <div className={`${CN}__vertical-holder half-width-wrapper`}>
-          <div className={`${CN}__horizontal-holder third-heigth-wrapper`} index={2}>
+          <div className={`${CN}__horizontal-holder third-heigth-wrapper`}>
             {this.renderImage(images[1])}
           </div>
-          <div className={`${CN}__horizontal-holder third-heigth-wrapper`} index={3}>
+          <div className={`${CN}__horizontal-holder third-heigth-wrapper`}>
             {this.renderImage(images[2])}
           </div>
-          <div className={`${CN}__horizontal-holder third-heigth-wrapper`} index={4}>
+          <div className={`${CN}__horizontal-holder third-heigth-wrapper`}>
             {this.renderImage(images[3])}
-            {
+            { 
               images.length > 4 &&
               <div className={`${CN}__more  third-heigth-wrapper`}>{`and ${images.length - 4} more`}</div>
             }
